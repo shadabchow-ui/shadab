@@ -105,14 +105,11 @@
             {% assign normalized_url = link.url | downcase %}
             {% assign link_label = link.title %}
             {% assign hide_link = false %}
-            {% if normalized_url contains '/cart' or normalized_url contains '/checkout' or normalized_url contains '/collections' or normalized_url contains '/products' %}
+            {% if normalized_url contains '/cart' or normalized_url contains '/checkout' or normalized_url contains '/collections' or normalized_url contains '/products' or normalized_url contains '/account' %}
               {% assign hide_link = true %}
             {% endif %}
             {% if normalized_title == 'cart' or normalized_title == 'checkout' or normalized_title == 'shop' or normalized_title == 'products' or normalized_title == 'collections' %}
               {% assign hide_link = true %}
-            {% endif %}
-            {% if normalized_url contains '/account' %}
-              {% assign link_label = 'Profile' %}
             {% endif %}
             {% unless hide_link %}
               <li><a href="{{ link.url }}">{{ link_label }}</a></li>
