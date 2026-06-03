@@ -1,0 +1,125 @@
+{% layout 'theme' %}
+
+<article class="article-page">
+  <header class="article-header">
+    <h1 class="article-title">{{ article.title }}</h1>
+    <div class="article-divider"></div>
+  </header>
+
+  <div class="article-content">
+    {{ article.content }}
+  </div>
+</article>
+
+<style>
+/* ================================
+   ARTICLE BASE LAYOUT
+   ================================ */
+
+.article-page {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.article-header {
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  padding: 0 20px;
+}
+
+.article-title {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #eaeaea;
+  text-align: left;
+}
+
+.article-divider {
+  margin-top: 16px;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+  width: 100%;
+}
+
+/* ================================
+   CONTENT WRAPPER (CONSTRAINED)
+   ================================ */
+
+.article-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  overflow-x: hidden;
+  line-height: 1.8;
+}
+
+/* Center all text and block elements */
+.article-content > * {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.article-content p,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content ul,
+.article-content ol {
+  max-width: 100%;
+}
+
+/* ================================
+   EX5 / EMBED SAFE CENTERING
+   ================================ */
+
+/* Desktop */
+@media (min-width: 769px) {
+  .article-content iframe,
+  .article-content .ex5,
+  .article-content .exo-planet-profile,
+  .article-content .exoplanet-profile {
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .article-content {
+    padding: 0 16px;
+  }
+
+  .article-header {
+    padding: 0 16px;
+  }
+
+  .article-title {
+    font-size: 22px;
+  }
+
+  .article-content iframe,
+  .article-content .ex5,
+  .article-content .exo-planet-profile,
+  .article-content .exoplanet-profile {
+    width: 100%;
+    max-width: 100%;
+    transform: scale(0.94);
+    transform-origin: center top;
+  }
+}
+</style>
+
+
+
+
+
+
+
+
+
+

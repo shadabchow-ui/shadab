@@ -1,0 +1,54 @@
+<style>
+
+#iranwar-dashboard{
+  width:100%;
+  background:#0b0f14;
+  color:#e6eef7;
+  overflow:hidden;
+}
+
+#iranwar-dashboard .dashboard-shell{
+  width:100%;
+  max-width:1400px;
+  margin:0 auto;
+  padding:24px;
+  box-sizing:border-box;
+}
+
+/* mobile layout fixes */
+
+@media (max-width:768px){
+
+  #iranwar-dashboard .dashboard-shell{
+    padding:10px;
+  }
+
+  #iranwar-dashboard .iwcc-force-grid,
+  #iranwar-dashboard .iwct-rate-cards,
+  #iranwar-dashboard .iwct-hc-grid,
+  #iranwar-dashboard .dashboard-row-2,
+  #iranwar-dashboard .kpi-strip{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+
+  #iranwar-dashboard .iwcc-force-stats{
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+
+  #iranwar-dashboard table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+    width:100%;
+  }
+
+  #iranwar-dashboard .num,
+  #iranwar-dashboard .kpi-value{
+    font-size:28px !important;
+  }
+
+}
+
+</style>

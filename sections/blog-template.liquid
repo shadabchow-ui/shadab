@@ -1,0 +1,235 @@
+{% paginate blog.articles by 12 %}
+
+<style>
+  .blog-grid-wrap {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 60px 52px 100px;
+  }
+
+  .blog-grid-header {
+    margin-bottom: 52px;
+    border-bottom: 1px solid #1e1e1e;
+    padding-bottom: 32px;
+  }
+
+  .blog-grid-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .blog-grid-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1.1;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 32px;
+    margin-bottom: 72px;
+  }
+
+  .blog-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #1e1e1e;
+    background: #0f0f0f;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .blog-card:hover {
+    border-color: #333;
+    background: #141414;
+  }
+
+  .blog-card-img-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #141414;
+    display: block;
+  }
+
+  .blog-card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .blog-card:hover .blog-card-img-wrap img {
+    transform: scale(1.03);
+  }
+
+  .blog-card-no-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #141414;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blog-card-no-img span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #333;
+  }
+
+  .blog-card-body {
+    padding: 20px 22px 24px;
+  }
+
+  .blog-card-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .blog-card-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  /* pagination */
+  .blog-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-top: 1px solid #1e1e1e;
+    padding-top: 48px;
+  }
+
+  .blog-pagination a,
+  .blog-pagination span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 11px 20px;
+    text-decoration: none;
+    border: 1px solid #282828;
+    color: #888;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .blog-pagination a:hover {
+    border-color: #333;
+    color: #efefef;
+  }
+
+  .blog-pagination span.current {
+    border-color: #efefef;
+    color: #efefef;
+    background: transparent;
+  }
+
+  .blog-pagination span.gap {
+    border-color: transparent;
+    color: #333;
+  }
+
+  @media (max-width: 900px) {
+    .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+    .blog-grid-wrap { padding: 40px 28px 80px; }
+  }
+  @media (max-width: 560px) {
+    .blog-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="blog-grid-wrap">
+
+  <div class="blog-grid-header">
+    <span class="blog-grid-label">{{ blog.title }}</span>
+    <h1 class="blog-grid-title">Breaking News &amp; Investigations</h1>
+  </div>
+
+  <div class="blog-grid">
+    {% for article in blog.articles %}
+      <a class="blog-card" href="{{ article.url }}">
+
+        <div class="blog-card-img-wrap">
+          {% if article.image %}
+            <img
+              src="{{ article.image | img_url: '600x338', crop: 'center' }}"
+              alt="{{ article.title | escape }}"
+              loading="lazy"
+            >
+          {% else %}
+            <div class="blog-card-no-img">
+              <span>No Image</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="blog-card-body">
+          <span class="blog-card-date">{{ article.published_at | date: "%b %d, %Y" }}</span>
+          <p class="blog-card-title">{{ article.title }}</p>
+        </div>
+
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+  <div class="blog-pagination">
+    {% if paginate.previous %}
+      <a href="{{ paginate.previous.url }}">← Prev</a>
+    {% endif %}
+
+    {% for part in paginate.parts %}
+      {% if part.is_link %}
+        <a href="{{ part.url }}">{{ part.title }}</a>
+      {% elsif part.title == paginate.current_page %}
+        <span class="current">{{ part.title }}</span>
+      {% else %}
+        <span class="gap">{{ part.title }}</span>
+      {% endif %}
+    {% endfor %}
+
+    {% if paginate.next %}
+      <a href="{{ paginate.next.url }}">Next →</a>
+    {% endif %}
+  </div>
+  {% endif %}
+
+</div>
+
+{% endpaginate %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

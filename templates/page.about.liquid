@@ -1,0 +1,673 @@
+<style>
+  /* ── About Page ── */
+  .about {
+    background: #080808;
+    color: #efefef;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .about-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 52px;
+  }
+
+  .about-mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  /* ── 1. OPENING PULL ── */
+  .about-opening {
+    padding: 100px 0 80px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-opening-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+    display: block;
+    margin-bottom: 40px;
+  }
+
+  .about-opening-quote {
+    font-style: italic;
+    font-size: clamp(32px, 4vw, 60px);
+    font-weight: 600;
+    color: #efefef;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    max-width: 900px;
+  }
+
+  /* ── 2. PHOTO + CREDENTIALS ── */
+  .about-identity {
+    padding: 80px 0;
+    border-bottom: 1px solid #1e1e1e;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: grayscale(8%);
+  }
+
+  .about-creds {
+    padding-top: 12px;
+  }
+
+  .about-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(52px, 5vw, 80px);
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+  }
+
+  .about-titles {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 52px;
+    line-height: 2;
+  }
+
+  .about-facts {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 52px;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .about-fact {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid #1e1e1e;
+    gap: 20px;
+  }
+
+  .about-fact-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #555;
+    flex-shrink: 0;
+  }
+
+  .about-fact-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #efefef;
+    text-align: right;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #1e1e1e;
+  }
+
+  .about-stat {
+    background: #0f0f0f;
+    padding: 24px 20px;
+  }
+
+  .about-stat-num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  .about-stat-lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #555;
+  }
+
+  /* ── 3. MISSION PROSE ── */
+  .about-mission {
+    padding: 100px 0;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+    display: block;
+    margin-bottom: 40px;
+  }
+
+  .about-prose {
+    max-width: 720px;
+  }
+
+  .about-prose p {
+    font-size: 20px;
+    line-height: 1.88;
+    color: #888;
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+
+  .about-prose p:last-child { margin-bottom: 0; }
+
+  /* ── 4. THE PATH ── */
+  .about-path {
+    background: #0f0f0f;
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 100px 0;
+  }
+
+  .about-path-inner {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 52px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-path-aside {
+    padding-top: 8px;
+  }
+
+  .about-path-aside-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+    display: block;
+    margin-bottom: 24px;
+  }
+
+  .about-path-year {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: #1c1c1c;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    user-select: none;
+  }
+
+  .about-path-body p {
+    font-size: 20px;
+    line-height: 1.88;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 32px;
+  }
+
+  .about-path-pull {
+    border-left: 2px solid #c8c8c8;
+    padding-left: 28px;
+    margin: 40px 0;
+  }
+
+  .about-path-pull p {
+    font-size: 26px !important;
+    color: #efefef !important;
+    font-style: italic;
+    line-height: 1.4 !important;
+    margin: 0 !important;
+  }
+
+  /* ── 5. UPCUBE CONVICTION ── */
+  .about-upcube {
+    padding: 100px 0;
+    border-bottom: 1px solid #1e1e1e;
+    background: #080808;
+  }
+
+  .about-upcube-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-upcube-hed {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+
+  .about-upcube-body {
+    font-size: 18px;
+    line-height: 1.88;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+
+  .about-domains {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .about-domain-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid #282828;
+    padding: 9px 16px;
+    color: #555;
+  }
+
+  .about-upcube-aside {
+    border: 1px solid #1e1e1e;
+    background: #0f0f0f;
+    padding: 36px 32px;
+  }
+
+  .about-aside-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+    display: block;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-aside-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 0;
+    border-bottom: 1px solid #1e1e1e;
+  }
+  .about-aside-item:last-child { border-bottom: none; }
+
+  .about-aside-item-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #444;
+  }
+
+  .about-aside-item-val {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #efefef;
+  }
+
+  /* ── 6. JOURNALISM ── */
+  .about-journalism {
+    background: #0f0f0f;
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
+    padding: 100px 0;
+  }
+
+  .about-journalism-hed {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3vw, 44px);
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1.2;
+    max-width: 680px;
+    margin-bottom: 40px;
+  }
+
+  .about-journalism-body {
+    font-size: 18px;
+    line-height: 1.88;
+    color: #888;
+    font-style: italic;
+    max-width: 720px;
+    margin-bottom: 48px;
+  }
+
+  .about-beats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: #1e1e1e;
+  }
+
+  .about-beat {
+    background: #141414;
+    padding: 28px 24px;
+  }
+
+  .about-beat-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .about-beat-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #efefef;
+  }
+
+  /* ── 7. AUTHOR + UNIVERSITY ── */
+  .about-work {
+    padding: 100px 0;
+    border-bottom: 1px solid #1e1e1e;
+    background: #080808;
+  }
+
+  .about-work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #1e1e1e;
+  }
+
+  .about-work-card {
+    background: #0f0f0f;
+    padding: 48px 40px;
+  }
+
+  .about-work-card-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #555;
+    display: block;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .about-work-card-hed {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .about-work-card-body {
+    font-size: 16px;
+    line-height: 1.78;
+    color: #888;
+    font-style: italic;
+  }
+
+  .about-work-card-detail {
+    margin-top: 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #444;
+  }
+
+  /* ── 8. CLOSING ── */
+  .about-closing {
+    background: #0f0f0f;
+    border-top: 1px solid #1e1e1e;
+    padding: 100px 0 120px;
+  }
+
+  .about-closing-hed {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(28px, 3.2vw, 48px);
+    font-weight: 700;
+    color: #efefef;
+    line-height: 1.2;
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
+
+  .about-closing-sub {
+    font-size: 18px;
+    line-height: 1.78;
+    color: #888;
+    font-style: italic;
+    max-width: 560px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .about-identity { grid-template-columns: 1fr; gap: 48px; }
+    .about-photo { aspect-ratio: 4 / 3; }
+    .about-path-inner { grid-template-columns: 1fr; gap: 32px; }
+    .about-path-year { font-size: 52px; }
+    .about-upcube-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-beats { grid-template-columns: repeat(2, 1fr); }
+    .about-work-grid { grid-template-columns: 1fr; }
+    .about-inner, .about-path-inner { padding: 0 28px; }
+  }
+  @media (max-width: 560px) {
+    .about-beats { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="about">
+
+  <!-- 1. OPENING PULL -->
+  <div class="about-opening">
+    <div class="about-inner">
+      <span class="about-opening-label">The Mission</span>
+      <p class="about-opening-quote">"I build so people have more control over their time, money, &amp; choices."</p>
+    </div>
+  </div>
+
+  <!-- 2. PHOTO + CREDENTIALS -->
+  <div class="about-identity about-inner">
+    <img
+      class="about-photo"
+      src="https://cdn.shopify.com/s/files/1/0799/4369/6609/files/1771606780122_67e6ecb2-4bd2-444c-9831-0230c70952c2.jpg?v=1780445589"
+      alt="Sha"
+    >
+    <div class="about-creds">
+      <div class="about-name">Sha</div>
+      <div class="about-titles">
+        Entrepreneur &nbsp;·&nbsp; Investor &nbsp;·&nbsp; Author<br>
+        Investigative Journalist &nbsp;·&nbsp; Data Analyst<br>
+        Content Creator &nbsp;·&nbsp; PhD Candidate
+      </div>
+
+      <div class="about-facts">
+        <div class="about-fact">
+          <span class="about-fact-label">Company</span>
+          <span class="about-fact-value">UpCube — CEO &amp; Founder</span>
+        </div>
+        <div class="about-fact">
+          <span class="about-fact-label">Education</span>
+          <span class="about-fact-value">PhD, Computer Science</span>
+        </div>
+        <div class="about-fact">
+          <span class="about-fact-label">Based</span>
+          <span class="about-fact-value">New York</span>
+        </div>
+      </div>
+
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="about-stat-num">500M+</div>
+          <div class="about-stat-lbl">Video Views</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">300K</div>
+          <div class="about-stat-lbl">Followers</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat-num">50K+</div>
+          <div class="about-stat-lbl">Customers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. MISSION PROSE -->
+  <div class="about-mission">
+    <div class="about-inner">
+      <span class="about-section-label">Who I Am</span>
+      <div class="about-prose">
+        <p>I research &amp; analyze data &amp; build scientific systems so decisions are grounded in reality, not noise. I report so truth doesn't get buried. I create so ideas can move — fast, honest, &amp; useful.</p>
+        <p>I lead UpCube, a technology company that has served over fifty thousand customers &amp; crossed seven figures in revenue. I hold a completed Master's in Computer Science and am currently pursuing a PhD — because rigorous thinking &amp; real-world shipping should live under the same roof.</p>
+        <p>I'm also a researcher. I collect data across tech, science, finance, &amp; more — and I publish it free for educational purposes. My work is sourced, updated, &amp; corrected when the facts change.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. THE PATH -->
+  <div class="about-path">
+    <div class="about-path-inner">
+      <div class="about-path-aside">
+        <span class="about-path-aside-label">Background</span>
+        <div class="about-path-year">—</div>
+      </div>
+      <div class="about-path-body">
+        <p>My path wasn't linear. Early in life, I made choices that led to four years in a medium-security federal prison. It was violent, tense, &amp; humbling — an environment that stripped away ego &amp; demanded daily courage.</p>
+        <div class="about-path-pull">
+          <p>"Not applause, but alignment. Not noise, but impact. Not reputation, but responsibility."</p>
+        </div>
+        <p>That season became a turning point. I learned the cost of wasted potential &amp; the power of second chances. I walked out with a different definition of success — and I've been building from that definition ever since.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. UPCUBE CONVICTION -->
+  <div class="about-upcube">
+    <div class="about-inner">
+      <span class="about-section-label">What I'm Building</span>
+      <div class="about-upcube-grid">
+        <div>
+          <h2 class="about-upcube-hed">Today, that conviction fuels everything I do.</h2>
+          <p class="about-upcube-body">At UpCube, we design &amp; ship tools, systems, &amp; infrastructure that put real leverage in ordinary hands — AI &amp; cloud architecture that is deterministic &amp; efficient, creative software that respects your time, security that defends privacy without drama, operations software that removes friction instead of adding dashboards no one opens.</p>
+          <p class="about-upcube-body">We don't chase trends. We build what endures.</p>
+          <div class="about-domains">
+            <span class="about-domain-tag">AGI</span>
+            <span class="about-domain-tag">Robotics</span>
+            <span class="about-domain-tag">Biotech</span>
+            <span class="about-domain-tag">Autonomy</span>
+            <span class="about-domain-tag">Nanotech</span>
+            <span class="about-domain-tag">Quantum</span>
+          </div>
+        </div>
+        <div class="about-upcube-aside">
+          <span class="about-aside-label">Research Programs</span>
+          <div class="about-aside-item">
+            <span class="about-aside-item-label">Status</span>
+            <span class="about-aside-item-val">Active — alongside production</span>
+          </div>
+          <div class="about-aside-item">
+            <span class="about-aside-item-label">Principle</span>
+            <span class="about-aside-item-val">Breakthroughs mature before they ship</span>
+          </div>
+          <div class="about-aside-item">
+            <span class="about-aside-item-label">Horizon</span>
+            <span class="about-aside-item-val">20-year bets, responsibly placed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. JOURNALISM -->
+  <div class="about-journalism">
+    <div class="about-inner">
+      <span class="about-section-label">Investigations</span>
+      <h2 class="about-journalism-hed">I'm equally committed to telling the stories that platforms would prefer to throttle.</h2>
+      <p class="about-journalism-body">My investigative work follows crime, corruption, justice, &amp; public safety wherever the facts lead. When algorithms shadowban, demonetize, or flag uncomfortable realities, I publish anyway. The point is not to be popular with code you don't control — the point is to be faithful to the truth.</p>
+      <div class="about-beats">
+        <div class="about-beat">
+          <span class="about-beat-tag">Beat 01</span>
+          <div class="about-beat-name">Crime</div>
+        </div>
+        <div class="about-beat">
+          <span class="about-beat-tag">Beat 02</span>
+          <div class="about-beat-name">Corruption</div>
+        </div>
+        <div class="about-beat">
+          <span class="about-beat-tag">Beat 03</span>
+          <div class="about-beat-name">Justice</div>
+        </div>
+        <div class="about-beat">
+          <span class="about-beat-tag">Beat 04</span>
+          <div class="about-beat-name">Public Safety</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. AUTHOR + UNIVERSITY -->
+  <div class="about-work">
+    <div class="about-inner">
+      <span class="about-section-label">The Work</span>
+      <div class="about-work-grid">
+        <div class="about-work-card">
+          <span class="about-work-card-tag">Author</span>
+          <h3 class="about-work-card-hed">Writing for clarity &amp; for courage.</h3>
+          <p class="about-work-card-body">My books are about growth that doesn't pretend pain didn't happen, reinvention that keeps its receipts, &amp; the kind of focus that lets you move forward without erasing where you've been. No fluff, no gimmicks — just the most useful thing I can offer today.</p>
+        </div>
+        <div class="about-work-card">
+          <span class="about-work-card-tag">UpCube University</span>
+          <h3 class="about-work-card-hed">100,000 courses. $5 each.</h3>
+          <p class="about-work-card-body">Too many people charge thousands for recycled advice. UpCube University offers a hundred thousand courses at five dollars each — because access to rigorous, practical education shouldn't depend on how much money you already have.</p>
+          <div class="about-work-card-detail">Available at UpCube University</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. CLOSING -->
+  <div class="about-closing">
+    <div class="about-inner">
+      <span class="about-section-label">This Is Just the Beginning</span>
+      <h2 class="about-closing-hed">"If you're here for journalism, for tech that works, or for stories that make you think — you're in the right place."</h2>
+      <p class="about-closing-sub">Follow the investigations. Use the tools. Share what resonates. &amp; if you have a lead, a collaboration, or a problem worth solving, reach out.</p>
+    </div>
+  </div>
+
+</div>

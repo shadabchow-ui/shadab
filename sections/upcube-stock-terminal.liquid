@@ -1,0 +1,451 @@
+<div class="uc-terminal" id="uc-terminal" data-symbol="NYSE:A">
+  <div class="uc-header">
+    <div class="uc-identity">
+      <img class="uc-logo" id="uc-logo" alt="" />
+      <div>
+        <div class="uc-title">
+          <span id="uc-name">Loading…</span>
+          <span class="uc-pill" id="uc-symbol">—</span>
+        </div>
+        <div class="uc-sub" id="uc-sub">—</div>
+      </div>
+    </div>
+
+    <div class="uc-price">
+      <div class="uc-price-main">
+        <span id="uc-price">—</span>
+        <span class="uc-change" id="uc-change">—</span>
+      </div>
+      <div class="uc-mini" id="uc-mini">Market cap — · P/E — · EPS — · Yield —</div>
+    </div>
+  </div>
+
+  <div class="uc-grid">
+    <!-- Left: Chart -->
+    <section class="uc-card uc-chart">
+      <div class="uc-card-head">
+        <div class="uc-card-title">Price</div>
+        <div class="uc-range" role="tablist" aria-label="Range">
+          <button class="uc-btn uc-btn-active" data-range="1D">1D</button>
+          <button class="uc-btn" data-range="5D">5D</button>
+          <button class="uc-btn" data-range="1M">1M</button>
+          <button class="uc-btn" data-range="6M">6M</button>
+          <button class="uc-btn" data-range="YTD">YTD</button>
+          <button class="uc-btn" data-range="1Y">1Y</button>
+          <button class="uc-btn" data-range="5Y">5Y</button>
+        </div>
+      </div>
+      <div class="uc-chart-wrap">
+        <canvas id="uc-chart" height="220"></canvas>
+      </div>
+      <div class="uc-card-foot" id="uc-chart-foot">—</div>
+    </section>
+
+    <!-- Right: Key metrics -->
+    <section class="uc-card uc-metrics">
+      <div class="uc-card-head">
+        <div class="uc-card-title">Snapshot</div>
+      </div>
+      <div class="uc-kv" id="uc-kv">
+        <!-- injected -->
+      </div>
+    </section>
+
+    <!-- Tabs -->
+    <section class="uc-card uc-tabs">
+      <div class="uc-tabbar" role="tablist" aria-label="Sections">
+        <button class="uc-tab uc-tab-active" data-tab="performance">Performance</button>
+        <button class="uc-tab" data-tab="stats">Key stats</button>
+        <button class="uc-tab" data-tab="financials">Financials</button>
+        <button class="uc-tab" data-tab="technicals">Technicals</button>
+        <button class="uc-tab" data-tab="holdings">Holdings</button>
+        <button class="uc-tab" data-tab="bonds">Bonds</button>
+        <button class="uc-tab" data-tab="about">About</button>
+      </div>
+
+      <div class="uc-tabpanes">
+        <div class="uc-pane uc-pane-active" id="pane-performance"></div>
+        <div class="uc-pane" id="pane-stats"></div>
+        <div class="uc-pane" id="pane-financials"></div>
+        <div class="uc-pane" id="pane-technicals"></div>
+        <div class="uc-pane" id="pane-holdings"></div>
+        <div class="uc-pane" id="pane-bonds"></div>
+        <div class="uc-pane" id="pane-about"></div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- Chart.js (high quality, easy) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<style>
+  :root{
+    --uc-bg:#0b1220;
+    --uc-card:#0f1b33;
+    --uc-card2:#0c1730;
+    --uc-text:#e8eefc;
+    --uc-muted:#93a4c7;
+    --uc-line:rgba(255,255,255,.08);
+    --uc-accent:#7aa2ff;
+    --uc-good:#4ade80;
+    --uc-bad:#fb7185;
+    --uc-warn:#fbbf24;
+    --uc-radius:18px;
+  }
+  .uc-terminal{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; color:var(--uc-text); background:linear-gradient(180deg, #0b1220, #070d19); padding:18px; border-radius:24px; border:1px solid var(--uc-line); box-shadow: 0 18px 50px rgba(0,0,0,.35);}
+  .uc-header{display:flex; gap:16px; align-items:flex-start; justify-content:space-between; padding:6px 6px 14px;}
+  .uc-identity{display:flex; gap:12px; align-items:center;}
+  .uc-logo{width:44px; height:44px; border-radius:12px; background:#0a1530; border:1px solid var(--uc-line); object-fit:contain; padding:8px;}
+  .uc-title{display:flex; gap:10px; align-items:center; font-weight:700; font-size:18px; line-height:1.2;}
+  .uc-sub{color:var(--uc-muted); font-size:13px; margin-top:4px;}
+  .uc-pill{font-size:12px; color:var(--uc-muted); border:1px solid var(--uc-line); padding:3px 8px; border-radius:999px;}
+  .uc-price{text-align:right;}
+  .uc-price-main{display:flex; gap:10px; align-items:baseline; justify-content:flex-end;}
+  #uc-price{font-size:28px; font-weight:800;}
+  .uc-change{font-weight:700; font-size:14px; padding:3px 10px; border-radius:999px; border:1px solid var(--uc-line);}
+  .uc-mini{color:var(--uc-muted); font-size:12px; margin-top:6px;}
+  .uc-grid{display:grid; grid-template-columns: 1.4fr .9fr; gap:14px;}
+  .uc-card{background:linear-gradient(180deg, var(--uc-card), var(--uc-card2)); border:1px solid var(--uc-line); border-radius:var(--uc-radius); padding:14px;}
+  .uc-card-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;}
+  .uc-card-title{font-weight:800; font-size:14px; letter-spacing:.2px;}
+  .uc-chart{grid-column:1 / 2;}
+  .uc-metrics{grid-column:2 / 3;}
+  .uc-tabs{grid-column:1 / 3;}
+  .uc-chart-wrap{padding:6px 2px 0;}
+  .uc-card-foot{color:var(--uc-muted); font-size:12px; margin-top:8px;}
+  .uc-range{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;}
+  .uc-btn{background:transparent; color:var(--uc-muted); border:1px solid var(--uc-line); padding:6px 10px; border-radius:999px; font-size:12px; cursor:pointer;}
+  .uc-btn:hover{border-color:rgba(122,162,255,.5); color:var(--uc-text);}
+  .uc-btn-active{border-color:rgba(122,162,255,.8); color:var(--uc-text); background:rgba(122,162,255,.10);}
+  .uc-kv{display:grid; grid-template-columns: 1fr 1fr; gap:10px;}
+  .uc-kv .kv{border:1px solid var(--uc-line); border-radius:14px; padding:10px;}
+  .uc-kv .k{color:var(--uc-muted); font-size:12px;}
+  .uc-kv .v{font-weight:800; margin-top:6px;}
+  .uc-tabbar{display:flex; gap:8px; flex-wrap:wrap; border-bottom:1px solid var(--uc-line); padding-bottom:10px; margin-bottom:12px;}
+  .uc-tab{background:transparent; color:var(--uc-muted); border:1px solid var(--uc-line); padding:8px 12px; border-radius:999px; font-size:12px; cursor:pointer;}
+  .uc-tab-active{border-color:rgba(122,162,255,.8); color:var(--uc-text); background:rgba(122,162,255,.10);}
+  .uc-pane{display:none;}
+  .uc-pane-active{display:block;}
+  .uc-table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border:1px solid var(--uc-line); border-radius:14px;}
+  .uc-table th, .uc-table td{padding:10px; font-size:12px; border-bottom:1px solid var(--uc-line); text-align:left; vertical-align:top;}
+  .uc-table th{color:var(--uc-muted); font-weight:700; background:rgba(255,255,255,.03);}
+  .uc-badge{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; border:1px solid var(--uc-line); font-size:12px;}
+  .good{color:var(--uc-good);}
+  .bad{color:var(--uc-bad);}
+  .warn{color:var(--uc-warn);}
+  @media (max-width: 980px){
+    .uc-grid{grid-template-columns: 1fr;}
+    .uc-chart,.uc-metrics,.uc-tabs{grid-column:1 / -1;}
+    .uc-header{flex-direction:column; align-items:flex-start;}
+    .uc-price{text-align:left;}
+    .uc-price-main{justify-content:flex-start;}
+  }
+</style>
+
+<script>
+(() => {
+  const root = document.getElementById('uc-terminal');
+  const symbol = root.getAttribute('data-symbol');  // e.g. "NYSE:A"
+
+  // 👉 Change this to your own hosted JSON base (Cloudflare R2, etc.)
+  const DATA_BASE = "https://YOUR-CDN/stocks";
+
+  // Expect file naming like: NYSE-A.json
+  const fileKey = symbol.replace(':','-');
+  const url = `${DATA_BASE}/${fileKey}.json`;
+
+  const $ = (id) => document.getElementById(id);
+
+  // ---------- Helpers ----------
+  const asText = (v) => (v === null || v === undefined || v === '' ? '—' : String(v));
+  const toPctBadge = (pct) => {
+    const n = Number(pct);
+    if (!isFinite(n)) return `<span class="uc-badge">—</span>`;
+    const cls = n > 0 ? 'good' : (n < 0 ? 'bad' : 'warn');
+    const sign = n > 0 ? '+' : '';
+    return `<span class="uc-badge ${cls}">${sign}${n.toFixed(2)}%</span>`;
+  };
+  const parseCompact = (s) => {
+    // "37.69 B USD" -> 37690000000 (best-effort)
+    if (!s) return null;
+    const str = String(s).replace(/\s+/g,' ').trim();
+    const m = str.match(/([0-9]+(?:\.[0-9]+)?)\s*([KMBT])?/i);
+    if (!m) return null;
+    let val = parseFloat(m[1]);
+    const mult = (m[2]||'').toUpperCase();
+    if (mult === 'K') val *= 1e3;
+    if (mult === 'M') val *= 1e6;
+    if (mult === 'B') val *= 1e9;
+    if (mult === 'T') val *= 1e12;
+    return val;
+  };
+
+  // ---------- Chart ----------
+  let chart;
+  function renderChart(priceSeries){
+    // priceSeries example: [{t:"2026-01-29T14:30:00Z", c:192.51}, ...]
+    // If you don't have a real series yet, you can render a synthetic sparkline from returns
+    const labels = priceSeries.map(p => p.t);
+    const values = priceSeries.map(p => p.c);
+
+    const ctx = $('uc-chart').getContext('2d');
+    if (chart) chart.destroy();
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [{
+          label: symbol,
+          data: values,
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.25
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { intersect: false, mode: 'index' }
+        },
+        scales: {
+          x: { display: false },
+          y: {
+            ticks: { color: 'rgba(232,238,252,.75)', font: { size: 11 } },
+            grid: { color: 'rgba(255,255,255,.06)' }
+          }
+        }
+      }
+    });
+  }
+
+  // ---------- Tabs ----------
+  function wireTabs(){
+    root.querySelectorAll('.uc-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        root.querySelectorAll('.uc-tab').forEach(b => b.classList.remove('uc-tab-active'));
+        root.querySelectorAll('.uc-pane').forEach(p => p.classList.remove('uc-pane-active'));
+        btn.classList.add('uc-tab-active');
+        const tab = btn.dataset.tab;
+        document.getElementById(`pane-${tab}`).classList.add('uc-pane-active');
+      });
+    });
+  }
+
+  function wireRanges(data){
+    root.querySelectorAll('.uc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        root.querySelectorAll('.uc-btn').forEach(b => b.classList.remove('uc-btn-active'));
+        btn.classList.add('uc-btn-active');
+
+        const r = btn.dataset.range;
+        // If you have real price series by range, switch here:
+        // renderChart(data.price_series[r])
+        // For now, fallback:
+        renderChart(data.price_series?.[r] || data.price_series?.["1D"] || []);
+        $('uc-chart-foot').textContent = `Range: ${r}`;
+      });
+    });
+  }
+
+  // ---------- Renderers ----------
+  function renderKV(kvs){
+    const items = kvs.map(({k,v}) => `
+      <div class="kv">
+        <div class="k">${k}</div>
+        <div class="v">${asText(v)}</div>
+      </div>
+    `).join('');
+    $('uc-kv').innerHTML = items;
+  }
+
+  function renderPerformance(perf){
+    // perf: { "1d": -0.45, "5d": -3.43, ... } (percent values)
+    const rows = [
+      ['1 day', perf?.d1],
+      ['5 days', perf?.d5],
+      ['1 month', perf?.m1],
+      ['6 months', perf?.m6],
+      ['YTD', perf?.ytd],
+      ['1 year', perf?.y1],
+      ['5 years', perf?.y5],
+      ['10 years', perf?.y10],
+      ['All time', perf?.all]
+    ].map(([k,v]) => `<tr><td>${k}</td><td>${toPctBadge(v)}</td></tr>`).join('');
+
+    $('pane-performance').innerHTML = `
+      <table class="uc-table">
+        <thead><tr><th>Period</th><th>Return</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderStats(stats){
+    const rows = [
+      ['Market cap', stats?.market_cap],
+      ['P/E (TTM)', stats?.pe_ttm],
+      ['EPS (TTM)', stats?.eps_ttm],
+      ['Dividend yield', stats?.div_yield],
+      ['Revenue (FY)', stats?.revenue_fy],
+      ['Net income (FY)', stats?.net_income_fy],
+      ['Shares float', stats?.shares_float],
+      ['Beta (1Y)', stats?.beta_1y],
+      ['Employees', stats?.employees]
+    ].map(([k,v]) => `<tr><td>${k}</td><td>${asText(v)}</td></tr>`).join('');
+
+    $('pane-stats').innerHTML = `
+      <table class="uc-table">
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderFinancials(fin){
+    // fin could be annual series arrays; keep v1 simple
+    $('pane-financials').innerHTML = `
+      <div style="color:var(--uc-muted); font-size:12px; line-height:1.6;">
+        <div style="font-weight:800; color:var(--uc-text); margin-bottom:6px;">Financials</div>
+        <div>Revenue: <b>${asText(fin?.revenue)}</b></div>
+        <div>Net income: <b>${asText(fin?.net_income)}</b></div>
+        <div>Free cash flow: <b>${asText(fin?.free_cash_flow)}</b></div>
+        <div>Debt: <b>${asText(fin?.debt)}</b></div>
+        <div>Cash & equivalents: <b>${asText(fin?.cash)}</b></div>
+        <div style="margin-top:10px;">(Next: we can render multi-year mini charts if your JSON includes series arrays.)</div>
+      </div>
+    `;
+  }
+
+  function renderTechnicals(tech){
+    const rating = (tech?.summary || 'Neutral');
+    const cls = rating.toLowerCase().includes('strong buy') ? 'good' :
+                rating.toLowerCase().includes('buy') ? 'good' :
+                rating.toLowerCase().includes('sell') ? 'bad' : 'warn';
+
+    $('pane-technicals').innerHTML = `
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <span class="uc-badge ${cls}">Technicals: ${asText(rating)}</span>
+        <span class="uc-badge">Analyst: ${asText(tech?.analyst || '—')}</span>
+      </div>
+      <div style="margin-top:10px; color:var(--uc-muted); font-size:12px; line-height:1.6;">
+        Add indicator breakdown here if you have it (RSI/MACD/MA signals).
+      </div>
+    `;
+  }
+
+  function renderHoldings(hold){
+    const rows = (hold?.etfs || []).slice(0, 12).map(e => `
+      <tr>
+        <td><b>${asText(e.ticker)}</b> <span style="color:var(--uc-muted)"> ${asText(e.name)}</span></td>
+        <td>${asText(e.weight)}</td>
+        <td>${asText(e.market_value)}</td>
+      </tr>
+    `).join('') || `<tr><td colspan="3" style="color:var(--uc-muted)">No ETF holdings data</td></tr>`;
+
+    $('pane-holdings').innerHTML = `
+      <table class="uc-table">
+        <thead><tr><th>ETF</th><th>Weight</th><th>Market value</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderBonds(bonds){
+    const rows = (bonds || []).slice(0, 10).map(b => `
+      <tr>
+        <td>${asText(b.id)}</td>
+        <td>${asText(b.coupon)}</td>
+        <td>${asText(b.maturity)}</td>
+        <td>${asText(b.ytm)}</td>
+      </tr>
+    `).join('') || `<tr><td colspan="4" style="color:var(--uc-muted)">No bond data</td></tr>`;
+
+    $('pane-bonds').innerHTML = `
+      <table class="uc-table">
+        <thead><tr><th>Bond</th><th>Coupon</th><th>Maturity</th><th>YTM</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderAbout(about){
+    $('pane-about').innerHTML = `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+        <div class="kv"><div class="k">Sector</div><div class="v">${asText(about?.sector)}</div></div>
+        <div class="kv"><div class="k">Industry</div><div class="v">${asText(about?.industry)}</div></div>
+        <div class="kv"><div class="k">CEO</div><div class="v">${asText(about?.ceo)}</div></div>
+        <div class="kv"><div class="k">Headquarters</div><div class="v">${asText(about?.hq)}</div></div>
+        <div class="kv"><div class="k">Founded</div><div class="v">${asText(about?.founded)}</div></div>
+        <div class="kv"><div class="k">Website</div><div class="v">${about?.website ? `<a href="https://${about.website}" target="_blank" style="color:var(--uc-accent)">${about.website}</a>` : '—'}</div></div>
+      </div>
+      <div style="color:var(--uc-muted); font-size:12px; line-height:1.7;">
+        ${asText(about?.description)}
+      </div>
+    `;
+  }
+
+  // ---------- Main ----------
+  async function main(){
+    wireTabs();
+
+    const res = await fetch(url, { cache: "force-cache" });
+    if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+    const data = await res.json();
+
+    // Expecting your JSON to have something like this:
+    // data.overview, data.performance, data.key_stats, data.about, data.technicals, data.etfs, data.bonds, data.price_series
+    // If your keys differ, map them here once.
+
+    // Header
+    $('uc-logo').src = data.logo_url || '';
+    $('uc-name').textContent = data.company_name || data.name || '—';
+    $('uc-symbol').textContent = data.symbol_uid || symbol;
+    $('uc-sub').textContent = `${asText(data.sector)} · ${asText(data.industry || '')}`.replace(/ · $/,'');
+    $('uc-price').textContent = asText(data.price_usd ?? data.price);
+    const ch = Number(data.change_percent ?? data.change_pct);
+    $('uc-change').innerHTML = toPctBadge(isFinite(ch) ? ch : null);
+
+    // Mini line
+    $('uc-mini').textContent =
+      `Market cap ${asText(data.market_cap)} · P/E ${asText(data.pe)} · EPS ${asText(data.eps)} · Yield ${asText(data.dividend_yield)}`;
+
+    // Snapshot cards
+    renderKV([
+      {k:'Market cap', v: data.market_cap},
+      {k:'Volume', v: data.volume},
+      {k:'P/E (TTM)', v: data.pe},
+      {k:'EPS (TTM)', v: data.eps},
+      {k:'Dividend yield', v: data.dividend_yield},
+      {k:'Sector', v: data.sector},
+      {k:'Analyst', v: data.analyst_rating},
+      {k:'Next earnings', v: data.earnings?.next_report_date || '—'},
+    ]);
+
+    // Tabs content
+    renderPerformance(data.performance || {});
+    renderStats(data.key_stats || {});
+    renderFinancials(data.financials || {});
+    renderTechnicals(data.technicals || {});
+    renderHoldings({ etfs: data.etf_holdings || data.etfs || [] });
+    renderBonds(data.bonds || []);
+    renderAbout(data.about || {});
+
+    // Chart
+    wireRanges(data);
+    const series = data.price_series?.["1D"] || data.price_series || [];
+    renderChart(series);
+    $('uc-chart-foot').textContent = `Source: your dataset · Symbol: ${symbol}`;
+  }
+
+  main().catch(err => {
+    console.error(err);
+    root.innerHTML = `<div style="color:#fff; font-family:system-ui; padding:16px;">
+      <b>Data load failed.</b><div style="opacity:.8; margin-top:6px;">${err.message}</div>
+      <div style="opacity:.8; margin-top:10px;">Check DATA_BASE URL and that <code>${symbol.replace(':','-')}.json</code> exists.</div>
+    </div>`;
+  });
+})();
+</script>
