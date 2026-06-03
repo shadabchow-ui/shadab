@@ -2,19 +2,19 @@
 
 <style>
   .blog-grid-wrap {
-    max-width: 1160px;
+    max-width: 1240px;
     margin: 0 auto;
     padding: 60px 52px 100px;
   }
 
   .blog-grid-header {
-    margin-bottom: 52px;
+    margin-bottom: 48px;
     border-bottom: 1px solid #1e1e1e;
     padding-bottom: 32px;
   }
 
   .blog-grid-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--sha-font-ui);
     font-size: 9px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -24,93 +24,225 @@
   }
 
   .blog-grid-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--sha-font-display);
     font-size: clamp(28px, 3vw, 44px);
     font-weight: 700;
     color: #efefef;
     line-height: 1.1;
   }
 
+  .blog-grid-subtitle {
+    font-family: var(--sha-font-body);
+    max-width: 760px;
+    margin-top: 18px;
+    font-size: 17px;
+    line-height: 1.78;
+    color: #888;
+  }
+
+  .blog-grid-notes,
+  .blog-grid-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .blog-grid-notes {
+    margin-top: 24px;
+  }
+
+  .blog-grid-tags {
+    margin: 0 0 36px;
+  }
+
+  .blog-grid-note,
+  .blog-grid-tag {
+    font-family: var(--sha-font-ui);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border: 1px solid #282828;
+  }
+
+  .blog-grid-note {
+    color: #a0a0a0;
+  }
+
+  .blog-grid-tag {
+    color: #c6c6c6;
+    text-decoration: none;
+  }
+
+  .blog-grid-tag:hover {
+    border-color: #efefef;
+    color: #efefef;
+  }
+
+  .blog-lead-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.75fr);
+    gap: 28px;
+    margin-bottom: 44px;
+  }
+
+  .blog-support-stack {
+    display: grid;
+    gap: 24px;
+  }
+
   .blog-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px 32px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
     margin-bottom: 72px;
   }
 
-  .blog-card {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+  .news-card {
     border: 1px solid #1e1e1e;
     background: #0f0f0f;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
   }
-  .blog-card:hover {
+
+  .news-card:hover {
     border-color: #333;
     background: #141414;
+    transform: translateY(-2px);
   }
 
-  .blog-card-img-wrap {
+  .news-card__link {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .news-card__media {
     width: 100%;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(160deg, #101010 0%, #1c1c1c 100%);
     overflow: hidden;
-    background: #141414;
-    display: block;
   }
 
-  .blog-card-img-wrap img {
+  .news-card__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s ease;
-  }
-  .blog-card:hover .blog-card-img-wrap img {
-    transform: scale(1.03);
+    transition: transform 0.45s ease;
   }
 
-  .blog-card-no-img {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #141414;
+  .news-card:hover .news-card__image {
+    transform: scale(1.04);
+  }
+
+  .news-card__fallback {
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 22px;
+    background:
+      linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+      radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 45%),
+      linear-gradient(160deg, #101010 0%, #1c1c1c 100%);
   }
 
-  .blog-card-no-img span {
-    font-family: 'IBM Plex Mono', monospace;
+  .news-card__fallback-label,
+  .news-card__fallback-meta {
+    font-family: var(--sha-font-ui);
     font-size: 9px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #333;
+    color: #8e8e8e;
   }
 
-  .blog-card-body {
-    padding: 20px 22px 24px;
-  }
-
-  .blog-card-date {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #555;
-    margin-bottom: 10px;
-    display: block;
-  }
-
-  .blog-card-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 20px;
-    font-weight: 700;
+  .news-card__fallback-title {
+    font-family: var(--sha-font-display);
+    font-size: clamp(22px, 2.3vw, 30px);
+    line-height: 1.12;
     color: #efefef;
-    line-height: 1.25;
+  }
+
+  .news-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 22px;
+  }
+
+  .news-card__eyebrow,
+  .news-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+
+  .news-card__badge,
+  .news-card__meta span {
+    font-family: var(--sha-font-ui);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .news-card__badge {
+    padding: 7px 10px;
+    border: 1px solid #2a2a2a;
+  }
+
+  .news-card__badge--urgency {
+    border-color: #efefef;
+    color: #efefef;
+  }
+
+  .news-card__badge--beat,
+  .news-card__meta span {
+    color: #8b8b8b;
+  }
+
+  .news-card__title {
+    font-family: var(--sha-font-display);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.16;
+    color: #efefef;
     margin: 0;
   }
 
-  /* pagination */
+  .news-card__deck {
+    font-family: var(--sha-font-body);
+    color: #b8b8b8;
+    font-size: 15px;
+    line-height: 1.78;
+    margin: 0;
+  }
+
+  .news-card--lead .news-card__title {
+    font-size: clamp(32px, 3.8vw, 52px);
+  }
+
+  .news-card--lead .news-card__body {
+    padding: 28px;
+    gap: 18px;
+  }
+
+  .news-card--lead .news-card__deck {
+    font-size: 17px;
+    max-width: 52ch;
+  }
+
+  .news-card--compact .news-card__title {
+    font-size: 20px;
+  }
+
+  .news-card--compact .news-card__body {
+    padding: 18px;
+    gap: 12px;
+  }
+
   .blog-pagination {
     display: flex;
     align-items: center;
@@ -122,7 +254,7 @@
 
   .blog-pagination a,
   .blog-pagination span {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--sha-font-ui);
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -151,85 +283,139 @@
   }
 
   @media (max-width: 900px) {
-    .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
-    .blog-grid-wrap { padding: 40px 28px 80px; }
+    .blog-lead-layout {
+      grid-template-columns: 1fr;
+    }
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 20px;
+    }
+    .blog-grid-wrap {
+      padding: 40px 28px 80px;
+    }
   }
+
   @media (max-width: 560px) {
-    .blog-grid { grid-template-columns: 1fr; }
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+    .news-card--lead .news-card__title {
+      font-size: 34px;
+    }
   }
 </style>
 
-<div class="blog-grid-wrap">
+{% assign archive_heading = blog.title | append: ' Archive' %}
+{% assign archive_subtitle = 'This archive leads with the top report first, then supporting developments, then the wider newsroom file. Story labels, urgency states, beat tags, deck copy, and updated dates are shown where the live article data provides them.' %}
+{% if blog.handle == 'breaking-news' %}
+  {% assign archive_heading = 'Breaking News and Investigations' %}
+  {% assign archive_subtitle = 'The newsroom archive leads with the most urgent report first, then supporting developments, then the wider reporting file. Story labels, urgency states, beat tags, deck copy, and updated dates are shown where the live article data provides them.' %}
+{% endif %}
 
+<div class="blog-grid-wrap">
   <div class="blog-grid-header">
     <span class="blog-grid-label">{{ blog.title }}</span>
-    <h1 class="blog-grid-title">Breaking News &amp; Investigations</h1>
+    <h1 class="blog-grid-title">{{ archive_heading }}</h1>
+    <p class="blog-grid-subtitle">{{ archive_subtitle }}</p>
+    <div class="blog-grid-notes">
+      <span class="blog-grid-note">Lead story hierarchy enabled</span>
+      <span class="blog-grid-note">Archive source: {{ blog.title }}</span>
+      <span class="blog-grid-note">Updated dates shown when provided</span>
+    </div>
   </div>
 
-  <div class="blog-grid">
-    {% for article in blog.articles %}
-      <a class="blog-card" href="{{ article.url }}">
-
-        <div class="blog-card-img-wrap">
-          {% if article.image %}
-            <img
-              src="{{ article.image | img_url: '600x338', crop: 'center' }}"
-              alt="{{ article.title | escape }}"
-              loading="lazy"
-            >
-          {% else %}
-            <div class="blog-card-no-img">
-              <span>No Image</span>
-            </div>
-          {% endif %}
-        </div>
-
-        <div class="blog-card-body">
-          <span class="blog-card-date">{{ article.published_at | date: "%b %d, %Y" }}</span>
-          <p class="blog-card-title">{{ article.title }}</p>
-        </div>
-
-      </a>
-    {% endfor %}
-  </div>
-
-  {% if paginate.pages > 1 %}
-  <div class="blog-pagination">
-    {% if paginate.previous %}
-      <a href="{{ paginate.previous.url }}">← Prev</a>
+  {% if blog.articles_count > 0 %}
+    {% if blog.all_tags.size > 0 %}
+      <div class="blog-grid-tags">
+        {% for tag in blog.all_tags limit: 6 %}
+          <a class="blog-grid-tag" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag }}</a>
+        {% endfor %}
+      </div>
     {% endif %}
 
-    {% for part in paginate.parts %}
-      {% if part.is_link %}
-        <a href="{{ part.url }}">{{ part.title }}</a>
-      {% elsif part.title == paginate.current_page %}
-        <span class="current">{{ part.title }}</span>
-      {% else %}
-        <span class="gap">{{ part.title }}</span>
+    {% assign lead_article = blank %}
+    {% for article in blog.articles limit: 12 %}
+      {% assign article_is_pinned = false %}
+      {% for tag in article.tags %}
+        {% assign normalized_tag = tag | downcase %}
+        {% if normalized_tag == 'pinned' or normalized_tag == 'lead' or normalized_tag == 'featured' %}
+          {% assign article_is_pinned = true %}
+        {% endif %}
+      {% endfor %}
+      {% if article_is_pinned and lead_article == blank %}
+        {% assign lead_article = article %}
       {% endif %}
     {% endfor %}
-
-    {% if paginate.next %}
-      <a href="{{ paginate.next.url }}">Next →</a>
+    {% if lead_article == blank %}
+      {% assign lead_article = blog.articles.first %}
     {% endif %}
-  </div>
+
+    <div class="blog-lead-layout">
+      {% include 'newsroom-story-card', article: lead_article, variant: 'lead', context: 'archive', fallback_blog_title: blog.title %}
+
+      <div class="blog-support-stack">
+        {% assign support_count = 0 %}
+        {% for article in blog.articles limit: 12 %}
+          {% if article.handle != lead_article.handle and support_count < 2 %}
+            {% include 'newsroom-story-card', article: article, variant: 'compact', context: 'archive', show_excerpt: false, fallback_blog_title: blog.title %}
+            {% assign support_count = support_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="blog-grid">
+      {% assign non_lead_seen = 0 %}
+      {% for article in blog.articles %}
+        {% if article.handle != lead_article.handle %}
+          {% assign non_lead_seen = non_lead_seen | plus: 1 %}
+          {% if non_lead_seen > 2 %}
+            {% include 'newsroom-story-card', article: article, variant: 'standard', context: 'archive', fallback_blog_title: blog.title %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="news-card news-card--lead">
+      <div class="news-card__link">
+        <div class="news-card__media">
+          <div class="news-card__fallback" aria-hidden="true">
+            <span class="news-card__fallback-label">{{ blog.title }}</span>
+            <strong class="news-card__fallback-title">No stories have been published in this archive yet.</strong>
+            <span class="news-card__fallback-meta">Live article data not provided</span>
+          </div>
+        </div>
+        <div class="news-card__body">
+          <div class="news-card__meta">
+            <span>Archive standby</span>
+          </div>
+          <p class="news-card__deck">Publish to this blog to populate the lead story, support stack, and article grid automatically.</p>
+        </div>
+      </div>
+    </div>
   {% endif %}
 
+  {% if paginate.pages > 1 %}
+    <div class="blog-pagination">
+      {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}">← Prev</a>
+      {% endif %}
+
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <a href="{{ part.url }}">{{ part.title }}</a>
+        {% elsif part.title == paginate.current_page %}
+          <span class="current">{{ part.title }}</span>
+        {% else %}
+          <span class="gap">{{ part.title }}</span>
+        {% endif %}
+      {% endfor %}
+
+      {% if paginate.next %}
+        <a href="{{ paginate.next.url }}">Next →</a>
+      {% endif %}
+    </div>
+  {% endif %}
 </div>
 
 {% endpaginate %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

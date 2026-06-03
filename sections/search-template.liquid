@@ -26,6 +26,9 @@
   <div class="section clearfix">
     <div class="sixteen columns clearfix">
       <h1>{{ 'general.search.title' | t }}</h1>
+      <p class="search_scope_note">
+        Search stories, pages, and reporting from <a href="/blogs/breaking-news">Breaking News</a>.
+      </p>
       <div class="feature_divider"></div>
     </div>
   </div>
@@ -55,15 +58,13 @@
 
       <br class="clear" />
       <br class="clear" />
-      <form class="search" action="/search">
+      <form class="search" action="/search" role="search">
         <div class="{% if sidebar %}three{% else %}five{% endif %} columns">
           &nbsp;
         </div>
         <div class="four columns center">
-          {% if settings.search_option != 'everything' %}
-            <input type="hidden" name="type" value="product" />
-          {% endif %}
-          <input type="text" name="q" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms }}" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" />
+          <label for="search-empty-state" class="hidden-label">Search stories and pages</label>
+          <input id="search-empty-state" type="search" name="q" placeholder="Search stories, investigations, and pages" value="{{ search.terms }}" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" />
         </div>
         <div class="two columns">
           <input type="submit" name="submit" class="action_button" value="{{ 'general.search.submit' | t }}" style="margin-top:0" />
@@ -71,96 +72,90 @@
       </form>
     {% else %}
 
-   {% if settings.search_option == 'everything' or search.results.first.price == blank %}
+    {% assign has_content_results = false %}
+    {% assign has_product_results = false %}
 
     {% for item in search.results %}
-      <div class="product_row">
-        {% assign featured_image = false %}
+      {% if item.object_type == 'product' %}
+        {% assign has_product_results = true %}
+      {% else %}
+        {% assign has_content_results = true %}
+      {% endif %}
+    {% endfor %}
 
-        {% if item.object_type == 'article' and item.image %}
-          {% assign featured_image = true %}
-          <div class="four columns alpha">
-             <a href="{{ item.url }}" title="{{ item.title | escape }}">
-                <img src="{{ item.image | img_url: '600x', scale: 2 }}"  alt="{{ item.title | escape }}" />
-             </a>
-          </div>
-        {% elsif item.featured_image %}
-          {% assign featured_image = true %}
-          <div class="four columns alpha">
-             <a href="{{ item.url }}" title="{{ item.title | escape }}">
-                <img src="{{ item.featured_image | product_img_url: '600x', scale: 2 }}"  alt="{{ item.title | escape }}" />
-             </a>
-          </div>
-        {% endif %}
+    {% if has_content_results %}
+      {% for item in search.results %}
+        {% unless item.object_type == 'product' %}
+          <div class="product_row">
+            {% assign featured_image = false %}
 
-        {% if sidebar %}
-          <div class="{% if featured_image %}eight{% else %}twelve{% endif %} columns omega align_left">
-        {% else %}
-          <div class="{% if featured_image %}twelve{% else %}sixteen alpha{% endif %} columns omega align_left">
-        {% endif %}
-
-          <h5 class="sub_title">
-            <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
-          </h5>
-
-          {% if item.price %}
-             <div class="info">
-                <span class="price">
-                  {% if item.compare_at_price_max > item.price %}
-                    <span class="was_price">{{ item.compare_at_price_max | money }}</span>
-                  {% endif %}
-
-                  {% if item.available %}
-                    {% if item.price_varies %}
-                      {% if item.compare_at_price_max > item.price %}
-                        <br />
-                      {% endif %}
-                      <small><em>{{ 'products.general.from' | t }}</em></small>
-                    {% endif %}
-                    {{ item.price_min | money }}
-                  {% else %}
-                    {{ item.price_min | money }} - {{ 'products.product.sold_out' | t }}
-                  {% endif %}
-                </span>
-            </div>
-          {% endif %}
-
-          {% if item.object_type == 'article' %}
-            <p class="blog_meta">
-              {% if section.settings.blog_author %}
-                <span>{{ 'blogs.article.by_author' | t: author: item.author }}</span>
-              {% endif %}
-
-              {% if section.settings.blog_date %}
-                <span>{{ item.published_at | date: format: "month_day_year" }}</span>
-              {% endif %}
-            </p>
-          {% endif %}
-
-          {% if item.excerpt %}
-            <div class="excerpt">{{ item.excerpt }}</div>
-
-            {% if section.settings.read_more_link %}
-              <p>
-                <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ 'blogs.general.continue_reading_html' | t }} <span class="icon-right-arrow"></span></a>
-              </p>
+            {% if item.object_type == 'article' and item.image %}
+              {% assign featured_image = true %}
+              <div class="four columns alpha">
+                 <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                    <img src="{{ item.image | img_url: '600x', scale: 2 }}"  alt="{{ item.title | escape }}" />
+                 </a>
+              </div>
+            {% elsif item.featured_image %}
+              {% assign featured_image = true %}
+              <div class="four columns alpha">
+                 <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                    <img src="{{ item.featured_image | product_img_url: '600x', scale: 2 }}"  alt="{{ item.title | escape }}" />
+                 </a>
+              </div>
             {% endif %}
-          {% else %}
-            <p>
-              {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms | replace: 'Description', '' | replace: 'Specs', '' | replace: 'Shipping', '' | replace: 'Size', '' }}
-            </p>
-          {% endif %}
-        </div>
-      </div>
-    <hr />
-   {% endfor %}
 
-  {% else %}
-    {% assign products = search.results %}
-    {% assign products_per_row = section.settings.products_per_row %}
-    {% include 'product-loop', sidebar: sidebar %}
+            {% if sidebar %}
+              <div class="{% if featured_image %}eight{% else %}twelve{% endif %} columns omega align_left">
+            {% else %}
+              <div class="{% if featured_image %}twelve{% else %}sixteen alpha{% endif %} columns omega align_left">
+            {% endif %}
 
-  {% endif %}
+              <h5 class="sub_title">
+                <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a>
+              </h5>
+
+              {% if item.object_type == 'article' %}
+                <p class="blog_meta">
+                  {% if section.settings.blog_author %}
+                    <span>{{ 'blogs.article.by_author' | t: author: item.author }}</span>
+                  {% endif %}
+
+                  {% if section.settings.blog_date %}
+                    <span>{{ item.published_at | date: format: "month_day_year" }}</span>
+                  {% endif %}
+                </p>
+              {% endif %}
+
+              {% if item.excerpt %}
+                <div class="excerpt">{{ item.excerpt }}</div>
+
+                {% if section.settings.read_more_link and item.object_type == 'article' %}
+                  <p>
+                    <a href="{{ item.url }}" title="{{ item.title | escape }}">{{ 'blogs.general.continue_reading_html' | t }} <span class="icon-right-arrow"></span></a>
+                  </p>
+                {% endif %}
+              {% else %}
+                <p>
+                  {{ item.content | strip_html | truncatewords: 40 | highlight: search.terms | replace: 'Description', '' | replace: 'Specs', '' | replace: 'Shipping', '' | replace: 'Size', '' }}
+                </p>
+              {% endif %}
+            </div>
+          </div>
+          <hr />
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+
+    {% if has_content_results and has_product_results %}
+      <hr />
+    {% endif %}
+
+    {% if has_product_results %}
+      {% assign products = search.results | where: "object_type", "product" %}
+      {% assign products_per_row = section.settings.products_per_row %}
+      {% include 'product-loop', sidebar: sidebar %}
+    {% endif %}
 {% endif %}
 
   {% else %}
@@ -168,19 +163,17 @@
       <br class="clear" />
       <div class="center">
         <h3>
-          {{ 'general.search.description' | t }}
+          Search stories, investigations, and pages
         </h3>
       </div>
       <br class="clear" />
-        <form class="search" action="/search">
+        <form class="search" action="/search" role="search">
           <div class="{% if sidebar %}three{% else %}five{% endif %} columns">
             &nbsp;
           </div>
           <div class="four columns center">
-            {% if settings.search_option != 'everything' %}
-              <input type="hidden" name="type" value="product" />
-            {% endif %}
-            <input type="text" name="q" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms }}" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" />
+            <label for="search-page-query" class="hidden-label">Search stories and pages</label>
+            <input id="search-page-query" type="search" name="q" placeholder="Search stories, investigations, and pages" value="{{ search.terms }}" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" />
           </div>
           <div class="two columns">
             <input type="submit" name="submit" class="action_button" value="{{ 'general.search.submit' | t }}" style="margin-top:0" />
@@ -210,7 +203,7 @@
     {
       "type": "range",
       "id": "products_per_row",
-      "label": "Products per row",
+      "label": "Results per row",
       "min": 2,
       "max": 5,
       "step": 1,
@@ -219,7 +212,7 @@
     {
       "type": "range",
       "id": "pagination_limit",
-      "label": "Products per page",
+      "label": "Results per page",
       "min": 2,
       "max": 50,
       "step": 1,

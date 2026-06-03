@@ -1,0 +1,182 @@
+{% assign video_has_meta = false %}
+{% if section.settings.viewer_discretion or section.settings.pretext != blank or section.settings.title != blank or section.settings.subtitle != blank or section.settings.video_date != blank or section.settings.video_time != blank or section.settings.video_source_note != blank or section.settings.video_context != blank or section.settings.video_transcript != blank or section.settings.video_evidence != blank or section.settings.video_shows != blank or section.settings.video_does_not_prove != blank %}
+  {% assign video_has_meta = true %}
+{% endif %}
+
+{% if video_has_meta %}
+  <section class="news-video__context no-ad-zone no-ad-zone--sensitive">
+    {% if section.settings.viewer_discretion %}
+      {% include 'viewer-discretion',
+        viewer_discretion_body: 'This video may contain graphic, disturbing, or otherwise sensitive material. It is framed here for context, verification, and reporting clarity.',
+        viewer_discretion_footnote: 'Manual age-restriction and ad-treatment decisions should be reviewed per video when needed.'
+      %}
+    {% endif %}
+
+    <div class="news-video__header">
+      {% if section.settings.pretext != blank %}
+        <div class="news-video__source">{{ section.settings.pretext }}</div>
+      {% endif %}
+
+      {% if section.settings.title != blank %}
+        <h2 class="news-video__title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      {% if section.settings.subtitle != blank %}
+        <div class="news-video__caption rte">{{ section.settings.subtitle }}</div>
+      {% endif %}
+
+      {% if section.settings.video_date != blank or section.settings.video_time != blank %}
+        <div class="news-video__datetime">
+          {% if section.settings.video_date != blank %}<span>{{ section.settings.video_date }}</span>{% endif %}
+          {% if section.settings.video_time != blank %}<span>{{ section.settings.video_time }}</span>{% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.settings.video_source_note != blank %}
+        {% include 'source-note',
+          source_note_body: section.settings.video_source_note,
+          source_note_footnote: 'This note reflects the editor-provided source context for the video module and should be reviewed manually before monetization decisions.'
+        %}
+      {% endif %}
+    </div>
+
+    <div class="news-video__grid">
+      {% if section.settings.video_context != blank %}
+        <section class="news-video__panel">
+          <h3>Context</h3>
+          <div class="rte">{{ section.settings.video_context }}</div>
+        </section>
+      {% endif %}
+
+      {% if section.settings.video_transcript != blank %}
+        <section class="news-video__panel">
+          <h3>Transcript or summary</h3>
+          <div class="rte">{{ section.settings.video_transcript }}</div>
+        </section>
+      {% endif %}
+
+      {% if section.settings.video_evidence != blank %}
+        <section class="news-video__panel news-video__panel--context no-ad-zone no-ad-zone--sensitive">
+          {% include 'evidence-context', evidence_context_body: section.settings.video_evidence %}
+        </section>
+      {% endif %}
+
+      {% if section.settings.video_shows != blank %}
+        <section class="news-video__panel">
+          <h3>What this video shows</h3>
+          <div class="rte">{{ section.settings.video_shows }}</div>
+        </section>
+      {% endif %}
+
+      {% if section.settings.video_does_not_prove != blank %}
+        <section class="news-video__panel">
+          <h3>What this video does not prove</h3>
+          <div class="rte">{{ section.settings.video_does_not_prove }}</div>
+        </section>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+<style>
+  .news-video__context {
+    width: min(100%, 980px);
+    margin: 28px auto 0;
+    display: grid;
+    gap: 18px;
+  }
+
+  .news-video__panel,
+  .news-video__header {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 18px;
+  }
+
+  .news-video__panel h3,
+  .news-video__source,
+  .news-video__datetime {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.58);
+  }
+
+  .news-video__caption,
+  .news-video__panel .rte,
+  .news-video__source-note,
+  .news-video__header .news-note__body,
+  .news-video__header .news-note__footnote,
+  .news-video__panel .news-note__body,
+  .news-video__panel .news-note__footnote {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(239, 239, 239, 0.8);
+  }
+
+  .news-video__title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(28px, 3vw, 44px);
+    line-height: 1.05;
+    color: #efefef;
+    margin: 10px 0 8px;
+  }
+
+  .news-video__caption {
+    margin-top: 8px;
+  }
+
+  .news-video__datetime {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+    margin-top: 14px;
+  }
+
+  .news-video__source-note,
+  .news-video__header .news-note,
+  .news-video__panel .news-note {
+    margin-top: 14px;
+  }
+
+  .news-video__source-note strong,
+  .news-video__header .news-note__title,
+  .news-video__panel .news-note__title {
+    color: #efefef;
+  }
+
+  .news-video__header .news-note,
+  .news-video__panel .news-note,
+  .news-video__context > .news-note {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .news-video__panel--context {
+    padding: 0;
+  }
+
+  .news-video__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .news-video__panel h3 {
+    color: #efefef;
+    margin-bottom: 10px;
+  }
+
+  .news-video__panel .rte p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 720px) {
+    .news-video__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

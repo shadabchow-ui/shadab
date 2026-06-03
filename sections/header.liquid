@@ -14,7 +14,7 @@
 
   
   <div class="top_bar clearfix">
-    <a class="mobile_nav dropdown_link" data-dropdown-rel="menu" data-no-instant="true">
+    <a class="mobile_nav dropdown_link" data-dropdown-rel="menu" data-no-instant="true" role="button" aria-label="{{ 'layout.general.menu' | t | escape }}" aria-controls="mobile_menu">
       <div>
         <span></span>
         <span></span>
@@ -35,21 +35,14 @@
     {% if section.settings.search_enabled %}
       <a href="/search" class="icon-search dropdown_link" title="{{ 'general.search.title' | t | escape }}" data-dropdown-rel="search"></a>
     {% endif %}
-    {% if section.settings.show_cart %}
-      <div class="cart_container">
-        <a href="/cart" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" title="{{ 'layout.general.cart' | t | escape }}" data-no-instant> <span class="cart_count">{{ cart.item_count }}</span></a>
-      </div>
-    {% endif %}
   </div>
   {% if section.settings.search_enabled %}
     <div class="dropdown_container center" data-dropdown="search">
       <div class="dropdown">
-        <form action="/search" class="header_search_form">
-          {% if settings.search_option != 'everything' %}
-            <input type="hidden" name="type" value="product" />
-          {% endif %}
+        <form action="/search" class="header_search_form" role="search">
+          <label for="mobile-header-search" class="hidden-label">Search stories and pages</label>
           <span class="icon-search search-submit"></span>
-          <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-terms" />
+          <input id="mobile-header-search" type="search" name="q" placeholder="Search stories, investigations, and pages" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-terms" />
         </form>
       </div>
     </div>
@@ -64,25 +57,6 @@
           <li><a href="tel:+{{ section.settings.phone_number | replace: ' ', '' | replace: '+', '' | replace: '-', '' }}">{{ section.settings.phone_number }}</a></li>
         {% endif %}
 
-        {% if shop.customer_accounts_enabled %}
-          {% if customer %}
-            <li>
-              <a href="/account" data-no-instant>{{ customer.name }}</a>
-            </li>
-            <li data-no-instant>
-              {{ 'layout.customer.log_out' | t | customer_logout_link }}
-            </li>
-          {% else %}
-            <li data-no-instant>
-              {{ 'layout.customer.log_in' | t | customer_login_link }}
-            </li>
-          {% endif %}
-        {% endif %}
-        {% if settings.show_multiple_currencies %}
-          <li>
-            {% include 'currencies-switcher' %}
-          </li>
-        {% endif %}
       </ul>
     </div>
   </div>
@@ -127,133 +101,26 @@
         {% endif %}
         {% if section.settings.top_bar_menu != blank %}
           {% for link in linklists[section.settings.top_bar_menu].links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% assign normalized_title = link.title | strip | downcase %}
+            {% assign normalized_url = link.url | downcase %}
+            {% assign link_label = link.title %}
+            {% assign hide_link = false %}
+            {% if normalized_url contains '/cart' or normalized_url contains '/checkout' or normalized_url contains '/collections' or normalized_url contains '/products' %}
+              {% assign hide_link = true %}
+            {% endif %}
+            {% if normalized_title == 'cart' or normalized_title == 'checkout' or normalized_title == 'shop' or normalized_title == 'products' or normalized_title == 'collections' %}
+              {% assign hide_link = true %}
+            {% endif %}
+            {% if normalized_url contains '/account' %}
+              {% assign link_label = 'Profile' %}
+            {% endif %}
+            {% unless hide_link %}
+              <li><a href="{{ link.url }}">{{ link_label }}</a></li>
+            {% endunless %}
           {% endfor %}
         {% endif %}
       </ul>
-      {% if section.settings.show_cart %}
-        <div class="cart_container">
-          <a href="/cart" class="{% if section.settings.cart_icon == "cart" %}icon-cart{% else %}icon-bag{% endif %} mini_cart dropdown_link" data-no-instant>
-            <span class="cart_count">{{ cart.item_count }}</span>
-          </a>
-          <div class="cart_content animated fadeIn">
-            <div class="js-empty-cart__message {% if cart.item_count > 0 %}hidden{% endif %}">
-              <p class="empty_cart">{{ 'layout.general.empty_cart' | t }}</p>
-            </div>
-            <form action="/checkout" method="post" data-money-format="{{ shop.money_format }}" data-shop-currency="{{ shop.currency }}" data-shop-name="{{ shop.name | escape }}" class="js-cart_content__form {% if cart.item_count == 0 %}hidden{% endif %}">
-              <a class="cart_content__continue-shopping secondary_button">
-                {{ 'cart.general.continue_shopping_link_html' | t }}
-              </a>
-              <ul class="cart_items js-cart_items clearfix">
-                {% assign total_saving = 0 %}
-                {% for item in cart.items %}
-                  {% if item.variant.compare_at_price > item.variant.price %}
-                    {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
-                    {% assign total_saving = saving | plus: total_saving %}
-                  {% endif %}
-
-                  <li class="cart_item clearfix">
-                    <a href="{{ item.url }}">
-                      {% if item.image %}
-                        <div class="cart_image">
-                          <img src="{{ item | img_url: '320x' }}" alt="{{ item.title | escape }}" />
-                        </div>
-                      {% endif %}
-                      <strong class="right price">
-                        {% if item.price < item.variant.compare_at_price %}
-                          <span class="money was_price">{{ item.variant.compare_at_price | money }}</span>
-                        {% endif %}
-
-                        <span class="money">{{ item.price | money }}</span>
-                      </strong>
-                      <div class="item_title">
-                        {{ item.product.title }}
-                        {% unless item.product.has_only_default_variant or item.variant.title contains "Title" %}
-                          -
-                          {% for option in item.product.options %}
-                            {{ item.variant.options[forloop.index0] }} {% unless forloop.last %}/{% endunless %}
-                          {% endfor %}
-                        {% endunless %}
-                        {% if item.properties %}
-                          {% for p in item.properties %}
-                            {% if p.last != blank %}
-                              <div class="line-item">
-                                {{ p.first }}: {{ p.last }}
-                              </div>
-                            {% endif %}
-                          {% endfor %}
-                        {% endif %}
-                      </div>
-                    </a>
-                    <div class="left product-quantity-box">
-                      <span class="ss-icon product-minus js-change-quantity" data-func="minus"><span class="icon-minus"></span></span>
-                      <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-line-id="{{ forloop.index }}" />
-                      <span class="ss-icon product-plus js-change-quantity" data-func="plus"><span class="icon-plus"></span></span>
-                    </div>
-                  </li>
-                {% endfor %}
-              </ul>
-              <hr />
-              <ul>
-                <li class="cart_subtotal js-cart_subtotal">
-                  <span class="right">
-                    <span class="money">{{ cart.total_price | money }}</span>
-                  </span>
-                  <span>{{ 'layout.general.subtotal' | t }}</span>
-                </li>
-                {% if settings.display_savings %}
-                  <li class="cart_savings sale js-cart_savings">
-                    {% if total_saving > 0 %}
-                      <span class="right">
-                        <span class="money">{{ total_saving | money }}</span>
-                      </span>
-                      <span>{{ 'layout.general.savings' | t }}</span>
-                    {% endif %}
-                  </li>
-                {% endif %}
-                <li>
-                  {% if settings.display_special_instructions and settings.go_to_checkout %}
-                    <textarea id="note" name="note" rows="2" placeholder="{{ 'layout.general.cart_note' | t }}" class="clearfix">{{ cart.note }}</textarea>
-                  {% endif %}
-
-                  {% if settings.display_tos_checkbox and settings.go_to_checkout %}
-                    <p class="tos">
-                      <input type="checkbox" class="tos_agree" id="sliding_agree" required />
-                        <label class="tos_label">
-                          {{ 'cart.general.agree_to_terms_html' | t }}
-                        </label>
-                        {% if settings.tos_page != blank %}
-                          <a href="{{ pages[settings.tos_page].url }}" target="_blank" class="tos_icon">{{ 'cart.general.view_terms' | t }}</a>
-                        {% endif %}
-                    </p>
-                  {% endif %}
-
-                  {% if settings.cart_message != blank %}
-                    <div class="cart_text">
-                      {{ settings.cart_message }}
-                    </div>
-                  {% endif %}
-
-                  <input type="submit" class="action_button" value="{% if settings.go_to_checkout %}{{ 'layout.general.checkout' | t }}{% else %}{{ 'layout.general.go_to_cart' | t }}{% endif %}" />
-                </li>
-              </ul>
-            </form>
-          </div>
-        </div>
-      {% endif %}
-
-      <ul class="menu right">
-        {% if settings.show_multiple_currencies %}
-          <li>
-            {% include 'currencies-switcher' %}
-          </li>
-        {% endif %}
-        {% if shop.customer_accounts_enabled %}
-          <li>
-            <a href="/account" class="icon-user" title="{{ 'layout.customer.my_account' | t }} {% if customer %}({{ customer.email }}){% endif %}"> <span>{% if customer %}{{ 'layout.customer.my_account' | t }}{% else %}{{ 'layout.customer.log_in' | t }}{% endif %}</span></a>
-          </li>
-        {% endif %}
-      </ul>
+      <ul class="menu right"></ul>
     </div>
 
     <div class="main_nav_wrapper">
@@ -273,7 +140,7 @@
           </div>
         {% endcapture %}
 
-        {% assign vertical_menu = section.settings.vertical_menu %}
+        {% assign vertical_menu = false %}
 
         {% capture menu_left %}
           {% if vertical_menu %}
@@ -291,12 +158,10 @@
           {% endif %}
           {% if section.settings.search_enabled %}
             <li class="search_container">
-              <form action="/search" class="search_form">
-                {% if settings.search_option != 'everything' %}
-                  <input type="hidden" name="type" value="product" />
-                {% endif %}
+              <form action="/search" class="search_form" role="search">
+                <label for="desktop-nav-search" class="hidden-label">Search stories and pages</label>
                 <span class="icon-search search-submit"></span>
-                <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" value="{% if search and search.results.first.price %}{{ search.terms }}{% endif %}" autocapitalize="off" autocomplete="off" autocorrect="off" />
+                <input id="desktop-nav-search" type="search" name="q" placeholder="Search stories, investigations, and pages" value="{{ search.terms }}" autocapitalize="off" autocomplete="off" autocorrect="off" />
               </form>
             </li>
             <li class="search_link">
@@ -329,12 +194,10 @@
         {% if section.settings.search_enabled %}
           <div class="dropdown_container center" data-dropdown="search">
             <div class="dropdown">
-              <form action="/search" class="header_search_form">
-                {% if settings.search_option != 'everything' %}
-                  <input type="hidden" name="type" value="product" />
-                {% endif %}
+              <form action="/search" class="header_search_form" role="search">
+                <label for="desktop-header-search" class="hidden-label">Search stories and pages</label>
                 <span class="icon-search search-submit"></span>
-                <input type="text" name="q" placeholder="{{ 'general.search.title' | t: shop_name: shop.name }}" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-terms" />
+                <input id="desktop-header-search" type="search" name="q" placeholder="Search stories, investigations, and pages" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-terms" />
               </form>
             </div>
           </div>
@@ -347,13 +210,66 @@
 </header>
 
 <style>
+  #header .top_bar,
+  .header .top_bar,
+  .main_nav_wrapper,
+  .main_nav_wrapper .menu,
+  .main_nav_wrapper .menu a,
+  .main_nav_wrapper .menu span,
+  .main_nav_wrapper input,
+  .menu_title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  #header .top_bar {
+    min-height: 62px;
+    padding: 0 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  #header .top_bar a.mobile_logo {
+    display: flex;
+    align-items: center;
+    min-height: 62px;
+  }
+
+  #header a.mobile_logo img {
+    max-height: 34px;
+    width: auto;
+  }
+
+  .header .top_bar {
+    min-height: 34px;
+    padding: 6px 0;
+  }
+
+  .header .top_bar .menu a,
+  .header .top_bar .social_icons a {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .main_nav_wrapper {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .main_nav {
+    min-height: 74px;
+    display: flex;
+    align-items: center;
+  }
+
   .main_nav div.logo a {
-    padding-top: {{ section.settings.logo_top_padding }}px;
-    padding-bottom: {{ section.settings.logo_top_padding }}px;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
   div.logo img {
-    max-width: {{ section.settings.logo_display_width }}px;
+    width: auto;
+    max-width: min(84px, {{ section.settings.logo_display_width }}px);
+    max-height: 42px;
   }
 
   .nav {
@@ -371,15 +287,37 @@
 
   {% if section.settings.menu_top_padding %}
     .nav ul.menu {
-      padding-top: {{ section.settings.menu_top_padding }}px;
-      padding-bottom: {{ section.settings.menu_top_padding }}px;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     .sticky_nav ul.menu, .sticky_nav .mini_cart {
-      padding-top: {{ section.settings.menu_top_padding | divided_by: 2 }}px;
-      padding-bottom: {{ section.settings.menu_top_padding | divided_by: 2 }}px;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   {% endif %}
+
+  .nav ul.menu > li > a,
+  .nav ul.menu > li > span,
+  .search_link a,
+  .search_form input {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav ul.menu > li > a,
+  .nav ul.menu > li > span {
+    line-height: 1.2;
+  }
+
+  .search_form input,
+  .header_search_form .search-terms {
+    font-size: 13px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
 
   {% unless section.settings.show_cart %}
     #header .top_bar .icon-search {
@@ -397,6 +335,15 @@
       }
     }
   {% endif %}
+
+  @media only screen and (max-width: 798px) {
+    #header .top_bar .menu_title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+  }
 
 </style>
 

@@ -1,153 +1,114 @@
-{%- comment -%}
-  Sha Homepage — templates/index.liquid
-  Drop into /templates/index.liquid in your Shopify theme.
-  Styles, font imports, BMC widget all live in theme.liquid gated to {% if template contains 'index' %}.
-{%- endcomment -%}
+{% assign breaking_blog_url = '/blogs/breaking-news' %}
+{% assign archives_url = '/pages/archives' %}
+{% assign submit_tip_url = '/pages/submit-a-tip' %}
+{% assign about_url = '/pages/about-shadab-chow' %}
+{% assign contact_url = '/pages/contact' %}
+{% assign editorial_url = '/pages/editorial-standards' %}
+{% assign corrections_url = '/pages/corrections-policy' %}
+{% assign privacy_url = '/pages/privacy-policy' %}
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<div class="hero">
-  <div class="hero-left">
-    <div class="hero-kicker">Entrepreneur · Journalist · Technologist</div>
-    <h1 class="hero-hed">I build so people have more control over their time, money, &amp; choices.</h1>
-    <div class="hero-divider"></div>
-    <p class="hero-sub">Founder of UpCube. Investigative journalist. Author. New York.</p>
-    <div class="hero-ctas">
-      <a href="#upcube" class="btn btn-primary">Explore My Work →</a>
-      <a href="https://shadabchow.com/blogs/breaking-news" class="btn btn-secondary">Read the Investigations</a>
+<div class="newsroom-home">
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="hero-kicker">Independent publisher · Breaking news · Public accountability</div>
+      <h1 class="hero-hed">Breaking news, crime coverage, corruption reporting, and public-interest accountability by Shadab Chow.</h1>
+      <p class="hero-sub">A direct publisher homepage built to surface the mission, clarify what the site covers, and route readers quickly to reporting, trust pages, and tip submission.</p>
+      <div class="hero-ctas">
+        <a href="{{ breaking_blog_url }}" class="btn btn-primary">Breaking News</a>
+        <a href="{{ submit_tip_url }}" class="btn btn-secondary">Submit a Tip</a>
+      </div>
     </div>
-  </div>
 
-  <div class="hero-right">
-    <div class="stat-block">
-      <div class="stat-num">500M+</div>
-      <div class="stat-lbl">Video Views Across Platforms</div>
+    <div class="hero-panel">
+      <div class="hero-panel__label">Publisher Focus</div>
+      <ul class="hero-panel__list">
+        <li>Independent reporting and verified updates</li>
+        <li>Clear separation between facts, claims, and developing details</li>
+        <li>Reader pathways to archives, standards, corrections, and contact</li>
+      </ul>
     </div>
-    <div class="stat-foot">0 venture dollars. Built from conviction.</div>
-  </div>
+  </section>
+
+  <section class="mission">
+    <div class="inner section-grid">
+      <div>
+        <div class="label">Mission</div>
+        <h2 class="section-title">The site exists to document what happened, explain why it matters, and state plainly when key facts are still being verified.</h2>
+      </div>
+      <div class="body-copy">
+        <p>Coverage is centered on breaking developments, crime, corruption, public accountability, submitted evidence, and developing public-interest stories that need context instead of noise.</p>
+        <p>It is a publisher platform, not a storefront. Readers should be able to move from the homepage into reporting, archives, editorial policies, and tip submission without digging through low-value filler.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="coverage">
+    <div class="inner">
+      <div class="label">Coverage Areas</div>
+      <div class="coverage-grid">
+        <article class="coverage-card">
+          <h3>Breaking News</h3>
+          <p>Fast-moving stories, major developments, and timely updates with clear status labeling.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>Crime and Public Safety</h3>
+          <p>Coverage that keeps allegations, arrests, and confirmed facts clearly separated.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>Corruption and Accountability</h3>
+          <p>Reporting focused on misuse of power, public records, institutional failures, and scrutiny.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>Exclusive Footage and Tips</h3>
+          <p>Reader-submitted documents, media, and leads reviewed for public-interest relevance.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="standards">
+    <div class="inner section-grid">
+      <div>
+        <div class="label">Editorial Approach</div>
+        <h2 class="section-title">Independent reporting with trust signals that are easy to find.</h2>
+      </div>
+      <div class="body-copy">
+        <p>Readers should be able to reach editorial standards, corrections, privacy, and contact pages directly from the public homepage. That improves clarity for both audiences and policy review.</p>
+        <div class="trust-links">
+          <a href="{{ editorial_url }}">Editorial Standards</a>
+          <a href="{{ corrections_url }}">Corrections Policy</a>
+          <a href="{{ privacy_url }}">Privacy Policy</a>
+          <a href="{{ contact_url }}">Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="inner">
+      <div class="label">Start Here</div>
+      <div class="cta-grid">
+        <a class="cta-card" href="{{ breaking_blog_url }}">
+          <span class="cta-card__label">Read</span>
+          <strong>Breaking News</strong>
+          <span>Go straight to the primary reporting stream.</span>
+        </a>
+        <a class="cta-card" href="{{ archives_url }}">
+          <span class="cta-card__label">Browse</span>
+          <strong>Archives</strong>
+          <span>Find older coverage and topic history.</span>
+        </a>
+        <a class="cta-card" href="{{ submit_tip_url }}">
+          <span class="cta-card__label">Send</span>
+          <strong>Submit a Tip</strong>
+          <span>Share documents, footage, and public-interest leads.</span>
+        </a>
+        <a class="cta-card" href="{{ about_url }}">
+          <span class="cta-card__label">About</span>
+          <strong>About Shadab Chow</strong>
+          <span>Understand the site, mission, and editorial purpose.</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </div>
-
-<!-- ═══════════════ STORY ═══════════════ -->
-<section class="story" id="story">
-  <div class="story-inner">
-    <div class="label rv">Background</div>
-    <h2 class="story-hed rv d1">"My path wasn't linear."</h2>
-    <p class="story-body rv d2">Early in life, I made choices that led to four years in a medium-security federal prison. It was violent, tense, and humbling — an environment that stripped away ego and demanded daily courage. That season became a turning point. I learned the cost of wasted potential and the power of second chances. I walked out with a different definition of success: not applause, but alignment. Not noise, but impact. Not reputation, but responsibility.</p>
-    <blockquote class="story-pull rv d3">"Today, that conviction fuels everything I do."</blockquote>
-    <p class="story-close rv d4">This is not a redemption story. It's a responsibility story.</p>
-  </div>
-</section>
-
-<!-- ═══════════════ UPCUBE ═══════════════ -->
-<section class="upcube-section" id="upcube">
-  <div class="inner">
-
-    <!-- header -->
-    <div class="uc-header rv">
-      <div class="label" style="margin-bottom:16px;">What I'm Building</div>
-      <div class="uc-brand-row">
-        <img
-          src="https://cdn.shopify.com/s/files/1/0799/4369/6609/files/ChatGPT_Image_May_22_2026_12_11_53_AM.png?v=1780440019"
-          alt="UpCube"
-          class="uc-logo-img"
-          width="48"
-          height="48"
-        >
-        <div class="uc-name">UpCube</div>
-      </div>
-      <p class="uc-manifesto">A technology company building the infrastructure people need to think, create, and act — without asking permission from platforms that weren't built for them. We don't optimize for engagement. We build for ownership, clarity, and long-term leverage.</p>
-      <a href="https://upcube.ai" class="uc-link" target="_blank" rel="noopener">Visit UpCube.ai →</a>
-    </div>
-
-    <!-- technology domains -->
-    <div class="uc-domains rv d1">
-      <div class="uc-domain">
-        <div class="uc-domain-num">01</div>
-        <div class="uc-domain-name">Intelligence</div>
-        <p class="uc-domain-body">AI systems that reason, research, and act — not just respond. Built to understand context, surface truth, and operate autonomously on behalf of the people using them.</p>
-      </div>
-      <div class="uc-domain">
-        <div class="uc-domain-num">02</div>
-        <div class="uc-domain-name">Infrastructure</div>
-        <p class="uc-domain-body">Cloud compute, virtual machines, and OS-level architecture owned end-to-end. The foundation that everything else runs on — and the layer most companies rent rather than build.</p>
-      </div>
-      <div class="uc-domain">
-        <div class="uc-domain-num">03</div>
-        <div class="uc-domain-name">Commerce</div>
-        <p class="uc-domain-body">A marketplace architecture built around the buyer, not the advertiser. Where discovery is honest, pricing is transparent, and sellers don't owe a cut to an algorithm.</p>
-      </div>
-      <div class="uc-domain">
-        <div class="uc-domain-num">04</div>
-        <div class="uc-domain-name">Knowledge</div>
-        <p class="uc-domain-body">Education, publishing, and research tools that distribute insight without a paywall. If understanding something matters, access to it shouldn't depend on a subscription.</p>
-      </div>
-      <div class="uc-domain">
-        <div class="uc-domain-num">05</div>
-        <div class="uc-domain-name">Autonomy</div>
-        <p class="uc-domain-body">Robotics, voice, and agent systems designed for the physical world. The next layer of human leverage isn't software — it's systems that move, speak, and operate without constant oversight.</p>
-      </div>
-    </div>
-
-    <!-- research horizon -->
-    <div class="uc-horizon rv d2">
-      <div class="uc-horizon-label">Research Horizon</div>
-      <p class="uc-horizon-body">Longer term, the research program extends into AGI, quantum computing, biotech, and nanotechnology — not as moonshots, but as responsible bets on what matters in twenty years. The work happening now is the foundation those programs will need.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════ JOURNALISM ═══════════════ -->
-<section class="journalism" id="journalism">
-  <div class="inner">
-    <div class="label rv">Investigations</div>
-    <p class="j-hed rv d1">I follow the facts wherever they lead — and publish what platforms would prefer to throttle.</p>
-    <div class="j-beats rv d2">
-      <div class="j-beat">
-        <div class="j-beat-tag">Crime</div>
-        <div class="j-beat-title">Street-level truth, documented.</div>
-        <p class="j-beat-body">Reporting that goes where official records don't. Sourced. On the ground. Unedited by algorithm.</p>
-      </div>
-      <div class="j-beat">
-        <div class="j-beat-tag">Corruption</div>
-        <div class="j-beat-title">Power under scrutiny.</div>
-        <p class="j-beat-body">Contracts, institutions, and systems that fail quietly — exposed in public, with receipts.</p>
-      </div>
-      <div class="j-beat">
-        <div class="j-beat-tag">Justice</div>
-        <div class="j-beat-title">The system, examined honestly.</div>
-        <p class="j-beat-body">From courtrooms to policy rooms — who gets accountability, who doesn't, and why.</p>
-      </div>
-    </div>
-    <div class="j-foot rv d3">
-      <span class="j-note">Published free. No algorithm decides what you see.</span>
-      <a href="https://shadabchow.com/blogs/breaking-news" class="j-cta">→ Read All Investigations</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ FREE RESOURCES ═══════════════ -->
-<section class="resources" id="resources">
-  <div class="inner">
-    <div class="res-inner">
-      <div class="label rv">Free Resources</div>
-      <p class="res-quote rv d1">"Too many course sellers charge thousands for recycled advice."</p>
-      <div class="res-chips rv d2">
-        <a href="#" class="chip">Free Ebooks</a>
-        <a href="#" class="chip">Open Datasets</a>
-        <a href="#" class="chip">Free Courses</a>
-      </div>
-      <p class="res-close rv d3">If I can teach it clearly and responsibly, I'd rather put it in your hands for free.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ CONTACT ═══════════════ -->
-<section class="contact" id="contact">
-  <div class="inner">
-    <div class="contact-solo rv">
-      <div class="label">Reach Out</div>
-      <h2 class="contact-hed">"If you have a lead, a collaboration, or a problem worth solving — reach out."</h2>
-      <a href="/pages/contact" class="btn btn-primary contact-btn">Get in Touch →</a>
-    </div>
-  </div>
-</section>

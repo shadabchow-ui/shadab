@@ -1,0 +1,131 @@
+{% assign card_article = article %}
+{% assign card_variant = variant | default: 'standard' %}
+{% assign card_context = context | default: 'default' %}
+{% assign fallback_label = fallback_blog_title | default: 'Reporting' %}
+{% assign card_blog_title = '' %}
+{% assign image_loading = 'lazy' %}
+{% if card_article.blog and card_article.blog.title != blank %}
+  {% assign card_blog_title = card_article.blog.title %}
+{% endif %}
+
+{% assign urgency_label = '' %}
+{% assign beat_label = '' %}
+{% assign lead_label = '' %}
+
+{% if card_variant == 'lead' %}
+  {% assign lead_label = 'Lead Story' %}
+{% elsif card_variant == 'compact' %}
+  {% assign lead_label = 'Latest' %}
+{% endif %}
+
+{% if card_variant == 'lead' %}
+  {% assign image_loading = 'eager' %}
+{% endif %}
+
+{% for tag in card_article.tags %}
+  {% assign normalized_tag = tag | downcase %}
+
+  {% if urgency_label == '' %}
+    {% case normalized_tag %}
+      {% when 'breaking' %}
+        {% assign urgency_label = 'Breaking' %}
+      {% when 'developing' %}
+        {% assign urgency_label = 'Developing' %}
+      {% when 'exclusive' %}
+        {% assign urgency_label = 'Exclusive' %}
+      {% when 'updated' %}
+        {% assign urgency_label = 'Updated' %}
+      {% when 'investigation' %}
+        {% assign urgency_label = 'Investigation' %}
+      {% when 'video' %}
+        {% assign urgency_label = 'Video' %}
+      {% when 'opinion' %}
+        {% assign urgency_label = 'Opinion' %}
+    {% endcase %}
+  {% endif %}
+
+  {% if beat_label == '' %}
+    {% if normalized_tag contains 'crime' %}
+      {% assign beat_label = 'Crime' %}
+    {% elsif normalized_tag contains 'corruption' %}
+      {% assign beat_label = 'Corruption' %}
+    {% elsif normalized_tag contains 'public-accountability' or normalized_tag contains 'public accountability' or normalized_tag contains 'accountability' %}
+      {% assign beat_label = 'Public Accountability' %}
+    {% elsif normalized_tag contains 'investigation' %}
+      {% assign beat_label = 'Investigation' %}
+    {% elsif normalized_tag contains 'justice' %}
+      {% assign beat_label = 'Justice' %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% if urgency_label == '' and card_article.updated_at and card_article.updated_at != card_article.published_at %}
+  {% assign urgency_label = 'Updated' %}
+{% endif %}
+
+{% assign story_deck = card_article.excerpt %}
+{% if story_deck == blank %}
+  {% assign story_deck = card_article.content | strip_html | truncatewords: 28 %}
+{% endif %}
+
+{% if beat_label == '' %}
+  {% if card_blog_title != blank %}
+    {% assign beat_label = card_blog_title %}
+  {% else %}
+    {% assign beat_label = fallback_label %}
+  {% endif %}
+{% endif %}
+
+<article class="news-card news-card--{{ card_variant }} news-card--{{ card_context }}">
+  <a class="news-card__link" href="{{ card_article.url }}">
+    <div class="news-card__media">
+      {% if card_article.image %}
+        <img
+          class="news-card__image"
+          src="{{ card_article.image | img_url: '960x600', crop: 'center' }}"
+          alt="{{ card_article.image.alt | default: card_article.title | escape }}"
+          loading="{{ image_loading }}"
+          decoding="async"
+          width="960"
+          height="600"
+        >
+      {% else %}
+        <div class="news-card__fallback" aria-hidden="true">
+          <span class="news-card__fallback-label">{{ beat_label }}</span>
+          <strong class="news-card__fallback-title">{{ card_article.title }}</strong>
+          <span class="news-card__fallback-meta">Editorial file photo not provided</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="news-card__body">
+      <div class="news-card__eyebrow">
+        {% if lead_label != '' %}
+          <span class="news-card__badge news-card__badge--lead">{{ lead_label }}</span>
+        {% endif %}
+        {% if urgency_label != '' %}
+          <span class="news-card__badge news-card__badge--urgency">{{ urgency_label }}</span>
+        {% endif %}
+        <span class="news-card__badge news-card__badge--beat">{{ beat_label }}</span>
+      </div>
+
+      <h3 class="news-card__title">{{ card_article.title }}</h3>
+
+      {% unless show_excerpt == false %}
+        {% if story_deck != blank %}
+          <p class="news-card__deck">{{ story_deck }}</p>
+        {% endif %}
+      {% endunless %}
+
+      <div class="news-card__meta">
+        {% if card_article.author != blank %}
+          <span>By {{ card_article.author }}</span>
+        {% endif %}
+        <span>{{ card_article.published_at | date: "%b %d, %Y" }}</span>
+        {% if card_article.updated_at and card_article.updated_at != card_article.published_at %}
+          <span>Updated {{ card_article.updated_at | date: "%b %d, %Y" }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</article>

@@ -1,125 +1,612 @@
-{% layout 'theme' %}
+{% assign article_excerpt = article.excerpt | strip_html | strip %}
+{% if article_excerpt == blank %}
+  {% assign article_excerpt = article.excerpt_or_content | strip_html | strip | truncate: 260 %}
+{% endif %}
 
-<article class="article-page">
-  <header class="article-header">
-    <h1 class="article-title">{{ article.title }}</h1>
-    <div class="article-divider"></div>
-  </header>
+{% assign default_author = 'Shadab Chow' %}
+{% assign article_author = article.author | strip %}
+{% if article_author == blank or article_author == shop.name %}
+  {% assign article_author = default_author %}
+{% endif %}
 
-  <div class="article-content">
-    {{ article.content }}
+{% assign beat_label = blank %}
+{% if blog.title != blank %}
+  {% assign beat_label = blog.title %}
+{% elsif blog.handle != blank %}
+  {% assign beat_label = blog.handle | replace: '-', ' ' | capitalize %}
+{% endif %}
+
+{% assign article_tags_downcase = article.tags | join: '||' | downcase %}
+{% assign show_viewer_discretion = false %}
+{% assign show_story_disclaimer = false %}
+{% assign show_source_note = false %}
+{% assign show_evidence_context = false %}
+{% assign show_what_we_know = false %}
+{% assign show_what_we_dont_know = false %}
+{% assign show_corrections_note = false %}
+
+{% if article_tags_downcase contains 'graphic' or article_tags_downcase contains 'viewer discretion' or article_tags_downcase contains 'sensitive' or article_tags_downcase contains 'violence' %}
+  {% assign show_viewer_discretion = true %}
+{% endif %}
+{% if article_tags_downcase contains 'allegation' or article_tags_downcase contains 'lawsuit' or article_tags_downcase contains 'arrest' or article_tags_downcase contains 'investigation' or article_tags_downcase contains 'developing' %}
+  {% assign show_story_disclaimer = true %}
+{% endif %}
+{% if article_tags_downcase contains 'source note' or article_tags_downcase contains 'source' or article_tags_downcase contains 'exclusive' %}
+  {% assign show_source_note = true %}
+{% endif %}
+{% if article_tags_downcase contains 'evidence' or article_tags_downcase contains 'context' or article_tags_downcase contains 'investigation' %}
+  {% assign show_evidence_context = true %}
+{% endif %}
+{% if article_tags_downcase contains 'breaking' or article_tags_downcase contains 'developing' %}
+  {% assign show_what_we_know = true %}
+  {% assign show_what_we_dont_know = true %}
+{% endif %}
+{% if article_tags_downcase contains 'correction' or article_tags_downcase contains 'updated' %}
+  {% assign show_corrections_note = true %}
+{% endif %}
+
+<article class="news-article" itemscope itemtype="http://schema.org/NewsArticle">
+  <div class="news-article__inner">
+    <nav class="news-breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      {% if blog.url != blank %}
+        <span>/</span>
+        <a href="{{ blog.url }}">{{ blog.title }}</a>
+      {% endif %}
+      <span>/</span>
+      <span aria-current="page">{{ article.title }}</span>
+    </nav>
+
+    <header class="news-article__header">
+      {% if beat_label != blank %}
+        {% include 'newsroom-badge', label: beat_label %}
+      {% endif %}
+
+      <h1 class="news-article__title" itemprop="headline">{{ article.title }}</h1>
+
+      {% if article_excerpt != blank %}
+        <p class="news-article__deck" itemprop="description">{{ article_excerpt }}</p>
+      {% endif %}
+
+      <div class="news-article__meta">
+        <span class="news-article__byline">By {{ article_author }}</span>
+        {% if article.published_at %}
+          <time datetime="{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' }}">
+            Published {{ article.published_at | date: "%B %d, %Y" }}
+          </time>
+        {% endif %}
+        {% if article.updated_at and article.updated_at != article.published_at %}
+          <time datetime="{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' }}">
+            Updated {{ article.updated_at | date: "%B %d, %Y" }}
+          </time>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if article.image %}
+      <figure class="news-article__lead-media" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+        <img
+          src="{{ article.image | img_url: '1200x' }}"
+          alt="{{ article.image.alt | default: article.title | escape }}"
+          loading="eager">
+        {% if article.image.alt != blank and article.image.alt != article.title %}
+          <figcaption>{{ article.image.alt }}</figcaption>
+        {% endif %}
+        <meta itemprop="url" content="https:{{ article.image | img_url: '1200x' }}">
+      </figure>
+    {% endif %}
+
+    <div class="news-article__rail">
+      {% comment %}Future ad placement guardrail: keep monetization units away from sensitive article notices and source-context components.{% endcomment %}
+      <aside class="news-article__sidebar no-ad-zone no-ad-zone--sensitive">
+        {% if article.tags.size > 0 %}
+          <section class="news-article__side-block">
+            <h2 class="news-article__side-title">Story tags</h2>
+            <ul class="news-article__tag-list">
+              {% for tag in article.tags limit: 8 %}
+                <li>{{ tag }}</li>
+              {% endfor %}
+            </ul>
+          </section>
+        {% endif %}
+
+        {% if show_viewer_discretion %}
+          {% include 'viewer-discretion' %}
+        {% endif %}
+        {% if show_story_disclaimer %}
+          {% include 'story-disclaimer' %}
+        {% endif %}
+        {% if show_source_note %}
+          {% include 'source-note' %}
+        {% endif %}
+        {% if show_evidence_context %}
+          {% include 'evidence-context' %}
+        {% endif %}
+        {% if show_what_we_know %}
+          {% include 'what-we-know' %}
+        {% endif %}
+        {% if show_what_we_dont_know %}
+          {% include 'what-we-dont-know' %}
+        {% endif %}
+        {% if show_corrections_note %}
+          {% include 'article-corrections-note' %}
+        {% endif %}
+      </aside>
+
+      <div class="news-article__body-wrap">
+        <div class="news-article__content rte" itemprop="articleBody">
+          {{ article.content }}
+        </div>
+
+        <div class="news-article__postscript no-ad-zone no-ad-zone--tipline">
+          {% if section.settings.display_social_buttons %}
+            <div class="news-article__share">
+              {% include 'social-buttons' with 'article' %}
+            </div>
+          {% endif %}
+
+          {% include 'submit-tip-cta' %}
+        </div>
+      </div>
+    </div>
+
+    {% assign related_count = 0 %}
+    {% for related_article in blog.articles limit: 4 %}
+      {% if related_article.id != article.id %}
+        {% assign related_count = related_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+    {% if related_count > 0 %}
+      <section class="news-related" aria-labelledby="related-stories-heading">
+        <div class="news-related__header">
+          <span class="news-related__kicker">More reporting</span>
+          <h2 id="related-stories-heading">Related stories</h2>
+        </div>
+        <div class="news-related__grid">
+          {% for related_article in blog.articles limit: 4 %}
+            {% if related_article.id != article.id %}
+              <article class="news-related-card">
+                <a class="news-related-card__image" href="{{ related_article.url }}">
+                  {% if related_article.image %}
+                    <img
+                      src="{{ related_article.image | img_url: '720x450', crop: 'center' }}"
+                      alt="{{ related_article.image.alt | default: related_article.title | escape }}"
+                      loading="lazy"
+                      decoding="async"
+                      width="720"
+                      height="450">
+                  {% else %}
+                    <div class="news-related-card__fallback" aria-hidden="true">
+                      <span class="news-related-card__fallback-label">{{ blog.title | default: 'Related story' }}</span>
+                      <strong class="news-related-card__fallback-title">{{ related_article.title }}</strong>
+                      <span class="news-related-card__fallback-meta">Editorial file photo not provided</span>
+                    </div>
+                  {% endif %}
+                </a>
+                <div class="news-related-card__body">
+                  <p class="news-related-card__meta">{{ related_article.published_at | date: "%B %d, %Y" }}</p>
+                  <h3 class="news-related-card__title"><a href="{{ related_article.url }}">{{ related_article.title }}</a></h3>
+                  <p class="news-related-card__excerpt">{{ related_article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+                </div>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
   </div>
+
+  {% include 'article-schema-news', article_author: article_author, article_excerpt: article_excerpt, beat_label: beat_label %}
+  {% include 'article-breadcrumb-schema' %}
 </article>
 
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_social_buttons",
+      "label": "Display social sharing buttons",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
+
 <style>
-/* ================================
-   ARTICLE BASE LAYOUT
-   ================================ */
+  .news-article {
+    background: #080808;
+    color: #efefef;
+    padding: 48px 0 88px;
+  }
 
-.article-page {
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
-}
+  .news-article__inner {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+  }
 
-.article-header {
-  max-width: 800px;
-  margin: 0 auto 40px auto;
-  padding: 0 20px;
-}
+  .news-breadcrumbs {
+    font-family: var(--sha-font-ui);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.56);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
 
-.article-title {
-  font-size: 28px;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: #eaeaea;
-  text-align: left;
-}
+  .news-breadcrumbs a {
+    color: #c8c8c8;
+    text-decoration: none;
+  }
 
-.article-divider {
-  margin-top: 16px;
-  height: 1px;
-  background: rgba(255,255,255,0.25);
-  width: 100%;
-}
+  .news-article__header {
+    max-width: 840px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 28px;
+    margin-bottom: 34px;
+  }
 
-/* ================================
-   CONTENT WRAPPER (CONSTRAINED)
-   ================================ */
+  .news-article__title {
+    font-family: var(--sha-font-display);
+    font-size: clamp(38px, 5vw, 72px);
+    line-height: 1.02;
+    letter-spacing: 0;
+    margin: 18px 0 14px;
+    color: #efefef;
+  }
 
-.article-content {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-  overflow-x: hidden;
-  line-height: 1.8;
-}
+  .news-article__deck {
+    font-family: var(--sha-font-body);
+    font-size: clamp(20px, 2.2vw, 29px);
+    line-height: 1.55;
+    color: rgba(239, 239, 239, 0.72);
+    max-width: 760px;
+    margin-bottom: 18px;
+  }
 
-/* Center all text and block elements */
-.article-content > * {
-  margin-left: auto;
-  margin-right: auto;
-}
+  .news-article__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-family: var(--sha-font-ui);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.56);
+  }
 
-.article-content p,
-.article-content h2,
-.article-content h3,
-.article-content h4,
-.article-content ul,
-.article-content ol {
-  max-width: 100%;
-}
+  .news-article__lead-media {
+    margin: 0 0 42px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+  }
 
-/* ================================
-   EX5 / EMBED SAFE CENTERING
-   ================================ */
-
-/* Desktop */
-@media (min-width: 769px) {
-  .article-content iframe,
-  .article-content .ex5,
-  .article-content .exo-planet-profile,
-  .article-content .exoplanet-profile {
+  .news-article__lead-media img {
+    display: block;
     width: 100%;
-    max-width: 100%;
+    height: auto;
+  }
+
+  .news-article__lead-media figcaption {
+    padding: 12px 16px 16px;
+    font-family: var(--sha-font-ui);
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(239, 239, 239, 0.58);
+  }
+
+  .news-article__rail {
+    display: grid;
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+    gap: 34px;
+    align-items: start;
+  }
+
+  .news-article__sidebar {
+    position: sticky;
+    top: 24px;
+    display: grid;
+    gap: 14px;
+  }
+
+  .news-article__side-block,
+  .news-note {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 18px;
+  }
+
+  .news-article__side-title,
+  .news-note__title {
+    font-family: var(--sha-font-ui);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #efefef;
+    margin-bottom: 12px;
+  }
+
+  .news-article__tag-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .news-article__tag-list li {
+    font-family: var(--sha-font-ui);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 10px;
+  }
+
+  .news-note__body,
+  .news-note__list,
+  .news-note__footnote {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(239, 239, 239, 0.78);
+  }
+
+  .news-note__list {
+    padding-left: 18px;
+    margin: 0;
+  }
+
+  .news-note__footnote {
+    margin-top: 10px;
+    font-family: var(--sha-font-ui);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: rgba(239, 239, 239, 0.56);
+  }
+
+  .news-article__body-wrap {
+    min-width: 0;
+  }
+
+  .news-article__content {
+    font-family: var(--sha-font-body);
+    font-size: clamp(22px, 2vw, 28px);
+    line-height: 1.78;
+    color: #efefef;
+  }
+
+  .news-article__content > *:first-child {
+    margin-top: 0;
+  }
+
+  .news-article__content p,
+  .news-article__content ul,
+  .news-article__content ol,
+  .news-article__content blockquote,
+  .news-article__content h2,
+  .news-article__content h3,
+  .news-article__content h4 {
+    max-width: 760px;
     margin-left: auto;
     margin-right: auto;
-    display: block;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .article-content {
-    padding: 0 16px;
   }
 
-  .article-header {
-    padding: 0 16px;
+  .news-article__content p,
+  .news-article__content ul,
+  .news-article__content ol,
+  .news-article__content blockquote {
+    margin-bottom: 1.2em;
   }
 
-  .article-title {
-    font-size: 22px;
+  .news-article__content h2,
+  .news-article__content h3,
+  .news-article__content h4 {
+    font-family: var(--sha-font-display);
+    margin-top: 1.6em;
+    margin-bottom: 0.6em;
+    line-height: 1.12;
+    color: #efefef;
   }
 
-  .article-content iframe,
-  .article-content .ex5,
-  .article-content .exo-planet-profile,
-  .article-content .exoplanet-profile {
+  .news-article__content blockquote {
+    border-left: 2px solid rgba(255, 255, 255, 0.35);
+    padding-left: 18px;
+    font-style: italic;
+    color: rgba(239, 239, 239, 0.82);
+  }
+
+  .news-article__content img,
+  .news-article__content iframe,
+  .news-article__content video,
+  .news-article__content table {
     width: 100%;
     max-width: 100%;
-    transform: scale(0.94);
-    transform-origin: center top;
+    display: block;
+    margin: 24px auto;
   }
-}
+
+  .news-article__postscript {
+    max-width: 760px;
+    margin: 42px auto 0;
+    display: grid;
+    gap: 20px;
+  }
+
+  .news-article__share .social_buttons {
+    justify-content: flex-start;
+  }
+
+  .news-related {
+    margin-top: 68px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .news-related__header {
+    margin-bottom: 20px;
+  }
+
+  .news-related__kicker {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-family: var(--sha-font-ui);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.56);
+  }
+
+  .news-related h2 {
+    font-family: var(--sha-font-display);
+    font-size: clamp(28px, 3vw, 40px);
+    color: #efefef;
+    margin: 0;
+  }
+
+  .news-related__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .news-related-card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .news-related-card__image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background:
+      linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
+      radial-gradient(circle at top right, rgba(255,255,255,0.14), transparent 45%),
+      linear-gradient(160deg, #101010 0%, #1c1c1c 100%);
+  }
+
+  .news-related-card__image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+  }
+
+  .news-related-card:hover .news-related-card__image img {
+    transform: scale(1.04);
+  }
+
+  .news-related-card__fallback {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .news-related-card__fallback-label,
+  .news-related-card__fallback-meta {
+    font-family: var(--sha-font-ui);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.56);
+  }
+
+  .news-related-card__fallback-title {
+    font-family: var(--sha-font-display);
+    font-size: clamp(22px, 2.2vw, 28px);
+    line-height: 1.12;
+    color: #efefef;
+  }
+
+  .news-related-card__body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 auto;
+  }
+
+  .news-related-card__meta {
+    font-family: var(--sha-font-ui);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.52);
+    margin: 0;
+  }
+
+  .news-related-card__title {
+    font-family: var(--sha-font-display);
+    font-size: 22px;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  .news-related-card__title a {
+    color: #efefef;
+    text-decoration: none;
+  }
+
+  .news-related-card__excerpt {
+    font-family: var(--sha-font-body);
+    font-size: 15px;
+    line-height: 1.72;
+    color: rgba(239, 239, 239, 0.72);
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .news-article__rail {
+      grid-template-columns: 1fr;
+    }
+
+    .news-article__sidebar {
+      position: static;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .news-related__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .news-article {
+      padding: 28px 0 56px;
+    }
+
+    .news-article__inner {
+      width: min(100% - 24px, 1180px);
+    }
+
+    .news-article__meta {
+      gap: 8px 14px;
+    }
+
+    .news-article__sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .news-article__content {
+      font-size: 22px;
+    }
+
+    .news-related__grid {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
-
-
-
-
-
-
-
-
-
-

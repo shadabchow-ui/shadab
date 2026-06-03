@@ -1,0 +1,25 @@
+<span class="newsroom-badge">{{ label }}</span>
+
+<style>
+  .newsroom-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.05);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #efefef;
+  }
+  .newsroom-badge::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #efefef;
+    opacity: 0.88;
+  }
+</style>
