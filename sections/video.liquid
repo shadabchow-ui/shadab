@@ -27,6 +27,7 @@
       data-video-mp4="{{ section.settings.mp4 }}"
       data-video-ogv="{{ section.settings.ogv }}"
 >
+  <div class="news-video__embed-inner">
   <div class="homepage-video--media">
     {% if section.settings.image %}
       <img  src="{{ section.settings.image | img_url: '100x', format: 'pjpg' }}"
@@ -88,7 +89,10 @@
       </div>
     {% endunless %}
   </div>
+  </div>
 </section>
+
+{% include 'newsroom-video-module' %}
 
 {% unless section.settings.pretext == blank and section.settings.title == blank and section.settings.subtitle == blank and section.settings.button1_label == blank and section.settings.button2_label == blank %}
   <section class="position-{{ section.settings.text_position }} caption js-caption text-on-video outside-homepage-video">
@@ -128,6 +132,15 @@
       visibility: hidden;
     }
   {% endif %}
+
+  .news-video__embed-inner {
+    width: min(100%, 1180px);
+    margin: 0 auto;
+  }
+
+  .news-video__embed-inner .homepage-video--media {
+    width: 100%;
+  }
 </style>
 
 {% schema %}
@@ -235,6 +248,52 @@
       "type": "richtext",
       "id": "subtitle",
       "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "viewer_discretion",
+      "label": "Show viewer discretion warning",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "video_date",
+      "label": "Video date"
+    },
+    {
+      "type": "text",
+      "id": "video_time",
+      "label": "Video time"
+    },
+    {
+      "type": "richtext",
+      "id": "video_source_note",
+      "label": "Source note"
+    },
+    {
+      "type": "richtext",
+      "id": "video_context",
+      "label": "Context box"
+    },
+    {
+      "type": "richtext",
+      "id": "video_transcript",
+      "label": "Transcript or summary"
+    },
+    {
+      "type": "richtext",
+      "id": "video_evidence",
+      "label": "Evidence/context box"
+    },
+    {
+      "type": "richtext",
+      "id": "video_shows",
+      "label": "What this video shows"
+    },
+    {
+      "type": "richtext",
+      "id": "video_does_not_prove",
+      "label": "What this video does not prove"
     },
     {
       "type": "select",

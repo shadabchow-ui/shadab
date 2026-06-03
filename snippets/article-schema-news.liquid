@@ -1,0 +1,34 @@
+{% assign schema_image = blank %}
+{% if article.image %}
+  {% capture schema_image %}https:{{ article.image | img_url: '1200x' }}{% endcapture %}
+{% endif %}
+
+{% capture article_schema_json %}
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ canonical_url | json }}
+  },
+  "headline": {{ article.title | strip_html | json }},
+  "datePublished": {{ article.published_at | date: "%Y-%m-%dT%H:%M:%S%z" | json }},
+  "dateModified": {{ article.updated_at | default: article.published_at | date: "%Y-%m-%dT%H:%M:%S%z" | json }},
+  "author": {
+    "@type": "Person",
+    "name": {{ article_author | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }}
+  }{% if article_excerpt != blank %},
+  "description": {{ article_excerpt | strip_html | json }}{% endif %}{% if schema_image != blank %},
+  "image": [{{ schema_image | strip | json }}]{% endif %}{% if beat_label != blank %},
+  "articleSection": {{ beat_label | json }}{% endif %},
+  "url": {{ canonical_url | json }}
+}
+{% endcapture %}
+
+<script type="application/ld+json">
+{{ article_schema_json | strip }}
+</script>

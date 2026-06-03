@@ -1,0 +1,1136 @@
+{% assign newsroom_page_kind = newsroom_page_kind | default: 'general' %}
+
+{% capture newsroom_page_lede %}
+  {% case newsroom_page_kind %}
+    {% when 'about' %}
+      About Shadab Chow and the editorial purpose behind the site.
+    {% when 'standards' %}
+      How reporting, sourcing, corrections, and sensitive material are handled.
+    {% when 'corrections' %}
+      How readers can request factual corrections, clarifications, and updates.
+    {% when 'privacy' %}
+      How reader information may be collected, used, shared, and protected.
+    {% when 'terms' %}
+      The rules that apply when you use the site and submit material.
+    {% when 'advertise' %}
+      How advertising, sponsorship, and editorial independence are separated.
+    {% when 'archives' %}
+      How readers can browse coverage by archive, topic, and story type.
+    {% when 'copyright' %}
+      How copyright complaints, attribution requests, and related reviews are handled.
+  {% endcase %}
+{% endcapture %}
+
+{% capture newsroom_page_fallback %}
+  {% case newsroom_page_kind %}
+    {% when 'about' %}
+      <h2>About Shadab Chow</h2>
+      <p>ShadabChow.com is an independent publishing platform focused on breaking news, crime reporting, corruption, public accountability, exclusive footage, developing stories, and commentary.</p>
+      <p>The site is led by Shadab Chow and built around a simple purpose: publish information that helps people understand what happened, why it matters, and what still needs to be verified.</p>
+      <p>This platform is not a traditional newsroom, political campaign, gossip page, or ecommerce store. It is a personal-brand publishing site for independent reporting, public-interest coverage, and documented stories.</p>
+      <h3>What this site covers</h3>
+      <p>ShadabChow.com focuses on coverage areas where facts, context, evidence, and accountability matter:</p>
+      <ul>
+        <li>Breaking news</li>
+        <li>Crime and public safety</li>
+        <li>Corruption and misuse of power</li>
+        <li>Public accountability</li>
+        <li>Exclusive or submitted footage</li>
+        <li>Developing stories</li>
+        <li>Court, law enforcement, and public-record-related reporting</li>
+        <li>Commentary on public-interest issues</li>
+      </ul>
+      <p>Some stories may involve allegations, arrests, lawsuits, violence, sensitive footage, or graphic details. When coverage includes disturbing or sensitive material, the site may use viewer-discretion warnings, context notes, source notes, and update labels.</p>
+      <h3>Editorial purpose</h3>
+      <p>The goal is to make public-interest information easier to find, understand, and review.</p>
+      <p>ShadabChow.com aims to:</p>
+      <ul>
+        <li>Separate confirmed facts from claims or allegations</li>
+        <li>Identify what is known and what remains unclear</li>
+        <li>Add context to viral or developing material</li>
+        <li>Correct or update stories when new information becomes available</li>
+        <li>Avoid presenting allegations as proven facts</li>
+        <li>Provide a clear way for readers to request corrections or submit relevant information</li>
+      </ul>
+      <p>The site may publish original reporting, commentary, summaries of public information, embedded media, submitted tips, public records, source material, or curated context around developing stories. Content is reviewed before publication, but developing stories may change as more information becomes available.</p>
+      <h3>Independence and transparency</h3>
+      <p>ShadabChow.com is independently operated. Editorial coverage is not sold to advertisers, sponsors, donors, or outside organizations.</p>
+      <p>The site may use advertising, sponsorship, affiliate links, donations, newsletters, or reader-support tools to support operations. Any sponsored content or paid partnership should be clearly labeled when it appears.</p>
+      <p>Advertising support does not give advertisers control over editorial coverage.</p>
+      <h3>Corrections and updates</h3>
+      <p>Accuracy matters. If a story contains an error, missing context, outdated information, or unclear wording, readers can request a correction through the Corrections Policy page or Contact page.</p>
+      <p>When a correction or material update is made, the site may update the article, add an editor’s note, revise the headline or description, or clarify what changed.</p>
+      <h3>Submit information</h3>
+      <p>Readers, witnesses, sources, and community members may submit tips, documents, photos, videos, or public-interest leads through the Submit a Tip page.</p>
+      <p>Submitting information does not guarantee publication, response, confidentiality, payment, or legal protection. Do not submit illegal material, hacked material, stolen private records, or anything you do not have the right to share.</p>
+      <h3>Contact</h3>
+      <p>For questions, corrections, press inquiries, story leads, advertising inquiries, or general contact, use the Contact page.</p>
+      <p>For story leads, use Submit a Tip when possible.</p>
+    {% when 'standards' %}
+      <h2>Editorial Standards</h2>
+      <p>ShadabChow.com is an independent publishing platform covering breaking news, crime, corruption, public accountability, exclusive footage, developing stories, and commentary.</p>
+      <p>These Editorial Standards explain how the site approaches accuracy, sourcing, verification, sensitive material, allegations, corrections, advertising separation, and reader trust.</p>
+      <p>The goal is simple: publish public-interest information responsibly, clearly, and with enough context for readers to understand what is known, what is alleged, what is disputed, and what remains unknown.</p>
+      <h3>Our editorial mission</h3>
+      <p>ShadabChow.com exists to inform readers about stories involving public interest, accountability, crime, corruption, public safety, government, institutions, communities, and developing events.</p>
+      <p>The site aims to:</p>
+      <ul>
+        <li>Report and explain public-interest information</li>
+        <li>Separate confirmed facts from allegations or claims</li>
+        <li>Add context to developing stories and viral material</li>
+        <li>Avoid presenting unverified claims as established fact</li>
+        <li>Update or correct stories when better information becomes available</li>
+        <li>Provide readers with clear ways to submit tips, request corrections, and contact the site</li>
+      </ul>
+      <h3>Accuracy and verification</h3>
+      <p>Accuracy is a core standard.</p>
+      <p>Before publication, ShadabChow.com may review available information such as:</p>
+      <ul>
+        <li>Public records</li>
+        <li>Court filings</li>
+        <li>Police or agency statements</li>
+        <li>Official documents</li>
+        <li>Direct witness accounts</li>
+        <li>Photos, videos, or submitted material</li>
+        <li>Previously published reporting</li>
+        <li>Public statements</li>
+        <li>Archived pages or public posts</li>
+        <li>Source-provided context</li>
+      </ul>
+      <p>Not every story will have the same level of sourcing. Breaking and developing stories may begin with limited information and be updated as additional facts are confirmed.</p>
+      <p>When information is not fully verified, the article should make that clear.</p>
+      <h3>Confirmed facts, allegations, and claims</h3>
+      <p>ShadabChow.com distinguishes between:</p>
+      <ul>
+        <li>Confirmed facts</li>
+        <li>Official statements</li>
+        <li>Public records</li>
+        <li>Allegations</li>
+        <li>Claims by individuals or organizations</li>
+        <li>Commentary or analysis</li>
+        <li>Information that is still developing</li>
+      </ul>
+      <p>An allegation is not proof. An arrest is not a conviction. A lawsuit is not a final finding of wrongdoing.</p>
+      <p>When reporting on allegations, criminal cases, investigations, lawsuits, or accusations, the site should avoid language that suggests guilt or liability before a legal or factual determination is made.</p>
+      <h3>Crime and public safety coverage</h3>
+      <p>Crime and public safety reporting can affect real people, victims, families, defendants, witnesses, and communities.</p>
+      <p>When covering crime-related stories, ShadabChow.com aims to:</p>
+      <ul>
+        <li>Avoid unnecessary sensationalism</li>
+        <li>Provide context when available</li>
+        <li>Avoid naming private individuals without public-interest reason</li>
+        <li>Avoid publishing graphic material without editorial purpose</li>
+        <li>Use viewer-discretion warnings when needed</li>
+        <li>Avoid presenting arrests as convictions</li>
+        <li>Update coverage when cases develop</li>
+      </ul>
+      <h3>Sensitive, graphic, or disturbing material</h3>
+      <p>Some public-interest stories may involve violence, injury, death, nudity, hate incidents, disturbing footage, or other sensitive material.</p>
+      <p>Sensitive material should be handled carefully.</p>
+      <p>When appropriate, the site may use:</p>
+      <ul>
+        <li>Viewer-discretion warnings</li>
+        <li>Content warnings</li>
+        <li>Context notes</li>
+        <li>Source notes</li>
+        <li>Edited thumbnails</li>
+        <li>Limited excerpts</li>
+        <li>Summaries instead of full graphic display</li>
+        <li>What we know / what we do not know sections</li>
+      </ul>
+      <p>The site may decline to publish material that is exploitative, unnecessarily graphic, misleading, unverifiable, non-consensual, or harmful without clear public-interest value.</p>
+      <h3>Submitted tips, photos, and videos</h3>
+      <p>Readers may submit tips, photos, videos, documents, and other information through the Submit a Tip page.</p>
+      <p>Submitted material may be reviewed for:</p>
+      <ul>
+        <li>Newsworthiness</li>
+        <li>Public-interest value</li>
+        <li>Authenticity</li>
+        <li>Context</li>
+        <li>Legal risk</li>
+        <li>Safety risk</li>
+        <li>Privacy concerns</li>
+        <li>Whether the submitter appears to have the right to share it</li>
+      </ul>
+      <p>Submitting material does not guarantee publication, payment, confidentiality, legal protection, or a response.</p>
+      <p>Do not submit illegal material, hacked material, stolen private records, non-consensual intimate material, passwords, financial account numbers, Social Security numbers, private medical records, or material involving minors in a sexual or exploitative context.</p>
+      <h3>Source transparency</h3>
+      <p>When possible, articles should explain where information came from.</p>
+      <p>Source descriptions may include:</p>
+      <ul>
+        <li>Public record</li>
+        <li>Court document</li>
+        <li>Official statement</li>
+        <li>Witness account</li>
+        <li>Submitted video</li>
+        <li>Social media post</li>
+        <li>Public meeting</li>
+        <li>Prior reporting</li>
+        <li>On-the-record comment</li>
+        <li>Anonymous or confidential source</li>
+      </ul>
+      <p>Some sources may not be named for safety, privacy, retaliation, or legal reasons. When a source is not named, the article should still provide as much context as safely possible.</p>
+      <h3>Anonymous sources</h3>
+      <p>Anonymous sources should be used carefully.</p>
+      <p>The site may rely on anonymous or confidential sources when:</p>
+      <ul>
+        <li>The information has public-interest value</li>
+        <li>The source may face risk if identified</li>
+        <li>The information can be partially verified or contextualized</li>
+        <li>Naming the source is not necessary for readers to understand the story</li>
+      </ul>
+      <p>Anonymous claims should not be treated as proven facts without corroboration.</p>
+      <h3>Corrections, clarifications, and updates</h3>
+      <p>ShadabChow.com may update articles as new information becomes available.</p>
+      <p>Updates may include:</p>
+      <ul>
+        <li>Correcting factual errors</li>
+        <li>Clarifying unclear language</li>
+        <li>Adding missing context</li>
+        <li>Updating headlines</li>
+        <li>Adding official responses</li>
+        <li>Revising source descriptions</li>
+        <li>Adding editor’s notes</li>
+        <li>Updating the published or modified date</li>
+      </ul>
+      <p>For more information, review the Corrections Policy.</p>
+      <h3>Opinion, commentary, and analysis</h3>
+      <p>Some content may include commentary, analysis, or opinion.</p>
+      <p>When an article includes commentary, it should not intentionally misrepresent facts. Commentary should be based on available information, public-interest reasoning, or clearly stated opinion.</p>
+      <h3>Artificial intelligence and editorial assistance</h3>
+      <p>ShadabChow.com may use digital tools, automation, transcription tools, research tools, editing tools, or AI-assisted workflows to help with drafting, summarizing, formatting, research organization, translation, headline testing, or proofreading.</p>
+      <p>Human editorial judgment remains responsible for what is published.</p>
+      <p>AI-assisted material should not be used to fabricate facts, sources, quotes, documents, events, or claims.</p>
+      <h3>Advertising and editorial independence</h3>
+      <p>ShadabChow.com may use advertising, sponsorships, donations, affiliate links, newsletter tools, or other monetization methods to support operations.</p>
+      <p>Advertising does not control editorial coverage.</p>
+      <p>Advertisers, sponsors, donors, vendors, and partners do not receive the right to dictate news judgment, corrections decisions, reporting decisions, or story outcomes.</p>
+      <p>Sponsored content, if accepted, should be clearly labeled.</p>
+      <p>The site does not ask readers to click ads, view ads, refresh ads, or interact with ads to support reporting.</p>
+      <h3>Ad placement and user trust</h3>
+      <p>If advertising appears on the site, ad placements should not mislead readers.</p>
+      <p>Ads should not be designed to look like:</p>
+      <ul>
+        <li>Navigation menus</li>
+        <li>Download buttons</li>
+        <li>Story cards</li>
+        <li>Related article links</li>
+        <li>Editorial recommendations</li>
+        <li>Source links</li>
+        <li>Tip submission buttons</li>
+        <li>Contact buttons</li>
+      </ul>
+      <p>Ads should be separated from editorial content and labeled appropriately when needed.</p>
+      <h3>Conflicts and disclosures</h3>
+      <p>When relevant, ShadabChow.com may disclose relationships, sponsorships, affiliate relationships, paid partnerships, or other interests that could reasonably affect how readers understand a story.</p>
+      <p>If a conflict exists that materially affects coverage, it should be disclosed or the coverage should be avoided.</p>
+      <h3>Reader accountability</h3>
+      <p>Readers can contact the site about:</p>
+      <ul>
+        <li>Corrections</li>
+        <li>Clarifications</li>
+        <li>Missing context</li>
+        <li>Source concerns</li>
+        <li>Privacy concerns</li>
+        <li>Copyright concerns</li>
+        <li>Advertising concerns</li>
+        <li>Editorial questions</li>
+      </ul>
+      <p>Use the Contact page or Corrections Policy page for these requests.</p>
+    {% when 'corrections' %}
+      <h2>Corrections Policy</h2>
+      <p>ShadabChow.com is committed to accuracy, transparency, and accountability.</p>
+      <p>This Corrections Policy explains how readers, sources, subjects, public officials, attorneys, organizations, and community members can request corrections, clarifications, updates, or review of published material.</p>
+      <h3>What qualifies as a correction?</h3>
+      <p>A correction may be appropriate when an article includes a factual error, such as:</p>
+      <ul>
+        <li>Incorrect name</li>
+        <li>Incorrect date</li>
+        <li>Incorrect location</li>
+        <li>Incorrect quote</li>
+        <li>Incorrect attribution</li>
+        <li>Incorrect case status</li>
+        <li>Incorrect public record reference</li>
+        <li>Incorrect image or video context</li>
+        <li>Incorrect statement about a person, organization, or event</li>
+        <li>A material omission that changes the meaning of the article</li>
+      </ul>
+      <p>Corrections are used for factual errors. They are not the same as disagreements, opinion differences, criticism, or requests to remove accurate public-interest reporting.</p>
+      <h3>What qualifies as a clarification?</h3>
+      <p>A clarification may be appropriate when information is technically accurate but could be clearer, more complete, or less likely to be misunderstood.</p>
+      <p>Clarifications may address:</p>
+      <ul>
+        <li>Ambiguous wording</li>
+        <li>Missing context</li>
+        <li>Updated official statements</li>
+        <li>Timeline details</li>
+        <li>Legal status</li>
+        <li>Source descriptions</li>
+        <li>Distinction between allegation and confirmed fact</li>
+        <li>Additional public records</li>
+      </ul>
+      <h3>What qualifies as an update?</h3>
+      <p>An update may be appropriate when a story changes after publication.</p>
+      <p>Updates may include:</p>
+      <ul>
+        <li>New charges</li>
+        <li>Dropped charges</li>
+        <li>Court outcomes</li>
+        <li>Official responses</li>
+        <li>New records</li>
+        <li>Correction of public information</li>
+        <li>Additional evidence</li>
+        <li>New statements from involved parties</li>
+        <li>Safety or community updates</li>
+        <li>Follow-up reporting</li>
+      </ul>
+      <p>Updates may be added to the article body, headline, subheadline, editor’s note, timestamp, or related coverage.</p>
+      <h3>How to request a correction</h3>
+      <p>To request a correction, use the Contact page and include:</p>
+      <ul>
+        <li>The article URL</li>
+        <li>The headline or title</li>
+        <li>The specific statement, image, video, caption, or claim at issue</li>
+        <li>What you believe is inaccurate or incomplete</li>
+        <li>The correction you believe should be made</li>
+        <li>Supporting evidence, public records, documents, or links</li>
+        <li>Your name and contact information, if you want a response</li>
+        <li>Your relationship to the story, if relevant</li>
+      </ul>
+      <p>Correction requests without enough detail may be difficult to review.</p>
+      <h3>What evidence helps?</h3>
+      <p>Helpful evidence may include:</p>
+      <ul>
+        <li>Court documents</li>
+        <li>Public records</li>
+        <li>Official statements</li>
+        <li>Government records</li>
+        <li>Police or agency updates</li>
+        <li>Direct documentation</li>
+        <li>Timestamped source material</li>
+        <li>Original photos or videos</li>
+        <li>Archived pages</li>
+        <li>Reliable published sources</li>
+      </ul>
+      <p>Screenshots alone may not be enough unless they can be authenticated or supported by additional context.</p>
+      <h3>Review process</h3>
+      <p>Correction requests are reviewed based on available evidence, editorial judgment, public-interest value, and the article’s original sourcing.</p>
+      <p>The review may include:</p>
+      <ul>
+        <li>Rechecking source material</li>
+        <li>Reviewing public records</li>
+        <li>Comparing article language to available evidence</li>
+        <li>Contacting sources when appropriate</li>
+        <li>Adding context or clarification</li>
+        <li>Updating the article</li>
+        <li>Declining the request if the article is accurate or the claim is unsupported</li>
+      </ul>
+      <p>The site is not required to respond to every request.</p>
+      <h3>Corrections, editor’s notes, and timestamps</h3>
+      <p>When a material correction is made, the site may:</p>
+      <ul>
+        <li>Correct the article text</li>
+        <li>Add an editor’s note</li>
+        <li>Add a correction note</li>
+        <li>Update the article timestamp</li>
+        <li>Add a clarification line</li>
+        <li>Add new context to the article</li>
+        <li>Link to related follow-up coverage</li>
+      </ul>
+      <h3>Requests for removal, de-indexing, or takedown</h3>
+      <p>Not every complaint is a correction request.</p>
+      <p>Requests to remove accurate reporting, de-index a story, hide public records, or suppress truthful public-interest reporting are reviewed separately from factual corrections.</p>
+      <p>ShadabChow.com does not automatically remove accurate reporting because someone dislikes it, finds it embarrassing, or wants it removed from search results.</p>
+      <p>Such requests may be considered based on privacy, safety, legal risk, public-interest value, age of the information, accuracy, and editorial judgment.</p>
+      <h3>Allegations, arrests, and legal outcomes</h3>
+      <p>Stories involving arrests, charges, lawsuits, investigations, and allegations may evolve over time.</p>
+      <p>An allegation is not proof. An arrest is not a conviction. Legal outcomes should be updated when credible new information becomes available.</p>
+      <p>If a story needs a material update because charges were dropped, a person was cleared, a case was dismissed, or official findings changed, the site may update the story or add follow-up context.</p>
+      <h3>Abusive or bad-faith requests</h3>
+      <p>The site may ignore or decline requests that are abusive, threatening, spammy, fraudulent, repetitive without new evidence, or plainly unsupported.</p>
+      <h3>Contact</h3>
+      <p>Use the Contact page for correction requests, clarification requests, or article concerns.</p>
+    {% when 'privacy' %}
+      <h2>Privacy Policy</h2>
+      <p>Effective date: [Insert date]</p>
+      <p>ShadabChow.com respects reader privacy and aims to be transparent about how information may be collected, used, shared, and protected when you visit the site, submit information, contact us, subscribe, support the site, or interact with site features.</p>
+      <p>This Privacy Policy explains how information may be handled by ShadabChow.com and by service providers that help operate the site.</p>
+      <p>This policy is written for a publisher website that may use Shopify, Google advertising services, newsletter tools, push notification tools, reader-support tools, analytics tools, spam-prevention tools, embedded media, and other common website services.</p>
+      <h3>Who operates this site</h3>
+      <p>ShadabChow.com is an independent publishing platform led by Shadab Chow.</p>
+      <p>The site covers breaking news, crime, corruption, public accountability, exclusive footage, developing stories, and commentary.</p>
+      <h3>Information you provide directly</h3>
+      <p>You may choose to provide information when you:</p>
+      <ul>
+        <li>Contact the site</li>
+        <li>Submit a tip</li>
+        <li>Send a correction request</li>
+        <li>Subscribe to a newsletter</li>
+        <li>Request advertising or sponsorship information</li>
+        <li>Submit documents, links, photos, videos, or other materials</li>
+        <li>Use a contact form or comment/tip-related form</li>
+        <li>Support the site through a third-party service</li>
+      </ul>
+      <p>Information you provide may include:</p>
+      <ul>
+        <li>Name</li>
+        <li>Email address</li>
+        <li>Phone number</li>
+        <li>Message content</li>
+        <li>Story tips</li>
+        <li>Uploaded or linked materials</li>
+        <li>Public records or documents</li>
+        <li>Social media handles</li>
+        <li>Organization name</li>
+        <li>Advertising inquiry details</li>
+        <li>Technical information connected to your submission</li>
+      </ul>
+      <p>Do not submit sensitive personal information unless it is necessary and you have the legal right to provide it.</p>
+      <h3>Tips and source information</h3>
+      <p>If you submit a tip, the information you provide may be reviewed, stored, verified, rejected, archived, or used for reporting.</p>
+      <p>Submitting a tip does not guarantee confidentiality, publication, payment, response, or legal protection.</p>
+      <p>If your tip involves sensitive information, legal risk, retaliation risk, workplace risk, immigration risk, or personal safety concerns, consider whether ordinary web forms or email are appropriate before submitting.</p>
+      <p>Do not submit illegal material, hacked material, stolen private records, passwords, bank account numbers, Social Security numbers, private medical records, non-consensual intimate material, or exploitative material involving minors.</p>
+      <h3>Information collected automatically</h3>
+      <p>When you visit the site, some information may be collected automatically by the website, hosting provider, Shopify, analytics tools, advertising partners, security tools, embedded media providers, or other service providers.</p>
+      <p>This may include:</p>
+      <ul>
+        <li>IP address</li>
+        <li>Browser type</li>
+        <li>Device type</li>
+        <li>Operating system</li>
+        <li>Pages visited</li>
+        <li>Referring pages</li>
+        <li>Approximate location based on IP address</li>
+        <li>Date and time of visit</li>
+        <li>Interactions with pages or links</li>
+        <li>Cookie identifiers</li>
+        <li>Advertising identifiers</li>
+        <li>Device-specific information</li>
+        <li>Diagnostic and performance information</li>
+      </ul>
+      <p>This information may be used for site operation, analytics, security, advertising, fraud prevention, performance monitoring, and user experience improvement.</p>
+      <h3>Cookies and similar technologies</h3>
+      <p>ShadabChow.com and its service providers may use cookies, pixels, local storage, tags, web beacons, scripts, and similar technologies.</p>
+      <p>These technologies may be used to:</p>
+      <ul>
+        <li>Keep the site working</li>
+        <li>Remember preferences</li>
+        <li>Measure site performance</li>
+        <li>Analyze traffic</li>
+        <li>Prevent spam or abuse</li>
+        <li>Support newsletter or notification tools</li>
+        <li>Measure advertising</li>
+        <li>Serve or personalize ads where permitted</li>
+        <li>Limit repeated ads</li>
+        <li>Understand how readers use the site</li>
+      </ul>
+      <p>You can control cookies through your browser settings. Blocking cookies may affect how some site features work.</p>
+      <h3>Google advertising and AdSense</h3>
+      <p>ShadabChow.com may use Google AdSense or other Google advertising services.</p>
+      <p>Google and its partners may use cookies, device identifiers, web beacons, IP addresses, or similar technologies to serve ads, measure ad performance, limit repeated ads, detect invalid activity, and support advertising systems.</p>
+      <p>Third-party vendors, including Google, may use cookies to serve ads based on your prior visits to this site or other websites.</p>
+      <p>Google’s use of advertising cookies enables it and its partners to serve ads based on visits to this site and/or other sites on the internet, where permitted.</p>
+      <p>You can learn more about how Google uses information from sites and apps that use Google services by visiting Google’s public privacy resources.</p>
+      <p>You may be able to opt out of personalized advertising through Google’s ad settings or other industry opt-out tools.</p>
+      <h3>AdSense compliance and invalid activity</h3>
+      <p>Readers should not click, view, refresh, or interact with ads in order to support the site, help a story, influence a correction, receive a reward, or benefit anyone.</p>
+      <p>Ad interactions must come from genuine user interest.</p>
+      <p>ShadabChow.com does not offer payment, rewards, benefits, or editorial favors in exchange for ad clicks, ad views, ad searches, or ad interactions.</p>
+      <h3>Age and child-directed content</h3>
+      <p>ShadabChow.com is intended as a general-audience publisher site. It is not directed to children under 13.</p>
+      <p>The site may cover crime, public safety, corruption, sensitive footage, allegations, and other public-interest topics that may not be appropriate for young children.</p>
+      <p>If a parent or guardian believes a child has provided personal information through the site, they may contact the site to request review or deletion where appropriate and legally required.</p>
+      <p>Google and other advertising providers may apply age-related protections or restrictions where required by law, policy, account settings, or ad request settings.</p>
+      <h3>Teen and sensitive-content advertising</h3>
+      <p>Some content may involve sensitive subjects such as violence, crime, injury, legal allegations, or disturbing events.</p>
+      <p>Advertising may be limited, restricted, or unavailable on certain pages depending on advertising policies, content sensitivity, user protections, age-related rules, advertiser demand, and platform review.</p>
+      <p>The site may use content warnings, viewer-discretion notices, and editorial context where appropriate.</p>
+      <h3>Shopify</h3>
+      <p>This site is built on Shopify’s platform and theme system.</p>
+      <p>Shopify may process information necessary to operate the site, including technical information, page interactions, forms, cookies, analytics, and other data connected to Shopify services.</p>
+      <p>If commerce, accounts, forms, or other Shopify-powered features are active, Shopify may process additional information needed to provide those services.</p>
+      <h3>Brevo</h3>
+      <p>ShadabChow.com may use Brevo or similar email/newsletter tools to manage email subscriptions, communications, and related analytics.</p>
+      <p>If you subscribe or submit your email, your information may be processed by the email service provider for purposes such as sending emails, managing lists, tracking deliverability, recording consent or unsubscribes, and measuring engagement.</p>
+      <p>You can unsubscribe from marketing emails using the unsubscribe link in those emails where available.</p>
+      <h3>PushOwl</h3>
+      <p>ShadabChow.com may use PushOwl or similar push notification tools.</p>
+      <p>If you opt in to browser notifications, the notification provider may process information needed to deliver notifications, manage consent, and measure notification performance.</p>
+      <p>You can disable browser push notifications through your browser or device settings.</p>
+      <h3>Buy Me a Coffee</h3>
+      <p>ShadabChow.com may use Buy Me a Coffee or similar reader-support tools.</p>
+      <p>If you choose to support the site through Buy Me a Coffee, that transaction and related information may be processed by Buy Me a Coffee and its payment providers under their own policies.</p>
+      <p>Do not use donations, support tools, or payment features to request ad clicks, editorial favors, guaranteed coverage, article removal, or correction outcomes.</p>
+      <h3>Embedded media and third-party content</h3>
+      <p>Articles may include embedded videos, social media posts, maps, images, documents, or other third-party content.</p>
+      <p>Embedded content may behave as if you visited the third-party site directly. Third parties may collect data, use cookies, track interactions, or apply their own privacy policies.</p>
+      <p>Examples may include video platforms, social platforms, document viewers, map providers, or other public-content tools.</p>
+      <h3>Analytics and performance tools</h3>
+      <p>The site may use analytics or performance tools to understand traffic, page performance, referrals, device types, user behavior, and site errors.</p>
+      <p>Analytics data may be aggregated or pseudonymous, but it may still involve identifiers such as cookies, IP addresses, or device information.</p>
+      <h3>Spam, security, and fraud prevention</h3>
+      <p>The site may use tools to detect spam, abuse, bots, malicious activity, invalid traffic, form abuse, security threats, or policy violations.</p>
+      <p>Information may be used to protect the site, readers, advertisers, service providers, and publishing systems.</p>
+      <h3>How information may be used</h3>
+      <p>Information may be used to:</p>
+      <ul>
+        <li>Operate and maintain the site</li>
+        <li>Respond to messages</li>
+        <li>Review tips</li>
+        <li>Investigate corrections</li>
+        <li>Publish or verify reporting</li>
+        <li>Send newsletters or notifications</li>
+        <li>Improve content and user experience</li>
+        <li>Analyze traffic</li>
+        <li>Serve or measure ads</li>
+        <li>Prevent fraud, spam, abuse, and invalid activity</li>
+        <li>Comply with legal obligations</li>
+        <li>Enforce site terms and policies</li>
+      </ul>
+      <h3>How information may be shared</h3>
+      <p>Information may be shared with:</p>
+      <ul>
+        <li>Service providers that operate the site</li>
+        <li>Hosting and platform providers</li>
+        <li>Email/newsletter providers</li>
+        <li>Push notification providers</li>
+        <li>Advertising and analytics providers</li>
+        <li>Payment or reader-support providers</li>
+        <li>Security, spam-prevention, or fraud-prevention providers</li>
+        <li>Legal, compliance, or safety advisors where appropriate</li>
+        <li>Authorities when legally required or necessary to protect safety, rights, or the public interest</li>
+      </ul>
+      <p>The site does not sell personal information to advertisers as a simple mailing list. Advertising partners may process data through cookies, identifiers, and related technologies as described in this policy and their own policies.</p>
+      <h3>Public information and publication</h3>
+      <p>If you submit information for reporting, some information may become part of published coverage if it is newsworthy, verifiable, lawful, and editorially appropriate.</p>
+      <p>Do not submit information you do not want reviewed for possible publication.</p>
+      <p>If the site publishes submitted material, it may edit, crop, quote, summarize, blur, redact, contextualize, or withhold portions for editorial, safety, privacy, or legal reasons.</p>
+      <h3>Data retention</h3>
+      <p>Information may be retained for as long as reasonably needed for site operation, reporting, legal review, corrections, dispute handling, security, analytics, compliance, or business purposes.</p>
+      <p>Tip submissions and correction requests may be retained even if they are not published.</p>
+      <h3>Your choices</h3>
+      <p>Depending on your location and applicable law, you may have rights to request access, correction, deletion, restriction, objection, or other privacy-related actions.</p>
+      <p>You can also:</p>
+      <ul>
+        <li>Unsubscribe from emails</li>
+        <li>Disable push notifications</li>
+        <li>Change browser cookie settings</li>
+        <li>Use browser privacy tools</li>
+        <li>Use Google ad settings or industry opt-out tools where available</li>
+        <li>Avoid submitting sensitive information through forms</li>
+      </ul>
+      <h3>California, U.S. state, EEA, UK, and other regional rights</h3>
+      <p>Privacy rights vary by location.</p>
+      <p>If you are in a jurisdiction with specific privacy rights, you may contact the site to make a privacy request. The site may need information to verify your request.</p>
+      <p>The site will respond as required by applicable law.</p>
+      <h3>Security</h3>
+      <p>No website, email system, form, or online submission method is perfectly secure.</p>
+      <p>ShadabChow.com uses reasonable efforts to operate the site responsibly, but cannot guarantee that information submitted through the site will be fully secure, anonymous, confidential, or protected from unauthorized access.</p>
+      <h3>External links</h3>
+      <p>The site may link to external websites.</p>
+      <p>ShadabChow.com is not responsible for the privacy practices, content, security, or policies of third-party websites.</p>
+      <h3>Changes to this Privacy Policy</h3>
+      <p>This Privacy Policy may be updated from time to time.</p>
+      <p>When updates are made, the effective date may be changed. Continued use of the site after changes means you accept the updated policy.</p>
+      <h3>Contact about privacy</h3>
+      <p>For privacy questions or requests, use the Contact page.</p>
+    {% when 'terms' %}
+      <h2>Terms of Use</h2>
+      <p>Effective date: [Insert date]</p>
+      <p>Welcome to ShadabChow.com.</p>
+      <p>These Terms of Use explain the rules that apply when you visit, browse, read, submit information to, support, advertise with, or otherwise use ShadabChow.com.</p>
+      <p>By using this site, you agree to these Terms of Use and the Privacy Policy. If you do not agree, do not use the site.</p>
+      <h3>About this site</h3>
+      <p>ShadabChow.com is an independent publishing platform led by Shadab Chow.</p>
+      <p>The site covers public-interest topics including breaking news, crime, corruption, public accountability, exclusive footage, developing stories, and commentary.</p>
+      <p>The site may publish original reporting, commentary, public records, submitted tips, embedded media, summaries, analysis, curated context, and updates to developing stories.</p>
+      <h3>Informational and editorial content</h3>
+      <p>Content on ShadabChow.com is provided for informational, editorial, commentary, and public-interest purposes.</p>
+      <p>The site does not provide legal, financial, medical, professional, security, immigration, or emergency advice.</p>
+      <p>Do not rely on this site as a substitute for professional advice. If you need legal, medical, safety, or emergency help, contact a qualified professional or the appropriate authorities.</p>
+      <h3>Developing stories</h3>
+      <p>Some stories may be developing.</p>
+      <p>Developing stories can change as new information becomes available. Articles may be updated, corrected, clarified, expanded, or revised after publication.</p>
+      <p>The site may use labels such as:</p>
+      <ul>
+        <li>Breaking</li>
+        <li>Developing</li>
+        <li>Updated</li>
+        <li>Exclusive</li>
+        <li>Viewer Discretion</li>
+        <li>Allegation</li>
+        <li>Correction</li>
+        <li>Editor’s Note</li>
+      </ul>
+      <p>These labels are intended to help readers understand the context and status of coverage.</p>
+      <h3>Allegations and legal status</h3>
+      <p>Some content may discuss allegations, arrests, lawsuits, investigations, accusations, public records, or claims made by individuals, agencies, or organizations.</p>
+      <p>An allegation is not proof. An arrest is not a conviction. A lawsuit is not a final finding of wrongdoing.</p>
+      <p>People named in legal or crime-related coverage are presumed innocent unless proven otherwise through the legal process.</p>
+      <h3>Sensitive and graphic content</h3>
+      <p>Some articles may involve violence, injury, death, nudity, disturbing footage, public safety incidents, crime scenes, or other sensitive material.</p>
+      <p>The site may use viewer-discretion warnings, source notes, summaries, edited thumbnails, context boxes, or other editorial tools to reduce harm and help readers understand sensitive material.</p>
+      <p>The site may decline to publish or may remove material that is exploitative, misleading, unverifiable, unlawful, non-consensual, or not justified by public-interest value.</p>
+      <h3>User submissions</h3>
+      <p>You may submit tips, correction requests, documents, images, videos, links, public records, comments, or other information through site forms, email, social platforms, or other contact methods.</p>
+      <p>By submitting material, you represent that:</p>
+      <ul>
+        <li>You have the right to submit it</li>
+        <li>The submission does not violate the law</li>
+        <li>The submission does not violate another person’s rights</li>
+        <li>The submission is not knowingly false or misleading</li>
+        <li>The submission does not include illegal, hacked, stolen, exploitative, or non-consensual material</li>
+        <li>The submission may be reviewed for possible editorial use</li>
+      </ul>
+      <p>Submitting material does not guarantee publication, response, confidentiality, payment, credit, correction, removal, or legal protection.</p>
+      <h3>Rights you grant for submitted material</h3>
+      <p>When you submit material to ShadabChow.com, you give the site permission to review, store, edit, verify, publish, quote, excerpt, summarize, display, archive, and use that material for editorial, reporting, research, legal, safety, correction, and operational purposes.</p>
+      <p>The site may edit, crop, blur, redact, summarize, or withhold portions of submitted material for clarity, privacy, safety, legal, or editorial reasons.</p>
+      <p>Do not submit anything you do not want reviewed for possible publication.</p>
+      <h3>Prohibited submissions</h3>
+      <p>Do not submit:</p>
+      <ul>
+        <li>Illegal material</li>
+        <li>Hacked material</li>
+        <li>Stolen private records</li>
+        <li>Passwords or login credentials</li>
+        <li>Social Security numbers</li>
+        <li>Bank account numbers</li>
+        <li>Private medical records</li>
+        <li>Non-consensual intimate material</li>
+        <li>Revenge content</li>
+        <li>Sexual or exploitative material involving minors</li>
+        <li>Threats, harassment, blackmail, extortion, or doxxing</li>
+        <li>Malware, viruses, tracking code, or harmful files</li>
+        <li>Material you do not have the right to share</li>
+      </ul>
+      <p>If a matter involves immediate danger, contact emergency services or appropriate authorities first.</p>
+      <h3>Intellectual property</h3>
+      <p>Unless otherwise stated, the site’s original text, design elements, page structure, graphics, branding, headlines, compilations, and other original materials are owned by ShadabChow.com or used with permission.</p>
+      <p>You may link to public pages on the site.</p>
+      <p>You may quote brief excerpts for commentary, criticism, news discussion, or fair-use purposes where permitted by law, with appropriate attribution and a link when possible.</p>
+      <p>You may not copy, scrape, republish, sell, mirror, archive, or redistribute substantial portions of the site without permission, except where allowed by law.</p>
+      <h3>Embedded and third-party content</h3>
+      <p>Articles may include embedded videos, images, social media posts, documents, maps, or other third-party content.</p>
+      <p>Third-party content is governed by the third party’s own terms and privacy policies. ShadabChow.com is not responsible for third-party websites, platforms, policies, availability, accuracy, security, or actions.</p>
+      <h3>Copyright complaints</h3>
+      <p>If you believe content on this site infringes your copyright, contact the site with enough information to review the claim.</p>
+      <p>Include:</p>
+      <ul>
+        <li>Your name and contact information</li>
+        <li>The copyrighted work you claim was infringed</li>
+        <li>The URL of the allegedly infringing material</li>
+        <li>A statement explaining your rights</li>
+        <li>Any supporting documentation</li>
+        <li>A statement that the information you provide is accurate</li>
+      </ul>
+      <p>False or abusive copyright claims may be ignored or challenged.</p>
+      <h3>Corrections and takedown requests</h3>
+      <p>If you believe an article contains an error, missing context, private information, unsafe information, or a serious legal concern, use the Contact page or Corrections Policy page.</p>
+      <p>The site does not automatically remove accurate public-interest reporting because a person dislikes it, disagrees with it, is embarrassed by it, or wants it removed from search results.</p>
+      <p>Requests are reviewed based on accuracy, public interest, privacy, safety, law, sourcing, and editorial judgment.</p>
+      <h3>Advertising, sponsorship, and monetization</h3>
+      <p>ShadabChow.com may use advertising, sponsorships, donations, affiliate links, newsletter tools, reader-support tools, or other monetization methods.</p>
+      <p>Advertising and sponsorship do not control editorial coverage.</p>
+      <p>Sponsored content, if accepted, should be clearly labeled.</p>
+      <p>Readers must not click, view, refresh, or interact with ads to support the site, support a story, influence coverage, receive a reward, or help anyone financially.</p>
+      <p>Ad interactions must be based on genuine user interest.</p>
+      <h3>Ad placement and site behavior</h3>
+      <p>If ads appear on the site, they should be separated from editorial content and should not be designed to look like navigation, story links, download buttons, contact buttons, tip buttons, or site controls.</p>
+      <p>The site should not use pop-ups, redirects, malware, deceptive navigation, misleading labels, or other behavior that interferes with normal browsing.</p>
+      <h3>Reader accounts and profiles</h3>
+      <p>If reader account features are enabled, accounts may be used for profile, preference, newsletter, saved-content, or site-access features.</p>
+      <p>Reader accounts should not be used to mislead readers into purchases, ad clicks, or unwanted subscriptions.</p>
+      <p>Account features may change, be limited, or be removed.</p>
+      <h3>No misuse of the site</h3>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Interfere with site operation</li>
+        <li>Attempt unauthorized access</li>
+        <li>Submit malware or harmful code</li>
+        <li>Scrape the site at abusive scale</li>
+        <li>Impersonate another person</li>
+        <li>Submit false, misleading, or unlawful material</li>
+        <li>Harass, threaten, or abuse others through the site</li>
+        <li>Use the site to commit fraud, extortion, doxxing, or illegal activity</li>
+        <li>Attempt to manipulate ads, analytics, traffic, forms, or engagement metrics</li>
+      </ul>
+      <h3>No guarantee of availability</h3>
+      <p>The site may be changed, interrupted, limited, suspended, or discontinued at any time.</p>
+      <p>Content may be edited, moved, removed, archived, corrected, or updated.</p>
+      <p>The site does not guarantee that every page, article, media item, feature, form, or link will always be available.</p>
+      <h3>Disclaimer of warranties</h3>
+      <p>The site is provided on an as is and as available basis.</p>
+      <p>ShadabChow.com does not guarantee that the site will be error-free, uninterrupted, fully secure, complete, accurate in every respect, or suitable for every user’s needs.</p>
+      <h3>Limitation of liability</h3>
+      <p>To the fullest extent permitted by law, ShadabChow.com and its operators are not liable for damages arising from your use of the site, reliance on site content, inability to access the site, third-party links, submitted material, user actions, ad interactions, or service interruptions.</p>
+      <p>Some jurisdictions do not allow certain limitations, so some limitations may not apply to you.</p>
+      <h3>Indemnification</h3>
+      <p>You agree to be responsible for claims, losses, liabilities, damages, costs, or expenses arising from your misuse of the site, violation of these Terms, unlawful submissions, infringement of rights, or harmful conduct.</p>
+      <h3>Changes to these Terms</h3>
+      <p>These Terms may be updated from time to time.</p>
+      <p>When updates are made, the effective date may change. Continued use of the site after changes means you accept the updated Terms.</p>
+      <h3>Contact</h3>
+      <p>For questions about these Terms, use the Contact page.</p>
+    {% when 'advertise' %}
+      <h2>Advertise / Sponsor</h2>
+      <p>ShadabChow.com may consider advertising, sponsorship, newsletter, content partnership, and reader-support opportunities that fit the site’s audience and standards.</p>
+      <p>The site covers public-interest topics including breaking news, crime, corruption, public accountability, exclusive footage, developing stories, and commentary.</p>
+      <h3>Advertising inquiries</h3>
+      <p>Advertising may be considered for brands, organizations, campaigns, services, or partners that are appropriate for a general-audience publisher site and do not conflict with the site’s editorial standards.</p>
+      <p>Potential opportunities may include:</p>
+      <ul>
+        <li>Display advertising</li>
+        <li>Newsletter sponsorship</li>
+        <li>Sponsored messages</li>
+        <li>Sponsored content, where clearly labeled</li>
+        <li>Brand partnerships</li>
+        <li>Event or project sponsorships</li>
+        <li>Public-interest campaign sponsorships</li>
+        <li>Reader-supported initiatives</li>
+      </ul>
+      <p>All advertising and sponsorship inquiries are reviewed before acceptance.</p>
+      <h3>Editorial independence</h3>
+      <p>Advertising does not purchase editorial coverage.</p>
+      <p>Sponsors, advertisers, donors, vendors, and partners do not control:</p>
+      <ul>
+        <li>News judgment</li>
+        <li>Story selection</li>
+        <li>Headlines</li>
+        <li>Corrections decisions</li>
+        <li>Investigative priorities</li>
+        <li>Source protection decisions</li>
+        <li>Legal or editorial review</li>
+        <li>Whether a story is published, changed, or removed</li>
+      </ul>
+      <p>ShadabChow.com may reject advertising or sponsorship that conflicts with the site’s standards, audience, legal obligations, advertising policies, or public-interest mission.</p>
+      <h3>Sponsored content</h3>
+      <p>Sponsored content, if accepted, should be clearly labeled.</p>
+      <p>Sponsored content should not be presented as independent editorial reporting.</p>
+      <p>Sponsored content may be declined, edited, labeled, or removed if it is misleading, unsafe, deceptive, low quality, or inconsistent with the site’s standards.</p>
+      <h3>Restricted or unsuitable advertising categories</h3>
+      <p>ShadabChow.com may decline advertising related to categories that are inappropriate for the site, restricted by ad platforms, legally sensitive, or unsuitable for a general audience.</p>
+      <p>This may include, depending on context:</p>
+      <ul>
+        <li>Adult or sexually explicit content</li>
+        <li>Tobacco, vaping, or nicotine products</li>
+        <li>Illegal drugs or recreational drugs</li>
+        <li>Weapons, explosives, or dangerous products</li>
+        <li>Gambling or casino-style betting</li>
+        <li>Misleading financial products</li>
+        <li>Deceptive health claims</li>
+        <li>Hate, harassment, or extremist content</li>
+        <li>Malware, spyware, surveillance abuse, or hacking tools</li>
+        <li>Scam offers</li>
+        <li>Political or issue advertising that cannot be reviewed responsibly</li>
+        <li>Products or services that exploit crime victims, minors, or vulnerable people</li>
+      </ul>
+      <p>This list is not exhaustive.</p>
+      <h3>AdSense and third-party ad networks</h3>
+      <p>ShadabChow.com may use Google AdSense, Google advertising services, or other ad networks.</p>
+      <p>Ad network ads may be served, limited, personalized, non-personalized, blocked, or restricted depending on user settings, legal requirements, content sensitivity, advertiser demand, platform policy, and review systems.</p>
+      <p>The site does not control every ad that appears through third-party ad networks.</p>
+      <p>If an ad appears inappropriate, misleading, unsafe, or inconsistent with the site’s standards, readers may contact the site with the page URL, screenshot, date, and relevant details.</p>
+      <h3>No incentive to click ads</h3>
+      <p>Readers should never be asked to click ads, view ads, refresh ads, or interact with ads to support this site.</p>
+      <p>ShadabChow.com does not offer rewards, payment, discounts, editorial favors, tip priority, article removal, or any benefit in exchange for ad clicks, ad views, ad searches, or ad interactions.</p>
+      <p>Ad interactions must come from genuine user interest.</p>
+      <h3>Ad placement standards</h3>
+      <p>Advertisements should not be placed or designed in a way that misleads readers.</p>
+      <p>Ads should not look like:</p>
+      <ul>
+        <li>Navigation menus</li>
+        <li>Related story cards</li>
+        <li>Download buttons</li>
+        <li>Video play buttons</li>
+        <li>Contact buttons</li>
+        <li>Submit a Tip buttons</li>
+        <li>Source links</li>
+        <li>Editorial recommendations</li>
+      </ul>
+      <p>Ads should be visually distinguishable from editorial content.</p>
+      <p>If ad labels are used, they should be clear, such as Advertisements or Sponsored Links.</p>
+      <h3>Sensitive coverage and ads</h3>
+      <p>Some stories on ShadabChow.com may involve crime, violence, injury, death, allegations, sensitive footage, or other public-interest material.</p>
+      <p>Advertising may be limited or disabled on certain pages when content is sensitive, restricted, low-value, legally sensitive, still developing, or unsuitable for certain advertisers.</p>
+      <p>The site may choose not to show ads on some pages, including forms, contact pages, tip pages, legal pages, or sensitive stories.</p>
+      <h3>Partnership review</h3>
+      <p>Advertising or sponsorship proposals may be reviewed for:</p>
+      <ul>
+        <li>Audience fit</li>
+        <li>Legality</li>
+        <li>Brand safety</li>
+        <li>Editorial independence</li>
+        <li>User trust</li>
+        <li>Landing page quality</li>
+        <li>Compliance with platform policies</li>
+        <li>Suitability for public-interest journalism</li>
+        <li>Possible conflicts of interest</li>
+      </ul>
+      <p>Submitting an inquiry does not guarantee acceptance.</p>
+      <h3>What to include in an inquiry</h3>
+      <p>When contacting ShadabChow.com about advertising or sponsorship, include:</p>
+      <ul>
+        <li>Name</li>
+        <li>Organization</li>
+        <li>Website</li>
+        <li>Contact information</li>
+        <li>Campaign or sponsorship goal</li>
+        <li>Proposed placement or partnership type</li>
+        <li>Desired dates</li>
+        <li>Target audience</li>
+        <li>Budget range, if available</li>
+        <li>Any creative materials or landing page links</li>
+        <li>Disclosure requirements</li>
+      </ul>
+      <h3>Contact</h3>
+      <p>Use the Contact page for advertising and sponsorship inquiries.</p>
+    {% when 'archives' %}
+      <h2>Archives</h2>
+      <p>Use this page to browse ShadabChow.com coverage by topic, section, and archive.</p>
+      <p>The site covers public-interest stories including breaking news, crime, corruption, public accountability, exclusive footage, developing stories, and commentary.</p>
+      <h3>Main archive</h3>
+      <p>The main news archive is:</p>
+      <ul>
+        <li>Breaking News: <code>/blogs/breaking-news</code></li>
+      </ul>
+      <p>This archive includes recent and developing coverage published on ShadabChow.com.</p>
+      <h3>Coverage areas</h3>
+      <p>ShadabChow.com may organize stories around these coverage areas:</p>
+      <h3>Breaking News</h3>
+      <p>Fast-moving stories, urgent updates, developing reports, public safety incidents, and major new information.</p>
+      <p>Suggested link:</p>
+      <ul>
+        <li><code>/blogs/breaking-news</code></li>
+      </ul>
+      <h3>Crime and Public Safety</h3>
+      <p>Coverage involving crime, public safety, law enforcement, court records, incidents, allegations, and community impact.</p>
+      <p>Suggested archive behavior:</p>
+      <ul>
+        <li>Use tags such as <code>Crime</code>, <code>Public Safety</code>, <code>Court</code>, <code>Police</code>, or related topic tags inside the breaking-news blog.</li>
+      </ul>
+      <h3>Corruption and Accountability</h3>
+      <p>Stories involving alleged corruption, misconduct, misuse of power, public trust, institutions, government, businesses, or individuals in positions of influence.</p>
+      <p>Suggested archive behavior:</p>
+      <ul>
+        <li>Use tags such as <code>Corruption</code>, <code>Accountability</code>, <code>Public Accountability</code>, <code>Misconduct</code>, or related topic tags.</li>
+      </ul>
+      <h3>Investigations</h3>
+      <p>Longer-form or ongoing stories that require added context, documents, source review, follow-up reporting, or public-record research.</p>
+      <p>Suggested archive behavior:</p>
+      <ul>
+        <li>Use tags such as <code>Investigation</code>, <code>Exclusive</code>, <code>Documents</code>, <code>Public Records</code>, or related topic tags.</li>
+      </ul>
+      <h3>Exclusive Video</h3>
+      <p>Coverage that includes original, submitted, or notable footage with editorial context, captions, source notes, and viewer-discretion warnings where appropriate.</p>
+      <p>Suggested archive behavior:</p>
+      <ul>
+        <li>Use tags such as <code>Video</code>, <code>Exclusive Video</code>, <code>Footage</code>, or related topic tags.</li>
+      </ul>
+      <h3>Commentary</h3>
+      <p>Analysis, opinion, editorial perspective, or public-interest commentary.</p>
+      <p>Suggested archive behavior:</p>
+      <ul>
+        <li>Use tags such as <code>Commentary</code>, <code>Opinion</code>, or <code>Analysis</code>.</li>
+      </ul>
+      <h3>Developing Stories</h3>
+      <p>Stories that may be updated as new information becomes available.</p>
+      <p>Suggested archive behavior:</p>
+      <ul>
+        <li>Use tags such as <code>Developing</code>, <code>Updated</code>, or <code>Breaking</code>.</li>
+      </ul>
+      <h3>How to use the archives</h3>
+      <p>Readers can use the archives to:</p>
+      <ul>
+        <li>Follow recent stories</li>
+        <li>Review developing coverage</li>
+        <li>Find prior updates</li>
+        <li>Browse public accountability reporting</li>
+        <li>Locate stories by topic</li>
+        <li>Track related articles and follow-ups</li>
+      </ul>
+      <h3>Accuracy and updates</h3>
+      <p>Archive pages may include stories that have changed since publication.</p>
+      <p>Articles may be corrected, updated, clarified, expanded, or followed by newer coverage.</p>
+      <p>For correction requests, use the Corrections Policy page.</p>
+      <h3>Sensitive content warning</h3>
+      <p>Some archived stories may involve violence, injury, death, criminal allegations, disturbing footage, nudity, or other sensitive material.</p>
+      <p>Reader discretion is advised.</p>
+      <p>Articles with sensitive material may include viewer-discretion warnings, source notes, allegations disclaimers, or context boxes.</p>
+      <h3>Advertising note</h3>
+      <p>Archives are intended to help readers navigate published content.</p>
+      <p>If advertising appears on archive pages, it should not be confused with story links, navigation links, related articles, download buttons, or editorial recommendations.</p>
+    {% when 'copyright' %}
+      <h2>Copyright / DMCA Policy</h2>
+      <p>Effective date: [Insert date]</p>
+      <p>ShadabChow.com respects intellectual property rights and expects readers, contributors, sources, advertisers, and other users to do the same.</p>
+      <p>This Copyright / DMCA Policy explains how copyright owners can submit copyright complaints, how the site may review takedown requests, how submitted media is handled, and how counter-notices may be processed where applicable.</p>
+      <p>This page is intended to provide a clear copyright review process for a publisher site that may contain original reporting, commentary, public-interest coverage, submitted footage, images, videos, embedded media, documents, public records, screenshots, quotes, excerpts, and links.</p>
+      <h3>Copyright ownership</h3>
+      <p>Unless otherwise stated, original content created for ShadabChow.com is owned by ShadabChow.com or its respective author, publisher, creator, licensor, or rights holder.</p>
+      <p>This may include:</p>
+      <ul>
+        <li>Original articles</li>
+        <li>Headlines</li>
+        <li>Page copy</li>
+        <li>Editorial notes</li>
+        <li>Original graphics</li>
+        <li>Original layout elements</li>
+        <li>Original photos or videos</li>
+        <li>Compilations</li>
+        <li>Design elements</li>
+        <li>Original commentary</li>
+        <li>Original summaries and analysis</li>
+      </ul>
+      <p>Third-party content remains the property of its respective owners.</p>
+      <h3>Public-interest reporting and fair use</h3>
+      <p>ShadabChow.com may publish, quote, embed, reference, summarize, comment on, or link to third-party material for purposes such as news reporting, criticism, commentary, public accountability, public-interest analysis, education, or context.</p>
+      <p>Depending on the circumstances, some uses may be protected by fair use, fair dealing, license, permission, public-domain status, public-record status, platform embedding rules, or other legal principles.</p>
+      <p>Examples may include:</p>
+      <ul>
+        <li>Quoting a short excerpt for commentary</li>
+        <li>Embedding a public social media post</li>
+        <li>Referencing a public document</li>
+        <li>Showing a limited screenshot for news context</li>
+        <li>Discussing a public statement</li>
+        <li>Reporting on a video or image that is itself newsworthy</li>
+        <li>Using a thumbnail or cropped image to identify a public-interest story</li>
+      </ul>
+      <p>A copyright complaint does not automatically mean content will be removed. The site may review the claim, context, public-interest value, source, usage, amount used, and applicable legal considerations.</p>
+      <h3>Submitted photos, videos, and documents</h3>
+      <p>Readers, sources, witnesses, and community members may submit photos, videos, documents, screenshots, links, or other materials.</p>
+      <p>By submitting material, you represent that:</p>
+      <ul>
+        <li>You have the right to submit it</li>
+        <li>The material does not violate copyright law</li>
+        <li>The material does not violate another person’s rights</li>
+        <li>The material was not obtained unlawfully</li>
+        <li>The material does not include illegal or prohibited content</li>
+        <li>The material may be reviewed for possible editorial use</li>
+      </ul>
+      <p>Submitting material does not guarantee publication, payment, credit, confidentiality, legal protection, or a response.</p>
+      <p>Do not submit copyrighted material that you do not own or do not have permission or legal basis to share.</p>
+      <h3>Embedded third-party content</h3>
+      <p>Articles may include embedded content from third-party platforms, such as videos, social media posts, documents, maps, or other media.</p>
+      <p>Embedded content may be hosted by the third-party platform, not by ShadabChow.com.</p>
+      <p>If you believe embedded content infringes your rights, you may contact the platform hosting the material in addition to contacting ShadabChow.com.</p>
+      <p>The site may remove or replace embedded material when appropriate, but it may not control the underlying third-party platform.</p>
+      <h3>Copyright complaint process</h3>
+      <p>If you believe material on ShadabChow.com infringes your copyright, submit a copyright complaint with enough information for review.</p>
+      <p>Your complaint should include:</p>
+      <ol>
+        <li>Your full legal name</li>
+        <li>Your organization, if applicable</li>
+        <li>Your email address</li>
+        <li>Your phone number, if available</li>
+        <li>Identification of the copyrighted work you claim was infringed</li>
+        <li>The URL of the allegedly infringing material on ShadabChow.com</li>
+        <li>A description of where the allegedly infringing material appears on the page</li>
+        <li>A statement explaining your ownership or authorization to act for the copyright owner</li>
+        <li>A statement explaining why you believe the use is unauthorized</li>
+        <li>Any relevant registration number, source URL, publication date, or proof of ownership</li>
+        <li>A statement that the information in your complaint is accurate</li>
+        <li>Your physical or electronic signature</li>
+      </ol>
+      <p>Incomplete complaints may be difficult to review.</p>
+      <h3>Suggested complaint statement</h3>
+      <p>You may include this statement in your complaint:</p>
+      <pre><code>I have a good-faith belief that the use of the copyrighted material identified in this notice is not authorized by the copyright owner, its agent, or the law. I state that the information in this notice is accurate, and that I am the copyright owner or authorized to act on behalf of the copyright owner.</code></pre>
+      <h3>Where to send a copyright complaint</h3>
+      <p>Use the Contact page unless a dedicated copyright email is later provided.</p>
+      <p>Recommended contact path:</p>
+      <ul>
+        <li>Contact page: <code>/pages/contact</code></li>
+      </ul>
+      <p>When submitting a copyright complaint, include Copyright Complaint or DMCA Notice in the subject or first line of your message.</p>
+      <h3>Review of copyright complaints</h3>
+      <p>After receiving a copyright complaint, ShadabChow.com may:</p>
+      <ul>
+        <li>Review the material</li>
+        <li>Request more information</li>
+        <li>Remove the material</li>
+        <li>Disable access to the material</li>
+        <li>Replace the material</li>
+        <li>Add attribution or context</li>
+        <li>Determine the use is permitted</li>
+        <li>Decline an incomplete or unsupported complaint</li>
+        <li>Forward the complaint to a contributor, source, host, service provider, or legal advisor</li>
+        <li>Preserve records related to the dispute</li>
+      </ul>
+      <p>The site may act quickly in some cases and may take more time in others, depending on complexity, urgency, legal risk, and available evidence.</p>
+      <h3>Counter-notices</h3>
+      <p>If material you submitted or own was removed because of a copyright complaint and you believe the removal was mistaken, you may submit a counter-notice where applicable.</p>
+      <p>A counter-notice should include:</p>
+      <ol>
+        <li>Your full legal name</li>
+        <li>Your contact information</li>
+        <li>Identification of the removed material</li>
+        <li>The URL where the material appeared before removal, if available</li>
+        <li>A statement explaining why you believe the material was removed by mistake or misidentification</li>
+        <li>A statement that you consent to the jurisdiction required by applicable law, if applicable</li>
+        <li>A statement that the information in your counter-notice is accurate</li>
+        <li>Your physical or electronic signature</li>
+      </ol>
+      <p>Do not submit a counter-notice unless you understand the legal consequences. Consider speaking with an attorney before submitting one.</p>
+      <h3>Repeat infringement</h3>
+      <p>ShadabChow.com may restrict, block, remove, or decline submissions from users, contributors, sources, advertisers, or accounts that repeatedly submit infringing material or abusive copyright claims.</p>
+      <p>The site may also remove repeat infringer access where appropriate.</p>
+      <h3>False or abusive claims</h3>
+      <p>Do not submit false, misleading, abusive, or bad-faith copyright complaints.</p>
+      <p>Misusing the copyright complaint process can harm lawful reporting, commentary, criticism, public accountability, and fair use.</p>
+      <p>False claims may result in rejection of the request, publication of clarifying information, legal exposure, or restriction from future submissions.</p>
+      <h3>News reporting and takedown requests</h3>
+      <p>A request to remove content because it is embarrassing, critical, negative, newsworthy, controversial, or unfavorable is not the same as a copyright complaint.</p>
+      <p>For factual errors, privacy concerns, outdated information, or public-interest takedown requests, use the Corrections Policy or Contact page.</p>
+      <p>Copyright complaints should identify specific copyrighted material and explain the claimed infringement.</p>
+      <h3>Attribution requests</h3>
+      <p>If you believe material should include additional attribution, contact the site with:</p>
+      <ul>
+        <li>The article URL</li>
+        <li>The relevant image, video, quote, document, or source</li>
+        <li>The requested attribution</li>
+        <li>Supporting proof or source link</li>
+      </ul>
+      <p>The site may add, update, or decline attribution based on editorial judgment, legal considerations, source reliability, and available evidence.</p>
+      <h3>Use of ShadabChow.com content</h3>
+      <p>You may link to public pages on ShadabChow.com.</p>
+      <p>You may quote short excerpts for commentary, criticism, news discussion, or fair-use purposes where permitted by law, with appropriate attribution and a link when possible.</p>
+      <p>You may not copy, scrape, mirror, sell, republish, or redistribute substantial portions of the site without permission, except where allowed by law.</p>
+      <h3>Advertising and copyright</h3>
+      <p>Advertising, sponsorship, donations, or business relationships do not control copyright decisions.</p>
+      <p>Advertisers, sponsors, donors, vendors, and partners do not receive the right to force removal of public-interest reporting through copyright claims.</p>
+      <p>Do not click, view, refresh, or interact with ads as part of a copyright complaint, copyright request, takedown request, or ownership dispute.</p>
+      <h3>Privacy and personal information in complaints</h3>
+      <p>Copyright complaints may include personal information such as name, organization, email address, phone number, signature, and claim details.</p>
+      <p>This information may be used to review the claim, communicate with parties, preserve records, respond to legal requirements, contact service providers, or process disputes.</p>
+      <p>For more information, review the Privacy Policy.</p>
+      <h3>Changes to this policy</h3>
+      <p>This Copyright / DMCA Policy may be updated from time to time.</p>
+      <p>When updates are made, the effective date may change. Continued use of the site after changes means you accept the updated policy.</p>
+      <h3>Contact</h3>
+      <p>For copyright complaints or questions, use the Contact page.</p>
+  {% endcase %}
+{% endcapture %}
+
+<article class="newsroom-page newsroom-page--{{ newsroom_page_kind }}">
+  <header class="newsroom-page__header">
+    <p class="newsroom-page__kicker">Publisher Information</p>
+    <h1 class="newsroom-page__title">{{ page.title }}</h1>
+    {% if newsroom_page_lede != blank %}
+      <p class="newsroom-page__lede">{{ newsroom_page_lede | strip }}</p>
+    {% endif %}
+  </header>
+
+  <div class="newsroom-page__body rte">
+    {% if page.content != blank %}
+      {{ page.content }}
+    {% else %}
+      {{ newsroom_page_fallback }}
+    {% endif %}
+  </div>
+
+  {% unless newsroom_page_kind == 'privacy' or newsroom_page_kind == 'terms' or newsroom_page_kind == 'copyright' %}
+    {% include 'submit-tip-cta' %}
+  {% endunless %}
+</article>
+
+<style>
+  .newsroom-page {
+    width: min(100% - 24px, 980px);
+    margin: 0 auto;
+    padding: 56px 0 88px;
+    color: #efefef;
+  }
+
+  .newsroom-page__header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+
+  .newsroom-page__kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.56);
+  }
+
+  .newsroom-page__title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 14px 0 12px;
+  }
+
+  .newsroom-page__lede {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.45;
+    font-style: italic;
+    color: rgba(239, 239, 239, 0.72);
+    max-width: 760px;
+  }
+
+  .newsroom-page__body {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(20px, 2vw, 26px);
+    line-height: 1.7;
+    color: #efefef;
+  }
+
+  .newsroom-page__body p,
+  .newsroom-page__body ul,
+  .newsroom-page__body ol,
+  .newsroom-page__body h2,
+  .newsroom-page__body h3,
+  .newsroom-page__body pre {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsroom-page__body ul,
+  .newsroom-page__body ol {
+    padding-left: 22px;
+  }
+
+  .newsroom-page__body li {
+    margin-bottom: 10px;
+  }
+
+  .newsroom-page__body h2,
+  .newsroom-page__body h3 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 38px;
+    margin-bottom: 14px;
+  }
+
+  .newsroom-page__body code {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8em;
+  }
+
+  .newsroom-page__body pre {
+    overflow-x: auto;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  @media only screen and (max-width: 767px) {
+    .newsroom-page {
+      padding: 40px 0 64px;
+    }
+
+    .newsroom-page__body {
+      font-size: 18px;
+      line-height: 1.75;
+    }
+  }
+</style>

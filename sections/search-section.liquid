@@ -17,14 +17,12 @@
         <div class="search-text">{{ section.settings.search_text }}</div>
       {% endif %}
     <div class="search-container">
-      <form class="search" action="/search">
+      <form class="search" action="/search" role="search">
         <div class="search-wrapper">
-          {% if settings.search_option != 'everything' %}
-            <input type="hidden" name="type" value="product" />
-          {% endif %}
-          <input type="text" name="q" placeholder="{{ section.settings.search_term }}" value="{{ search.terms }}" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" />
-          <button type="submit" name="submit" class="search_button icon-search" value=" " style="margin-top:0" >
-            <span class"icon-search"></span>
+          <label for="homepage-search" class="hidden-label">Search stories and pages</label>
+          <input id="homepage-search" type="search" name="q" placeholder="{{ section.settings.search_term }}" value="{{ search.terms }}" x-webkit-speech autocapitalize="off" autocomplete="off" autocorrect="off" />
+          <button type="submit" name="submit" class="search_button icon-search" value=" " style="margin-top:0" aria-label="{{ 'general.search.submit' | t | escape }}">
+            <span class="icon-search" aria-hidden="true"></span>
           </button>
         </div>
       </form>
@@ -43,7 +41,7 @@
       "type": "text",
       "id": "search_title",
       "label": "Heading",
-      "default": "Search our shop"
+      "default": "Search stories"
     },
     {
       "type": "richtext",
@@ -74,7 +72,7 @@
       "type": "text",
       "id": "search_term",
       "label": "Placeholder text",
-      "default": "Search..."
+      "default": "Search stories, investigations, and pages"
     },
     {
       "type": "image_picker",

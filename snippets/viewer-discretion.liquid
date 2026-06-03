@@ -1,0 +1,9 @@
+{% assign viewer_discretion_title = viewer_discretion_title | default: 'Viewer discretion advised' %}
+{% assign viewer_discretion_body = viewer_discretion_body | default: 'This report may include graphic, disturbing, or otherwise sensitive details tied to crime, violence, or public safety.' %}
+{% assign viewer_discretion_footnote = viewer_discretion_footnote | default: 'Manual age-restriction and ad-treatment decisions should be reviewed story by story when needed.' %}
+
+<section class="news-note news-note--warning no-ad-zone no-ad-zone--sensitive" aria-label="Sensitive content warning">
+  <h2 class="news-note__title">{{ viewer_discretion_title }}</h2>
+  <p class="news-note__body">{{ viewer_discretion_body }}</p>
+  <p class="news-note__footnote">{{ viewer_discretion_footnote }}</p>
+</section>

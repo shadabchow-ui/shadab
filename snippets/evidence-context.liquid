@@ -1,0 +1,7 @@
+{% assign evidence_context_title = evidence_context_title | default: 'Evidence and context' %}
+{% assign evidence_context_body = evidence_context_body | default: 'Readers should distinguish between what is directly shown, what is asserted by sources, and what remains unresolved. This article may be updated if additional records, footage, or official responses become available.' %}
+
+<section class="news-note news-note--context no-ad-zone no-ad-zone--sensitive" aria-label="Evidence and context note">
+  <h2 class="news-note__title">{{ evidence_context_title }}</h2>
+  <p class="news-note__body">{{ evidence_context_body }}</p>
+</section>

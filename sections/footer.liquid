@@ -1,125 +1,148 @@
 {% comment %}
-** Footer - default view **
+** Footer - restrained publisher view **
 - Static section
-- Uses blocks
 {% endcomment %}
 
 <footer class="footer">
-  <div class="container footer-menu-wrap">
-      {% for block in section.blocks %}
-        <div class="{% if forloop.length >= 5 %}three columns{% elsif forloop.length == 4 %}four columns{% elsif forloop.length == 3 %}one-third column{% elsif forloop.length == 2 %}eight columns{% endif %}" {{ block.shopify_attributes }}>
-          {% if block.type == 'logo' %}
-            <div class="text-align--{{block.settings.text_align}}">
-              {% if block.settings.image %}
-                <img  src="{{ block.settings.image | img_url: '100x' }}"
-                      alt="{{ block.settings.image.alt | escape }}"
-                      class="footer-logo lazyload {{ settings.image_loading_style }}"
-                      data-sizes="25vw"
-                      style="max-width: {{- block.settings.image.width -}}px"
-                      data-src="{{ block.settings.image | img_url: '2048x' }}"
-                      data-srcset=" {{ block.settings.image | img_url: '200x' }} 200w,
-                                    {{ block.settings.image | img_url: '300x' }} 300w,
-                                    {{ block.settings.image | img_url: '400x' }} 400w,
-                                    {{ block.settings.image | img_url: '500x' }} 500w,
-                                    {{ block.settings.image | img_url: '600x' }} 600w,
-                                    {{ block.settings.image | img_url: '1000x' }} 1000w"
-                   />
-              {% else %}
-                <div class="logo">{{ shop.name }}</div>
-              {% endif %}
-            </div>
+  <div class="container footer-menu-wrap footer-publisher-shell">
+    <div class="footer-publisher-grid">
+      <div class="footer-publisher-brand">
+        <p class="footer-brand-line">{{ shop.name }}</p>
+        <p class="footer-mission">Independent publishing focused on breaking news, crime, corruption, public accountability, submitted evidence, and developing public-interest stories.</p>
+      </div>
 
-          {% elsif block.type == 'link_list' %}
-            <div class="footer_menu">
-              {% if block.settings.menu != blank %}
-                <h6>{{ linklists[block.settings.menu].title }}<span class="right icon-down-arrow"></span></h6>
-                <div class="toggle_content">
-                  <ul>
-                    {% for link in linklists[block.settings.menu].links %}
-                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                    {% endfor %}
-                  </ul>
-                </div>
-              {% else %}
-                <h6>Menu title<span class="right icon-down-arrow"></span></h6>
-                <div class="toggle_content">
-                  <ul>
-                    <li><p>{{ 'homepage.onboarding.no_content' | t }}</p></li>
-                  </ul>
-                </div>
-              {% endif %}
-            </div>
+      <nav class="footer-link-group" aria-label="News links">
+        <h6>News</h6>
+        <ul>
+          <li><a href="/blogs/breaking-news">Breaking News</a></li>
+          <li><a href="/pages/archives">Archives</a></li>
+          <li><a href="/pages/submit-a-tip">Submit a Tip</a></li>
+        </ul>
+      </nav>
 
-          {% elsif block.type == 'text' %}
-            <div class="footer_content">
-              {% if block.settings.title != blank %}
-                <h6>{{ block.settings.title }}<span class="right icon-down-arrow"></span></h6>
-                <div class="toggle_content">
-                  {{ block.settings.content }}
-                </div>
-              {% endif %}
-            </div>
-          {% elsif block.type == 'page' %}
-            <div class="footer_content">
-              {% if block.settings.page != blank %}
-                <h6>{{ pages[block.settings.page].title }}<span class="right icon-down-arrow"></span></h6>
-                <div class="toggle_content">
-                  {{ pages[block.settings.page].content }}
-                </div>
-              {% else %}
-                <h6>Page title<span class="right icon-down-arrow"></span></h6>
-                <div class="toggle_content">
-                  <p>{{ 'homepage.onboarding.no_content' | t }}</p>
-                </div>
-              {% endif %}
-            </div>
-
-          {% elsif block.type == 'html' %}
-            {% comment %}@TODO - Add HTML section for maps, widgets, embedding, etc{% endcomment %}
-
-          {% elsif block.type == 'empty' %}
-            <div class="empty-column"></div>
-
+      <nav class="footer-link-group" aria-label="About and trust links">
+        <h6>About and Trust</h6>
+        <ul>
+          <li><a href="/pages/about-shadab-chow">About Shadab Chow</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+          <li><a href="/pages/editorial-standards">Editorial Standards</a></li>
+          <li><a href="/pages/corrections-policy">Corrections Policy</a></li>
+          {% if shop.customer_accounts_enabled %}
+            <li><a href="/account">Account</a></li>
           {% endif %}
+        </ul>
+      </nav>
 
-          {% assign social_media_column = section.settings.social_media_column | plus: 0  %}
+      <nav class="footer-link-group" aria-label="Legal and advertising links">
+        <h6>Legal and Advertising</h6>
+        <ul>
+          <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+          <li><a href="/pages/terms-of-use">Terms of Use</a></li>
+          <li><a href="/pages/copyright-policy">Copyright / DMCA Policy</a></li>
+          <li><a href="/pages/advertise-sponsor">Advertise/Sponsor</a></li>
+        </ul>
+      </nav>
+    </div>
 
-          {% if block.settings.social_icons_footer %}
-            {% assign social_icons = true %}
-            <div class="footer-social-icons">
-              {% include 'social-icons' %}
-            </div>
-          {% endif %}
-
-        </div>
-        {% if forloop.last and social_icons %}
-          <div class="footer-social-icons--mobile sixteen columns">
-            {% include 'social-icons' %}
-          </div>
-        {% endif %}
-      {% endfor %}
-
-      <div class="sixteen columns row footer_credits">
-        <p class="credits">
-          &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.
-          {{ section.settings.copyright_text }}
-          {% if section.settings.display_designed_by %}
-            {{ 'layout.general.designer_credits_html' | t }}
-          {% endif %}
-          {{ powered_by_link | split: '" ' | join: '?ref=out-of-the-sandbox" ' | split: '">' | join: '?ref=out-of-the-sandbox">' }}
-        </p>
-
-        {% if section.settings.display_payment_methods %}
-          <div class="payment_methods">
-            {% for type in shop.enabled_payment_types %}
-              <img src="{{ type | payment_type_img_url }}" alt="{{ type | replace: "_", " " | capitalize }}" />
-            {% endfor %}
-          </div>
-        {% endif %}
-      </div><!--end footer_credits-->
+    <div class="sixteen columns row footer_credits footer-publisher-credits">
+      <p class="credits">
+        &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.
+        {{ section.settings.copyright_text }}
+      </p>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer-publisher-shell {
+    padding-top: 42px;
+    padding-bottom: 26px;
+  }
+
+  .footer-publisher-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-brand-line,
+  .footer-link-group h6,
+  .footer-link-group a,
+  .footer-publisher-credits .credits {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  .footer-brand-line {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #efefef;
+    margin-bottom: 14px;
+  }
+
+  .footer-mission {
+    max-width: 34ch;
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(239, 239, 239, 0.72);
+    margin: 0;
+  }
+
+  .footer-link-group h6 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #efefef;
+    margin-bottom: 14px;
+  }
+
+  .footer-link-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-link-group li + li {
+    margin-top: 10px;
+  }
+
+  .footer-link-group a {
+    color: rgba(239, 239, 239, 0.72);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .footer-link-group a:hover {
+    color: #efefef;
+  }
+
+  .footer-publisher-credits {
+    padding-top: 18px;
+  }
+
+  .footer-publisher-credits .credits {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 960px) {
+    .footer-publisher-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-publisher-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+</style>
 
 {% schema %}
 
@@ -137,13 +160,13 @@
       "type": "checkbox",
       "id": "display_designed_by",
       "label": "Show theme designer credits",
-      "default": true
+      "default": false
     },
     {
       "type": "checkbox",
       "id": "display_payment_methods",
       "label": "Show payment method icons",
-      "default": true
+      "default": false
     }
   ],
   "blocks": [
@@ -233,8 +256,8 @@
         {
           "type": "richtext",
           "id": "content",
-          "label": "Text",
-          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          "label": "Content",
+          "default": "<p>Footer content</p>"
         },
         {
           "type": "checkbox",
@@ -247,23 +270,13 @@
     {
       "type": "empty",
       "name": "Empty column",
-      "settings": [
-        {
-          "type": "checkbox",
-          "id": "social_icons_footer",
-          "label": "Show social media footer icons",
-          "default": false
-        }
-      ]
+      "settings": []
     }
   ],
   "default": {
     "blocks": [
       {
         "type": "logo"
-      },
-      {
-        "type": "link_list"
       },
       {
         "type": "link_list"

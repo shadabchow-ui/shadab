@@ -22,9 +22,169 @@
   </header>
 {% endif %}
 
+{% assign tip_mode = false %}
+{% if page.handle == 'submit-a-tip' %}
+  {% assign tip_mode = true %}
+{% endif %}
+
+{% capture newsroom_contact_fallback %}
+  {% if tip_mode %}
+    <h2>Submit a Tip</h2>
+    <p>Have information tied to a public-interest story?</p>
+    <p>Use this page to submit a tip, lead, document, image, video, public record, witness account, or other information that may help with reporting.</p>
+    <p>ShadabChow.com reviews tips related to breaking news, crime, corruption, public accountability, exclusive footage, developing stories, and commentary.</p>
+    <h3>Before you submit</h3>
+    <p>Please read these guidelines carefully.</p>
+    <p>Submitting a tip does not guarantee:</p>
+    <ul>
+      <li>Publication</li>
+      <li>A response</li>
+      <li>Confidentiality</li>
+      <li>Payment</li>
+      <li>Legal protection</li>
+      <li>Removal or publication of any article</li>
+      <li>That your information will be used</li>
+    </ul>
+    <p>Tips may be reviewed, verified, rejected, ignored, archived, or used as background for future reporting.</p>
+    <h3>What you can submit</h3>
+    <p>Useful tips may include:</p>
+    <ul>
+      <li>Firsthand information about a public-interest event</li>
+      <li>Photos or videos you have the right to share</li>
+      <li>Links to public records or official documents</li>
+      <li>Court records, police reports, meeting records, or public filings</li>
+      <li>Information about corruption, misconduct, abuse of power, fraud, or public safety</li>
+      <li>Context about a developing story</li>
+      <li>Corrections or updates to published coverage</li>
+      <li>Leads involving crime, public accountability, or community impact</li>
+    </ul>
+    <p>Include as much context as possible:</p>
+    <ul>
+      <li>What happened?</li>
+      <li>Where did it happen?</li>
+      <li>When did it happen?</li>
+      <li>Who was involved?</li>
+      <li>How do you know?</li>
+      <li>Is there documentation?</li>
+      <li>Is anyone else able to verify it?</li>
+      <li>Is the information public, private, alleged, or confirmed?</li>
+    </ul>
+    <h3>What not to submit</h3>
+    <p>Do not submit:</p>
+    <ul>
+      <li>Illegal material</li>
+      <li>Hacked material</li>
+      <li>Stolen private records</li>
+      <li>Passwords or login credentials</li>
+      <li>Social Security numbers</li>
+      <li>Bank account numbers</li>
+      <li>Private medical records</li>
+      <li>Revenge content or non-consensual intimate material</li>
+      <li>Material involving minors in a sexual or exploitative context</li>
+      <li>Threats, harassment, blackmail, or extortion attempts</li>
+      <li>Content you do not have the right to share</li>
+    </ul>
+    <p>If a matter involves immediate danger, call emergency services or contact the appropriate authorities first.</p>
+    <h3>Sensitive footage and graphic content</h3>
+    <p>Some public-interest stories involve violence, crime scenes, injury, nudity, disturbing content, or other sensitive material.</p>
+    <p>If you submit sensitive footage, clearly explain:</p>
+    <ul>
+      <li>What the footage shows</li>
+      <li>When and where it was recorded</li>
+      <li>Who recorded it</li>
+      <li>Whether you have permission to share it</li>
+      <li>Whether minors are present</li>
+      <li>Whether anyone is injured, deceased, exposed, or identifiable</li>
+      <li>Whether the footage has been edited</li>
+      <li>Whether it has already been posted publicly</li>
+    </ul>
+    <p>ShadabChow.com may decline to publish graphic, exploitative, misleading, or unverifiable material.</p>
+    <p>When sensitive content is published, the site may use viewer-discretion warnings, context labels, source notes, and editorial framing.</p>
+    <h3>Allegations and legal status</h3>
+    <p>Tips involving accusations, arrests, lawsuits, investigations, or misconduct are treated carefully.</p>
+    <p>An allegation is not proof. An arrest is not a conviction. People named in a story are presumed innocent unless proven otherwise through the legal process.</p>
+    <p>If you submit allegations, include supporting records or explain how the information can be verified.</p>
+    <h3>Anonymous tips</h3>
+    <p>You may submit information without including your name, but anonymous tips can be harder to verify.</p>
+    <p>If you want follow-up, provide a safe way to contact you.</p>
+    <p>Do not assume that ordinary web forms, email, messaging apps, or social media are fully secure or anonymous. If your situation involves legal danger, retaliation risk, workplace risk, immigration risk, or personal safety concerns, consider speaking with a qualified attorney or trusted advisor before sending sensitive material.</p>
+    <h3>Verification and editorial review</h3>
+    <p>Tips are reviewed based on:</p>
+    <ul>
+      <li>Newsworthiness</li>
+      <li>Public-interest value</li>
+      <li>Source reliability</li>
+      <li>Supporting documentation</li>
+      <li>Verification potential</li>
+      <li>Legal and safety concerns</li>
+      <li>Editorial standards</li>
+      <li>Potential harm to private individuals</li>
+    </ul>
+    <p>The site may contact you for more information, but it is not required to do so.</p>
+    <h3>No payment for tips unless explicitly agreed</h3>
+    <p>Do not send a tip expecting payment.</p>
+    <p>ShadabChow.com does not promise payment, rewards, compensation, or any benefit in exchange for tips, documents, images, videos, or ad interactions.</p>
+    <h3>Ad and monetization note</h3>
+    <p>Do not click, view, refresh, or interact with ads to support a tip, story, donation, or request.</p>
+    <p>Advertising, if present on the site, must remain separate from editorial decisions, tip review, and publication decisions.</p>
+    <h3>Submit your information</h3>
+    <p>When sending a tip, include:</p>
+    <ul>
+      <li>Your name, if you want to provide it</li>
+      <li>Your email or phone, if you want a response</li>
+      <li>The story lead or information</li>
+      <li>Links to documents, photos, videos, or public records</li>
+      <li>Whether the information is public, private, alleged, confirmed, or developing</li>
+      <li>Any safety concerns</li>
+    </ul>
+  {% else %}
+    <h2>Contact</h2>
+    <p>Use this page to contact ShadabChow.com about general questions, corrections, editorial concerns, advertising inquiries, and other non-sensitive messages.</p>
+    <p>For story leads, public-interest information, videos, documents, or source material, use the Submit a Tip page when possible.</p>
+    <h3>What to contact us about</h3>
+    <p>You may use this page for:</p>
+    <ul>
+      <li>General questions</li>
+      <li>Correction requests</li>
+      <li>Editorial concerns</li>
+      <li>Requests to update or clarify a story</li>
+      <li>Advertising or sponsorship inquiries</li>
+      <li>Media or collaboration inquiries</li>
+      <li>Website issues</li>
+      <li>Privacy-related questions</li>
+      <li>Terms or copyright concerns</li>
+    </ul>
+    <h3>Corrections and editorial concerns</h3>
+    <p>If you believe an article contains an error, missing context, outdated information, or a misleading statement, please include:</p>
+    <ul>
+      <li>The article title or URL</li>
+      <li>The specific sentence, headline, image, or claim at issue</li>
+      <li>What you believe is inaccurate or incomplete</li>
+      <li>Any supporting source, record, document, or public reference</li>
+      <li>Your contact information, if you want a response</li>
+    </ul>
+    <p>Correction requests are reviewed based on the available evidence, public records, sourcing, and editorial judgment.</p>
+    <p>Sending a correction request does not guarantee that a story will be removed, rewritten, or changed, but good-faith correction requests are taken seriously.</p>
+    <h3>Story tips and sensitive information</h3>
+    <p>If you have a story tip, use the Submit a Tip page.</p>
+    <p>Do not submit illegal material, hacked material, stolen private records, passwords, private medical information, Social Security numbers, financial account numbers, or other sensitive personal data unless there is a clear legal right and public-interest basis to share it.</p>
+    <p>If your information is sensitive, consider whether ordinary email or website forms are appropriate for your situation. Do not put yourself or others at unnecessary legal, personal, or physical risk.</p>
+    <h3>Advertising and sponsorship inquiries</h3>
+    <p>ShadabChow.com may consider advertising, sponsorships, or brand partnerships that fit the site’s audience and standards.</p>
+    <p>Advertising or sponsorship does not purchase editorial coverage. Sponsored content, if accepted, should be clearly labeled.</p>
+    <p>Do not use this page to request that ads be clicked, viewed, manipulated, or artificially boosted.</p>
+    <h3>Response times</h3>
+    <p>Messages may not receive an immediate response. Some messages may not receive a response at all, especially if they are incomplete, abusive, spammy, promotional, or unrelated to the site’s coverage.</p>
+    <h3>Privacy note</h3>
+    <p>Information submitted through contact forms may be processed by Shopify, email providers, newsletter tools, spam-prevention tools, analytics tools, or other service providers used to operate the site.</p>
+    <p>For more information, review the Privacy Policy.</p>
+  {% endif %}
+{% endcapture %}
+
 <a name="pagecontent" id="pagecontent"></a>
 
-<div class="container main content">
+{% comment %}Future ad placement guardrail: keep ads away from contact and tip forms, submission buttons, and source-safety copy.{% endcomment %}
+<div class="container main content no-ad-zone {% if tip_mode %}no-ad-zone--tipline{% else %}no-ad-zone--form{% endif %}">
 
   <div class="ten columns offset-by-three page clearfix">
     {% if section.settings.image == nil %}
@@ -32,7 +192,13 @@
       <div class="feature_divider"></div>
     {% endif %}
 
-    {{ page.content }}
+    <div class="newsroom-contact__content rte">
+      {% if page.content != blank %}
+        {{ page.content }}
+      {% else %}
+        {{ newsroom_contact_fallback }}
+      {% endif %}
+    </div>
 
     {% form 'contact' %}
       {% if form.posted_successfully? %}
@@ -60,29 +226,42 @@
       {% endif %}
 
        <br class="clear" />
+       {% assign name_attr = 'contact.form.name' | handle %}
        <div class="five columns alpha">
-        {% assign name_attr = 'contact.form.name' | handle %}
-        <label for="contactFormName">{{ 'contact.form.name' | t }} <span class="red">*</span></label>
-        <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.name' | t }}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
+        <label for="contactFormName">{{ 'contact.form.name' | t }}{% unless tip_mode %} <span class="red">*</span>{% endunless %}</label>
+        <input type="text" id="contactFormName" name="contact[{{ name_attr }}]" placeholder="{% if tip_mode %}{{ 'contact.form.name' | t }} (optional){% else %}{{ 'contact.form.name' | t }}{% endif %}" autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" {% unless tip_mode %}required="required"{% endunless %}>
        </div>
        <div class="five columns omega">
-        <label for="contactFormEmail">{{ 'contact.form.email' | t }} <span class="red">*</span></label>
-        <input type="email" id="contactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+        <label for="contactFormEmail">{{ 'contact.form.email' | t }}{% unless tip_mode %} <span class="red">*</span>{% endunless %}</label>
+        <input type="email" id="contactFormEmail" name="contact[email]" placeholder="{% if tip_mode %}{{ 'contact.form.email' | t }} (optional){% else %}{{ 'contact.form.email' | t }}{% endif %}" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" {% unless tip_mode %}required="required"{% endunless %}>
        </div>
-       {% comment %}
-        {% assign name_attr = 'contact.form.phone' | t | handle %}
-        <label for="contactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
-        <input type="tel" id="contactFormPhone" name="contact[{{ name_attr }}]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
-        {% endcomment %}
 
-      <label for="contactFormMessage">{{ 'contact.form.message' | t }} <span class="red">*</span></label>
-      <textarea rows="5" id="contactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}" required="required">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+       {% if tip_mode %}
+         {% assign phone_attr = 'contact.form.phone' | handle %}
+         <div class="five columns alpha">
+          <label for="contactFormPhone">{{ 'contact.form.phone' | t }}</label>
+          <input type="tel" id="contactFormPhone" name="contact[{{ phone_attr }}]" placeholder="{{ 'contact.form.phone' | t }} (optional)" pattern="[0-9\-]*" value="{% if form[phone_attr] %}{{ form[phone_attr] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+         </div>
+         <div class="five columns omega">
+          <label for="contactFormAnonymousTip">Anonymous tip</label>
+          <input type="checkbox" id="contactFormAnonymousTip" name="contact[anonymous_tip]" value="Yes" {% if form.anonymous_tip == 'Yes' %}checked="checked"{% endif %}>
+          <p class="newsroom-tip__hint">Check this if you want to withhold identifying details.</p>
+         </div>
+         <div class="ten columns alpha omega">
+          <label for="contactFormMediaLinks">Document or media links</label>
+          <textarea rows="3" id="contactFormMediaLinks" name="contact[document_media_links]" placeholder="Paste links to documents, files, or media here if you have them.">{% if form.document_media_links %}{{ form.document_media_links }}{% endif %}</textarea>
+         </div>
+       {% endif %}
 
-      <input type="submit" class="submit action_button" value="{{ 'contact.form.send' | t }}" />
+      <label for="contactFormMessage">{% if tip_mode %}Tip details{% else %}{{ 'contact.form.message' | t }}{% endif %}{% if tip_mode %} <span class="red">*</span>{% endif %}</label>
+      <textarea rows="5" id="contactFormMessage" name="contact[body]" placeholder="{% if tip_mode %}Tell us what happened, where, when, and what evidence you have.{% else %}{{ 'contact.form.message' | t }}{% endif %}" {% if tip_mode %}required="required"{% endif %}>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+
+      <input type="submit" class="submit action_button" value="{% if tip_mode %}Send Tip{% else %}{{ 'contact.form.send' | t }}{% endif %}" />
     {% endform %}
   </div>
 </div>
 
+{% unless tip_mode %}
 {% if section.settings.show_map and section.settings.contact_address != blank %}
   {% if section.settings.map_stretch %}
     <div class="embed-container maps">
@@ -114,6 +293,7 @@
     </div>
   {% endif %}
 {% endif %}
+{% endunless %}
 
 <style>
   {% if section.settings.map_greyscale %}
@@ -137,6 +317,61 @@
   .map-placeholder {
     width: 100%;
     height: {{ section.settings.map_height }}px;
+  }
+
+  .no-ad-zone--form,
+  .no-ad-zone--tipline {
+    position: relative;
+  }
+
+  .newsroom-tip__intro {
+    max-width: 760px;
+    margin-bottom: 24px;
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  .newsroom-contact__content {
+    margin-bottom: 28px;
+  }
+
+  .newsroom-contact__content h2,
+  .newsroom-contact__content h3 {
+    font-family: "IBM Plex Mono", monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .newsroom-contact__content h2 {
+    font-size: 16px;
+    margin: 0 0 18px;
+  }
+
+  .newsroom-contact__content h3 {
+    font-size: 13px;
+    margin: 30px 0 12px;
+  }
+
+  .newsroom-contact__content ul {
+    padding-left: 22px;
+    margin-bottom: 18px;
+  }
+
+  .newsroom-contact__content li {
+    margin-bottom: 8px;
+  }
+
+  .newsroom-tip__hint {
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(239, 239, 239, 0.66);
+    margin-top: 8px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .newsroom-tip__intro {
+      font-size: 16px;
+    }
   }
 </style>
 

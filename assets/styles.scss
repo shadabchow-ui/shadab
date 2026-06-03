@@ -199,6 +199,43 @@ body {
   
 }
 
+.hidden-label {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+.skip-to-content-link {
+  position: fixed;
+  left: 14px;
+  top: 12px;
+  z-index: 10000;
+  padding: 10px 14px;
+  background: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  border: 1px solid #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translateY(-180%);
+  transition: transform 0.18s ease;
+}
+
+.skip-to-content-link:focus,
+.skip-to-content-link:focus-visible {
+  transform: translateY(0);
+}
+
 ::-moz-selection {
   background-color: #000;
   color: #fff;
@@ -862,6 +899,15 @@ li.dropdown_link--vertical:last-of-type .vertical-menu_sub-submenu {
   -o-transition: .1s ease-in-out;
   transition: .1s ease-in-out;
   cursor: pointer;
+}
+
+button.mobile_nav {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .mobile_nav div span {
@@ -6691,6 +6737,7 @@ or wrap each row of columns in a <div class="row"> */
        url('//shadabchow.com/cdn/shop/t/2/assets/turbo.svg?v=35158008340974890511765920912') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
@@ -8804,3 +8851,27 @@ $delay: 0;
 
 /* #Custom Styles
 ================================================== */
+
+.no-ad-zone {
+  position: relative;
+}
+
+.no-ad-zone--sensitive,
+.no-ad-zone--trust,
+.no-ad-zone--form,
+.no-ad-zone--tipline {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.no-ad-zone--sensitive + .no-ad-zone--sensitive,
+.no-ad-zone--trust .no-ad-zone--tipline,
+.no-ad-zone--form form,
+.no-ad-zone--tipline form {
+  margin-top: 18px;
+}
+
+.no-ad-zone--form input[type="submit"],
+.no-ad-zone--tipline input[type="submit"] {
+  margin-top: 12px;
+}

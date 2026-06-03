@@ -74,10 +74,10 @@
             {% endif %}
 
           {% elsif block.type == 'search' %}
-            <form class="blog_search" action="/search">
-              <input type="hidden" name="type" value="article" />
+            <form class="blog_search" action="/search" role="search">
+              <label for="blog-search" class="hidden-label">Search stories and pages</label>
               <span class="icon-search search-submit"></span>
-              <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.title' | t }} {{ blog.title | escape }}..." autocapitalize="off" autocomplete="off" autocorrect="off" value="{{ search.terms }}" />
+              <input id="blog-search" type="search" name="q" class="search_box" placeholder="Search coverage, tags, and pages" autocapitalize="off" autocomplete="off" autocorrect="off" value="{{ search.terms }}" />
             </form>
 
           {% elsif block.type == 'newsletter' %}

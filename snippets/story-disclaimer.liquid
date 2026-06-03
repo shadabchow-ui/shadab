@@ -1,0 +1,7 @@
+{% assign story_disclaimer_title = story_disclaimer_title | default: 'Story status' %}
+{% assign story_disclaimer_body = story_disclaimer_body | default: 'This report covers allegations, investigations, arrests, or developing claims. Allegations are not findings of guilt, and individuals named remain presumed innocent unless proven otherwise in court.' %}
+
+<section class="news-note news-note--disclaimer no-ad-zone no-ad-zone--sensitive" aria-label="Allegations and legal-status note">
+  <h2 class="news-note__title">{{ story_disclaimer_title }}</h2>
+  <p class="news-note__body">{{ story_disclaimer_body }}</p>
+</section>
