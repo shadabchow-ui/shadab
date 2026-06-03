@@ -238,6 +238,46 @@ div.logo img,
   text-transform: uppercase;
 }
 
+.newsletter-popup.remodal {
+  overflow: visible !important;
+}
+
+.newsletter-popup .remodal-close {
+  align-items: center;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  display: flex !important;
+  font-family: var(--sha-font-ui);
+  font-size: 22px;
+  height: 44px;
+  justify-content: center;
+  line-height: 1;
+  opacity: 1;
+  pointer-events: auto;
+  position: absolute;
+  right: -14px;
+  text-decoration: none;
+  top: -14px;
+  width: 44px;
+  z-index: 10000;
+}
+
+.newsletter-popup .remodal-close:before,
+.newsletter-popup .remodal-close:after {
+  content: none !important;
+}
+
+.newsletter-popup .remodal-close:focus,
+.newsletter-popup .remodal-close:hover {
+  background: #fff;
+  color: #111;
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 2px;
+}
+
 @media only screen and (max-width: 798px) {
   .main_nav div.logo a {
     padding-top: 8px;
