@@ -335,3 +335,44 @@ div.logo img,
 .sha-dropdown-sub li a:hover {
   color: #c8c8c8 !important;
 }
+
+/* ── Newsletter popup close button fix ──────────────────────────── */
+.newsletter-popup.remodal {
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.newsletter-popup .remodal-close {
+  position: absolute !important;
+  top: -14px !important;
+  right: -14px !important;
+  z-index: 10000 !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  background: #222 !important;
+  color: #eee !important;
+  border-radius: 50% !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+  border: 2px solid #444 !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.newsletter-popup .remodal-close:before {
+  display: none !important;
+}
+
+.newsletter-popup .remodal-close:hover,
+.newsletter-popup .remodal-close:focus {
+  background: #444 !important;
+  color: #fff !important;
+  outline: 2px solid #888 !important;
+}
