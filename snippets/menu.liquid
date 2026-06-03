@@ -10,7 +10,7 @@
     {% assign hide_link = true %}
   {% endif %}
   {% if normalized_url contains '/account' %}
-    {% assign link_label = 'Profile' %}
+    {% assign hide_link = true %}
   {% endif %}
   {% unless hide_link %}
     <li><a href="{{ link.url }}" class="{% if link.active %}active{% endif %} {% if linklists[link.handle] != empty %}dropdown_link{% else %} top_link {% endif %}" data-dropdown-rel="{{ link.handle }}"{% if linklists[link.handle] != empty %} aria-haspopup="true" aria-expanded="false"{% endif %}>{{ link_label }} {% if linklists[link.handle] != empty %}<span class="icon-down-arrow" aria-hidden="true"></span>{% endif %}</a></li>

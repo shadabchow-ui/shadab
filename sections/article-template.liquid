@@ -96,9 +96,9 @@
       </figure>
     {% endif %}
 
-    <div class="news-article__rail">
-      {% comment %}Future ad placement guardrail: keep monetization units away from sensitive article notices and source-context components.{% endcomment %}
-      <aside class="news-article__sidebar no-ad-zone no-ad-zone--sensitive">
+    <div class="news-article__body-centered">
+      {% comment %}Sensitive-content notices above article body; no-ad-zone preserved.{% endcomment %}
+      <div class="news-article__notices no-ad-zone no-ad-zone--sensitive">
         {% if article.tags.size > 0 %}
           <section class="news-article__side-block">
             <h2 class="news-article__side-title">Story tags</h2>
@@ -131,22 +131,20 @@
         {% if show_corrections_note %}
           {% include 'article-corrections-note' %}
         {% endif %}
-      </aside>
+      </div>
 
-      <div class="news-article__body-wrap">
-        <div class="news-article__content rte" itemprop="articleBody">
-          {{ article.content }}
-        </div>
+      <div class="news-article__content rte" itemprop="articleBody">
+        {{ article.content }}
+      </div>
 
-        <div class="news-article__postscript no-ad-zone no-ad-zone--tipline">
-          {% if section.settings.display_social_buttons %}
-            <div class="news-article__share">
-              {% include 'social-buttons' with 'article' %}
-            </div>
-          {% endif %}
+      <div class="news-article__postscript no-ad-zone no-ad-zone--tipline">
+        {% if section.settings.display_social_buttons %}
+          <div class="news-article__share">
+            {% include 'social-buttons' with 'article' %}
+          </div>
+        {% endif %}
 
-          {% include 'submit-tip-cta' %}
-        </div>
+        {% include 'submit-tip-cta' %}
       </div>
     </div>
 
@@ -299,16 +297,14 @@
     color: rgba(239, 239, 239, 0.58);
   }
 
-  .news-article__rail {
+  .news-article__body-centered {
+    max-width: 760px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
-    gap: 34px;
-    align-items: start;
+    gap: 28px;
   }
 
-  .news-article__sidebar {
-    position: sticky;
-    top: 24px;
+  .news-article__notices {
     display: grid;
     gap: 14px;
   }
@@ -370,10 +366,6 @@
     color: rgba(239, 239, 239, 0.56);
   }
 
-  .news-article__body-wrap {
-    min-width: 0;
-  }
-
   .news-article__content {
     font-family: var(--sha-font-body);
     font-size: clamp(22px, 2vw, 28px);
@@ -383,18 +375,6 @@
 
   .news-article__content > *:first-child {
     margin-top: 0;
-  }
-
-  .news-article__content p,
-  .news-article__content ul,
-  .news-article__content ol,
-  .news-article__content blockquote,
-  .news-article__content h2,
-  .news-article__content h3,
-  .news-article__content h4 {
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .news-article__content p,
@@ -432,8 +412,6 @@
   }
 
   .news-article__postscript {
-    max-width: 760px;
-    margin: 42px auto 0;
     display: grid;
     gap: 20px;
   }
@@ -570,15 +548,6 @@
   }
 
   @media (max-width: 1024px) {
-    .news-article__rail {
-      grid-template-columns: 1fr;
-    }
-
-    .news-article__sidebar {
-      position: static;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
     .news-related__grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -595,10 +564,6 @@
 
     .news-article__meta {
       gap: 8px 14px;
-    }
-
-    .news-article__sidebar {
-      grid-template-columns: 1fr;
     }
 
     .news-article__content {

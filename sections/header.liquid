@@ -33,20 +33,9 @@
       {% endif %}
     </a>
     {% if section.settings.search_enabled %}
-      <a href="/search" class="icon-search dropdown_link" title="{{ 'general.search.title' | t | escape }}" data-dropdown-rel="search"></a>
+      <a href="/search" class="icon-search" title="Search stories and pages" aria-label="Search stories and pages"></a>
     {% endif %}
   </div>
-  {% if section.settings.search_enabled %}
-    <div class="dropdown_container center" data-dropdown="search">
-      <div class="dropdown">
-        <form action="/search" class="header_search_form" role="search">
-          <label for="mobile-header-search" class="hidden-label">Search stories and pages</label>
-          <span class="icon-search search-submit"></span>
-          <input id="mobile-header-search" type="search" name="q" placeholder="Search stories, investigations, and pages" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-terms" />
-        </form>
-      </div>
-    </div>
-  {% endif %}
   <div class="dropdown_container" data-dropdown="menu">
     <div class="dropdown">
       <ul class="menu" id="mobile_menu">
@@ -112,7 +101,7 @@
               {% assign hide_link = true %}
             {% endif %}
             {% if normalized_url contains '/account' %}
-              {% assign link_label = 'Profile' %}
+              {% assign hide_link = true %}
             {% endif %}
             {% unless hide_link %}
               <li><a href="{{ link.url }}">{{ link_label }}</a></li>
@@ -157,15 +146,8 @@
             {% include 'menu' with section.settings.main_linklist2 %}
           {% endif %}
           {% if section.settings.search_enabled %}
-            <li class="search_container">
-              <form action="/search" class="search_form" role="search">
-                <label for="desktop-nav-search" class="hidden-label">Search stories and pages</label>
-                <span class="icon-search search-submit"></span>
-                <input id="desktop-nav-search" type="search" name="q" placeholder="Search stories, investigations, and pages" value="{{ search.terms }}" autocapitalize="off" autocomplete="off" autocorrect="off" />
-              </form>
-            </li>
             <li class="search_link">
-              <a href="/search" class="icon-search dropdown_link" title="{{ 'general.search.title' | t | escape }}" data-dropdown-rel="search"></a>
+              <a href="/search" class="icon-search" title="Search stories and pages" aria-label="Search stories and pages"></a>
             </li>
           {% endif %}
         {% endcapture %}
@@ -189,17 +171,6 @@
             <ul class="menu {% if section.settings.menu_alignment == 'align_left' %}align_right{% elsif section.settings.menu_alignment == 'align_right' %}align_left{% else %}{{ section.settings.menu_alignment }}{% endif %} clearfix">
               {{ menu_right }}
             </ul>
-          </div>
-        {% endif %}
-        {% if section.settings.search_enabled %}
-          <div class="dropdown_container center" data-dropdown="search">
-            <div class="dropdown">
-              <form action="/search" class="header_search_form" role="search">
-                <label for="desktop-header-search" class="hidden-label">Search stories and pages</label>
-                <span class="icon-search search-submit"></span>
-                <input id="desktop-header-search" type="search" name="q" placeholder="Search stories, investigations, and pages" autocapitalize="off" autocomplete="off" autocorrect="off" class="search-terms" />
-              </form>
-            </div>
           </div>
         {% endif %}
         {% include 'sub-menu' with section.settings.main_linklist %}

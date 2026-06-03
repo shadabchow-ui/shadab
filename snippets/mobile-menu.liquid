@@ -10,7 +10,7 @@
     {% assign hide_link = true %}
   {% endif %}
   {% if normalized_url contains '/account' %}
-    {% assign link_label = 'Profile' %}
+    {% assign hide_link = true %}
   {% endif %}
   {% unless hide_link %}
     {% if linklists[link.handle] == empty %}
@@ -49,7 +49,7 @@
               {% assign hide_child_link = true %}
             {% endif %}
             {% if child_normalized_url contains '/account' %}
-              {% assign child_link_label = 'Profile' %}
+              {% assign hide_child_link = true %}
             {% endif %}
             {% unless hide_child_link %}
               {% if linklists[child_link.handle] == empty %}
@@ -78,7 +78,7 @@
                         {% assign hide_grandchild_link = true %}
                       {% endif %}
                       {% if grandchild_normalized_url contains '/account' %}
-                        {% assign grandchild_link_label = 'Profile' %}
+                        {% assign hide_grandchild_link = true %}
                       {% endif %}
                       {% unless hide_grandchild_link %}
                         <li><a href="{{ grandchild_link.url }}">{{ grandchild_link_label }}</a></li>
