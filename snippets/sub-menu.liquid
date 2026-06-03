@@ -1,30 +1,32 @@
 {% for link in linklists[sub-menu].links %}
   {% if linklists[link.handle] != empty %}
-    {% assign link_count = linklists[link.handle].links | size %}
-    <div class="dropdown_container" data-dropdown="{{ link.handle }}">
-      <div class="dropdown menu">
-        <div class="dropdown_content {% if link_count < 4 %}dropdown_narrow{% endif %}">
+    <div class="dropdown_container sha-dropdown-container" data-dropdown="{{ link.handle }}">
+      <div class="dropdown sha-dropdown">
+        <ul class="sha-dropdown-list">
           {% for sublink in linklists[link.handle].links %}
-            <div class="dropdown_column">
-              <ul class="{% if linklists[sublink.handle] != empty %}dropdown_title{% else %}dropdown_item{% endif %}">
-                <li>
-                  <a href="{{ sublink.url }}">{{ sublink.title }}</a>
-                </li>
-              </ul>
-
-              {% if linklists[sublink.handle] != empty %}
-                <ul>
-                  {% for subsublink in linklists[sublink.handle].links %}
-                    <li>
-                      <a href="{{ subsublink.url }}">{{ subsublink.title }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </div>
-            {% cycle link.handle: '', '', '', '', '<div class="dropdown_row"></div>' %}
+            {% assign sub_normalized_url = sublink.url | downcase %}
+            {% assign sub_normalized_title = sublink.title | strip | downcase %}
+            {% assign sub_hide = false %}
+            {% if sub_normalized_url contains '/cart' or sub_normalized_url contains '/checkout' or sub_normalized_url contains '/collections' or sub_normalized_url contains '/products' or sub_normalized_url contains '/account' %}
+              {% assign sub_hide = true %}
+            {% endif %}
+            {% if sub_normalized_title == 'cart' or sub_normalized_title == 'checkout' or sub_normalized_title == 'shop' or sub_normalized_title == 'products' or sub_normalized_title == 'collections' or sub_normalized_title == 'account' or sub_normalized_title == 'profile' %}
+              {% assign sub_hide = true %}
+            {% endif %}
+            {% unless sub_hide %}
+              <li class="sha-dropdown-item">
+                <a href="{{ sublink.url }}">{{ sublink.title }}</a>
+                {% if linklists[sublink.handle] != empty %}
+                  <ul class="sha-dropdown-sub">
+                    {% for subsublink in linklists[sublink.handle].links %}
+                      <li><a href="{{ subsublink.url }}">{{ subsublink.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endunless %}
           {% endfor %}
-        </div>
+        </ul>
       </div>
     </div>
   {% endif %}
