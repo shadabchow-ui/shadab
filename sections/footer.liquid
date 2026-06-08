@@ -90,15 +90,15 @@
         <ul>
           <li><a href="/blogs/crime">Investigations</a></li>
           <li><a href="{{ investigate_url }}">What We Investigate</a></li>
-          <li><a href="{{ extremism_public_safety_url }}">Extremism &amp; Public Safety</a></li>
+          <li><a href="{{ extremism_public_safety_url }}">Extremism</a></li>
           <li><a href="{{ counterintelligence_url }}">Counterintelligence</a></li>
           <li><a href="{{ cyber_crime_url }}">Cyber Crime</a></li>
           <li><a href="{{ public_corruption_url }}">Public Corruption</a></li>
           <li><a href="{{ civil_rights_url }}">Civil Rights</a></li>
-          <li><a href="{{ criminal_networks_url }}">Criminal Networks &amp; Public Accountability</a></li>
+          <li><a href="{{ criminal_networks_url }}">Criminal Networks</a></li>
           <li><a href="{{ white_collar_url }}">White-Collar Crime</a></li>
           <li><a href="{{ crime_community_safety_url }}">Crime &amp; Community Safety</a></li>
-          <li><a href="{{ high_risk_threats_url }}">High-Risk Threats &amp; Emergency Preparedness</a></li>
+          <li><a href="{{ high_risk_threats_url }}">High-Risk Threats</a></li>
         </ul>
       </nav>
 
@@ -132,7 +132,7 @@
 
     <div class="sixteen columns row footer_credits footer-publisher-credits">
       <p class="credits">
-        &copy; {{ "now" | date: "%Y" }} <a href="/">ShadabChow.com</a>. Conquer New Heights.
+        &copy; {{ "now" | date: "%Y" }} Conquer New Heights.
         {{ section.settings.copyright_text }}
       </p>
     </div>
@@ -199,8 +199,8 @@
   .footer-link-group a {
     color: rgba(239, 239, 239, 0.72);
     text-decoration: none;
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 15px;
+    line-height: 1.45;
   }
 
   .footer-link-group a:hover {
@@ -225,6 +225,10 @@
   @media (max-width: 640px) {
     .footer-publisher-grid {
       grid-template-columns: 1fr;
+    }
+
+    .footer-link-group a {
+      font-size: 14px;
     }
   }
 
