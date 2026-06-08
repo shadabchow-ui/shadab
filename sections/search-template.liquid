@@ -59,6 +59,7 @@
       <br class="clear" />
       <br class="clear" />
       <form class="search" action="/search" role="search">
+        <input type="hidden" name="type" value="article,page" />
         <div class="{% if sidebar %}three{% else %}five{% endif %} columns">
           &nbsp;
         </div>
@@ -151,11 +152,7 @@
       <hr />
     {% endif %}
 
-    {% if has_product_results %}
-      {% assign products = search.results | where: "object_type", "product" %}
-      {% assign products_per_row = section.settings.products_per_row %}
-      {% include 'product-loop', sidebar: sidebar %}
-    {% endif %}
+    {% comment %}Publisher site: product results are not rendered in search output. Products are excluded from search via type=article,page on all search forms.{% endcomment %}
 {% endif %}
 
   {% else %}
@@ -168,6 +165,7 @@
       </div>
       <br class="clear" />
         <form class="search" action="/search" role="search">
+          <input type="hidden" name="type" value="article,page" />
           <div class="{% if sidebar %}three{% else %}five{% endif %} columns">
             &nbsp;
           </div>

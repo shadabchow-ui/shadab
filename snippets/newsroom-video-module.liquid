@@ -7,8 +7,7 @@
   <section class="news-video__context no-ad-zone no-ad-zone--sensitive">
     {% if section.settings.viewer_discretion %}
       {% include 'viewer-discretion',
-        viewer_discretion_body: 'This video may contain graphic, disturbing, or otherwise sensitive material. It is framed here for context, verification, and reporting clarity.',
-        viewer_discretion_footnote: 'Manual age-restriction and ad-treatment decisions should be reviewed per video when needed.'
+        viewer_discretion_body: 'This material may contain graphic, disturbing, or otherwise sensitive content. It is presented here for context, verification, and reporting clarity.'
       %}
     {% endif %}
 
@@ -34,8 +33,7 @@
 
       {% if section.settings.video_source_note != blank %}
         {% include 'source-note',
-          source_note_body: section.settings.video_source_note,
-          source_note_footnote: 'This note reflects the editor-provided source context for the video module and should be reviewed manually before monetization decisions.'
+          source_note_body: section.settings.video_source_note
         %}
       {% endif %}
     </div>

@@ -2,32 +2,21 @@
   Facebook Open Graph meta tags
 {% endcomment %}
 
+{% assign social_meta_title = meta_title | default: page_title %}
+{% assign social_meta_description = meta_description | default: page_description %}
+
 <meta name="author" content="{{ shop.name }}">
 <meta property="og:url" content="{{ canonical_url }}">
 <meta property="og:site_name" content="{{ shop.name }}">
 
 {% if template contains 'product' %}
-  <meta property="og:type" content="product">
-  <meta property="og:title" content="{{ product.title | strip_html | escape }}">
-  {% for image in product.images limit:3 %}
-    <meta property="og:image" content="http:{{ image.src | product_img_url: '600x' }}">
-    <meta property="og:image:secure_url" content="https:{{ image.src | product_img_url: '600x' }}">
-    {% if image.alt contains 'youtube' or image.alt contains 'vimeo' %}
-      {% assign src = image.alt | split: 'src="' %}
-      {% assign src = src[1] | split: '"' | first %}
-      <meta property="og:video" content="{{ src }}">
-    {% endif %}
-  {% endfor %}
-  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html | escape }}">
-  <meta property="og:price:currency" content="{{ shop.currency }}">
+  {% comment %}Publisher site: product pages are noindexed. og:type=product and price metadata suppressed.{% endcomment %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ shop.name | escape }}">
 {% elsif template contains 'collection' %}
-  <meta property="og:type" content="product.group">
-  <meta property="og:title" content="{{ collection.title | strip_html | escape }}">
-  {% if collection.products_count > 0 %}
-    {% assign image = collection.products.first.featured_image %}
-    <meta property="og:image" content="http:{{ image.src | product_img_url: '600x' }}">
-    <meta property="og:image:secure_url" content="https:{{ image.src | product_img_url: '600x' }}">
-  {% endif %}
+  {% comment %}Publisher site: collection pages are noindexed. Suppressed product.group og:type to avoid signaling storefront to crawlers.{% endcomment %}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ shop.name | escape }}">
 {% elsif template contains 'article' %}
   <meta property="og:type" content="article">
   <meta property="og:title" content="{{ article.title | strip_html | escape }}">
@@ -67,7 +56,7 @@
   {% endif %}
 {% elsif template contains 'page' %}
   <meta property="og:type" content="article">
-  <meta property="og:title" content="{{ page.title | strip_html | escape }}">
+  <meta property="og:title" content="{{ social_meta_title | strip_html | escape }}">
   {% assign img_tag = '<' | append: 'img' %}
   {% if page.content contains img_tag %}
     {% assign src = page.content | split: 'src="' %}
@@ -79,10 +68,10 @@
   {% endif %}
 {% else %}
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:title" content="{{ social_meta_title | escape }}">
 {% endif %}
-{% if page_description %}
-  <meta property="og:description" content="{{ page_description | escape }}">
+{% if social_meta_description %}
+  <meta property="og:description" content="{{ social_meta_description | escape }}">
 {% endif %}
 
 {% comment %}
@@ -109,5 +98,10 @@
     {% if src %}
       <meta property="twitter:image" content="{{ src }}">
     {% endif %}
+  {% endif %}
+{% elsif template contains 'page' %}
+  <meta name="twitter:title" content="{{ social_meta_title | escape }}">
+  {% if social_meta_description %}
+    <meta name="twitter:description" content="{{ social_meta_description | escape }}">
   {% endif %}
 {% endif %}

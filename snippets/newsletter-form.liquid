@@ -1,8 +1,8 @@
-<div class="newsletter">
+<div class="newsletter" data-newsletter-popup-form-wrap>
   <div class="popup-signup-show--{{settings.newsletter_popup_form }} clearfix">
     <span class="message"></span>
     {% if settings.mailchimp_link != blank %}
-      <form action="{{ settings.mailchimp_link }}" method="post" name="mc-embedded-subscribe-form" id="contact_form" target="_blank">
+      <form action="{{ settings.mailchimp_link }}" method="post" name="mc-embedded-subscribe-form" id="newsletter_popup_mc_form" class="newsletter-popup-form" target="_blank">
         {% if settings.display_first_name %}
           <input type="text" value="" class="firstName" name="FNAME" placeholder="{{ 'general.newsletter_form.subscriber_first_name' | t }}">
         {% endif %}

@@ -1,0 +1,780 @@
+{% assign investigate_page_kind = investigate_page_kind | default: 'hub' %}
+
+{% assign submit_tip_page = pages['submit-a-tip'] %}
+{% assign about_page = pages['about-shadab-chow'] %}
+{% assign editorial_page = pages['editorial-standards'] %}
+{% assign corrections_page = pages['corrections-policy'] %}
+{% assign privacy_page = pages['privacy-policy'] %}
+{% assign legal_page = pages['legal-and-advertising'] %}
+{% assign contact_page = pages['contact'] %}
+
+{% assign investigate_hub_page = pages['what-we-investigate'] %}
+{% assign extremism_public_safety_page = pages['extremism-public-safety'] %}
+{% assign counterintelligence_page = pages['counterintelligence'] %}
+{% assign cyber_crime_page = pages['cyber-crime'] %}
+{% assign public_corruption_page = pages['public-corruption'] %}
+{% assign civil_rights_page = pages['civil-rights'] %}
+{% assign criminal_networks_page = pages['criminal-networks'] %}
+{% assign white_collar_page = pages['white-collar-crime'] %}
+{% assign crime_community_safety_page = pages['crime-community-safety'] %}
+{% assign high_risk_threats_page = pages['high-risk-threats'] %}
+
+{% assign submit_tip_url = '/pages/submit-a-tip' %}
+{% if submit_tip_page != blank %}
+  {% assign submit_tip_url = submit_tip_page.url %}
+{% endif %}
+
+{% assign about_url = '/pages/about-shadab-chow' %}
+{% if about_page != blank %}
+  {% assign about_url = about_page.url %}
+{% endif %}
+
+{% assign editorial_url = '/pages/editorial-standards' %}
+{% if editorial_page != blank %}
+  {% assign editorial_url = editorial_page.url %}
+{% endif %}
+
+{% assign corrections_url = '/pages/corrections-policy' %}
+{% if corrections_page != blank %}
+  {% assign corrections_url = corrections_page.url %}
+{% endif %}
+
+{% assign privacy_url = '/pages/privacy-policy' %}
+{% if privacy_page != blank %}
+  {% assign privacy_url = privacy_page.url %}
+{% endif %}
+
+{% assign legal_url = '/pages/legal-and-advertising' %}
+{% if legal_page != blank %}
+  {% assign legal_url = legal_page.url %}
+{% endif %}
+
+{% assign contact_url = '/pages/contact' %}
+{% if contact_page != blank %}
+  {% assign contact_url = contact_page.url %}
+{% endif %}
+
+{% assign investigate_hub_url = '/pages/what-we-investigate' %}
+{% if investigate_hub_page != blank %}
+  {% assign investigate_hub_url = investigate_hub_page.url %}
+{% endif %}
+
+{% assign extremism_public_safety_url = '/pages/extremism-public-safety' %}
+{% if extremism_public_safety_page != blank %}
+  {% assign extremism_public_safety_url = extremism_public_safety_page.url %}
+{% endif %}
+
+{% assign counterintelligence_url = '/pages/counterintelligence' %}
+{% if counterintelligence_page != blank %}
+  {% assign counterintelligence_url = counterintelligence_page.url %}
+{% endif %}
+
+{% assign cyber_crime_url = '/pages/cyber-crime' %}
+{% if cyber_crime_page != blank %}
+  {% assign cyber_crime_url = cyber_crime_page.url %}
+{% endif %}
+
+{% assign public_corruption_url = '/pages/public-corruption' %}
+{% if public_corruption_page != blank %}
+  {% assign public_corruption_url = public_corruption_page.url %}
+{% endif %}
+
+{% assign civil_rights_url = '/pages/civil-rights' %}
+{% if civil_rights_page != blank %}
+  {% assign civil_rights_url = civil_rights_page.url %}
+{% endif %}
+
+{% assign criminal_networks_url = '/pages/criminal-networks' %}
+{% if criminal_networks_page != blank %}
+  {% assign criminal_networks_url = criminal_networks_page.url %}
+{% endif %}
+
+{% assign white_collar_url = '/pages/white-collar-crime' %}
+{% if white_collar_page != blank %}
+  {% assign white_collar_url = white_collar_page.url %}
+{% endif %}
+
+{% assign crime_community_safety_url = '/pages/crime-community-safety' %}
+{% if crime_community_safety_page != blank %}
+  {% assign crime_community_safety_url = crime_community_safety_page.url %}
+{% endif %}
+
+{% assign high_risk_threats_url = '/pages/high-risk-threats' %}
+{% if high_risk_threats_page != blank %}
+  {% assign high_risk_threats_url = high_risk_threats_page.url %}
+{% endif %}
+
+{% capture investigation_disclaimer %}
+  <p class="newsroom-investigate__disclaimer">This site is an independent journalism platform. We report, analyze, verify, and publish public-interest information. We are not a law-enforcement agency, emergency service, court, intelligence agency, or government office. If there is an immediate danger or emergency, contact local emergency services.</p>
+{% endcapture %}
+
+{% capture investigation_short_disclaimer %}
+  <p class="newsroom-investigate__disclaimer newsroom-investigate__disclaimer--compact">We are a journalism platform, not a law-enforcement or emergency-response channel. If there is an immediate danger or emergency, contact local emergency services.</p>
+{% endcapture %}
+
+{% capture investigate_page_title %}
+  {% case investigate_page_kind %}
+    {% when 'hub' %}What We Investigate
+    {% when 'extremism-public-safety' %}Extremism &amp; Public Safety
+    {% when 'counterintelligence' %}Counterintelligence Reporting
+    {% when 'cyber-crime' %}Cyber Crime Reporting
+    {% when 'public-corruption' %}Public Corruption Reporting
+    {% when 'civil-rights' %}Civil Rights Reporting
+    {% when 'criminal-networks' %}Criminal Networks &amp; Public Accountability
+    {% when 'white-collar-crime' %}White-Collar Crime Reporting
+    {% when 'crime-community-safety' %}Crime &amp; Community Safety
+    {% when 'high-risk-threats' %}High-Risk Threats &amp; Emergency Preparedness
+  {% endcase %}
+{% endcapture %}
+
+{% capture investigate_page_lede %}
+  {% case investigate_page_kind %}
+    {% when 'hub' %}We organize our reporting around beats where facts, accountability, safety, rights, and power collide.
+    {% when 'extremism-public-safety' %}We report on extremist violence, public-safety failures, prosecutions, official response, and civil-liberties questions without amplifying ideology or operational detail.
+    {% when 'counterintelligence' %}We examine foreign influence, espionage allegations, secrecy, prosecutions, sanctions, and the accountability questions that appear when institutions invoke national security.
+    {% when 'cyber-crime' %}We cover digital harm through the lens of victims, records, systems failure, fraud, disclosure, and public accountability rather than tactical or technical how-to detail.
+    {% when 'public-corruption' %}We report on how public power is used, hidden, traded, or abused when records, money, official conduct, and public trust are at stake.
+    {% when 'civil-rights' %}We cover rights, access, discrimination allegations, abuse of authority, and the lived impact of public and institutional power on communities.
+    {% when 'criminal-networks' %}We follow networks, money, intimidation, trafficking allegations, fraud patterns, and the institutions that fail to stop organized harm.
+    {% when 'white-collar-crime' %}We report on financial deception, corporate misconduct, fraud allegations, regulatory failure, and the human cost of paper-based wrongdoing.
+    {% when 'crime-community-safety' %}We cover crime and community-safety stories with restraint, context, and attention to victims, community impact, official response, and the legal record.
+    {% when 'high-risk-threats' %}We examine mass-casualty risk, public warnings, preparedness, prosecutions, institutional failures, and misinformation through a public-safety reporting lens.
+  {% endcase %}
+{% endcapture %}
+
+{% capture investigate_page_body %}
+  {% case investigate_page_kind %}
+    {% when 'hub' %}
+      <h2>Why we organize coverage this way</h2>
+      <p>We do not use these beats as branding exercises or as a way to imitate a government agency. We organize them because readers need a clear map of what this publication covers, how we approach difficult material, and where our reporting standards become especially important. These subjects tend to generate rumor, fear, political spin, incomplete official narratives, and a constant pressure to repeat claims before they are verified. A serious newsroom needs a visible framework for slowing that process down.</p>
+      <p>Our mission is to report what happened, explain why it matters, verify before amplifying, and correct the record when facts change. That standard applies everywhere on this site, but it becomes especially important in areas involving crime, public safety, corruption, civil-rights disputes, cyber incidents, extremist violence, or high-stakes public warnings. The point of this hub is to show readers what we examine, what we do not publish, and how we try to keep difficult reporting accurate, useful, and restrained.</p>
+      {{ investigation_disclaimer }}
+
+      <h3>The reporting beats on this site</h3>
+      <p>Each beat below is a public-interest lens, not a promise that every story fits neatly into one category. Some stories cross several beats at once. A public-corruption story may overlap with civil rights, a cyber crime case may involve criminal networks and fraud, and a community-safety story may raise questions about public warnings, official conduct, or institutional failure. The categories are there to help readers understand our editorial priorities, not to flatten complex stories.</p>
+      <div class="newsroom-investigate__grid">
+        <a class="newsroom-investigate__card" href="{{ extremism_public_safety_url }}"><strong>Extremism &amp; Public Safety</strong><span>Public-interest reporting on extremist violence, threats, court records, official response, civil liberties, and community impact without repeating propaganda or operational detail.</span></a>
+        <a class="newsroom-investigate__card" href="{{ counterintelligence_url }}"><strong>Counterintelligence</strong><span>Coverage of espionage allegations, foreign influence, secrecy, sanctions, prosecutions, public accountability, and civil-liberties concerns.</span></a>
+        <a class="newsroom-investigate__card" href="{{ cyber_crime_url }}"><strong>Cyber Crime</strong><span>Reporting on breaches, ransomware, scams, public-sector cyber failures, victim impact, platform abuse, and digital accountability.</span></a>
+        <a class="newsroom-investigate__card" href="{{ public_corruption_url }}"><strong>Public Corruption</strong><span>Coverage of misuse of office, bribery allegations, procurement failures, public funds, conflicts of interest, and transparency gaps.</span></a>
+        <a class="newsroom-investigate__card" href="{{ civil_rights_url }}"><strong>Civil Rights</strong><span>Reporting on discrimination allegations, hate crimes, access to services, abuse of authority, housing, education, policing accountability, and community impact.</span></a>
+        <a class="newsroom-investigate__card" href="{{ criminal_networks_url }}"><strong>Criminal Networks &amp; Public Accountability</strong><span>Coverage of coordinated criminal activity, trafficking allegations, fraud patterns, intimidation, cross-border accountability, and the institutions that fail to protect the public.</span></a>
+        <a class="newsroom-investigate__card" href="{{ white_collar_url }}"><strong>White-Collar Crime</strong><span>Reporting on fraud, embezzlement, corporate misconduct, procurement abuse, consumer deception, and financial accountability.</span></a>
+        <a class="newsroom-investigate__card" href="{{ crime_community_safety_url }}"><strong>Crime &amp; Community Safety</strong><span>Context-rich reporting on serious crime, court proceedings, official response, community impact, public safety, and prevention questions.</span></a>
+        <a class="newsroom-investigate__card" href="{{ high_risk_threats_url }}"><strong>High-Risk Threats &amp; Emergency Preparedness</strong><span>Public-safety reporting on chemical, biological, radiological, nuclear, and mass-casualty risk stories through preparedness, accountability, and emergency-response context.</span></a>
+      </div>
+
+      <h3>How tips are reviewed</h3>
+      <p>Readers may send us documents, timelines, photos, public records, first-hand accounts, and other leads for editorial review. A submission can help us identify a pattern, verify a timeline, question an official claim, or locate a record we would not otherwise have seen. It can also be incomplete, misleading, manipulated, retaliatory, or impossible to verify. That is why we treat submitted material as a lead rather than as an automatic fact.</p>
+      <p>When a tip appears credible, we may compare it against public records, court filings, official statements, archived material, interviews, geolocation clues, or other corroborating evidence. We may publish from it, cite it as background, use it to direct further reporting, or decline to use it at all. We do not promise confidentiality, response, publication, legal protection, or investigative action on behalf of any agency. We also do not want illegal material, threats, exploitative content, private personal data unrelated to a legitimate public-interest case, or anything that places people in unnecessary danger.</p>
+
+      <h3>How we handle sensitive material</h3>
+      <p>These beats can involve violence, hate, extremism, fraud victims, trafficking allegations, chemical or radiological fear, child-safety concerns, institutional abuse, disturbing material, and high-pressure breaking news. We want the reporting to be useful without becoming sensational, voyeuristic, or operational. That means we do not publish instructions for causing harm, evading detection, hacking systems, building weapons, laundering money, intimidating victims, or exploiting public confusion.</p>
+      <p>It also means we try to keep the line between allegation and proof visible. Arrests are not convictions. Official claims are not self-proving. Viral clips can lack context. Leaked documents can be partial or self-serving. Public fear can distort everything around it. Our reporting tries to make clear what is confirmed, what is alleged, what comes from the public record, what comes from official sources, and what still needs verification.</p>
+
+      <h3>Why source transparency matters</h3>
+      <p>Readers should be able to tell whether a claim comes from a charging document, an agency statement, a court hearing, a witness interview, a public-record request, a company disclosure, an audit, a legislative hearing, or another form of evidence. Source transparency does not solve every problem, but it makes the work more legible. It helps readers weigh credibility, track what changed over time, and recognize when institutions are making claims that deserve scrutiny rather than blind repetition.</p>
+      <p>That is also why our editorial and policy pages matter. They are part of the reporting package. The same publication that asks readers to trust its judgment should also show them how corrections work, how tips are handled, how sensitive material is framed, and what the site does not guarantee.</p>
+
+      <h3>Use this hub as a reporting map</h3>
+      <p>Think of these pages as an editorial guide to our coverage, not as a substitute for emergency services or government reporting channels. If you want to understand our standards, review <a href="{{ editorial_url }}">Editorial Standards</a> and <a href="{{ corrections_url }}">Corrections Policy</a>. If you want to understand how the site handles privacy and disclosures, review <a href="{{ privacy_url }}">Privacy Policy</a> and <a href="{{ legal_url }}">Legal and Advertising</a>. If you have a lead or records that may help the public understand an important story, use <a href="{{ submit_tip_url }}">Submit a Tip</a>. If you want the broader mission and publisher context, see <a href="{{ about_url }}">About</a>.</p>
+
+    {% when 'extremism-public-safety' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Reporting on extremism and public safety lives at the point where fear, political response, civil liberties, and real-world violence collide. Major incidents often produce immediate pressure to name motives, assign affiliations, draw broad ideological conclusions, and treat early official statements as settled truth. That is precisely when careful reporting matters most. Our job is not to repeat propaganda, magnify panic, or turn mass harm into spectacle. Our job is to document what can be verified, show where official claims need context, and help readers understand the public-interest stakes without inflaming them.</p>
+      <p>Some extremism and public-safety stories involve alleged plots or major incidents. Others involve prosecutions, public warnings, surveillance disputes, prison radicalization questions, school threats, online rhetoric, hate-motivated violence, or the long aftermath of a single event. The public record around these stories can be fragmented, politicized, and emotionally charged. We cover them because readers need credible context on what happened, what institutions knew, how communities were affected, and how civil liberties can shift in the wake of violence.</p>
+
+      <h3>Public records that matter</h3>
+      <p>In this beat, court filings, charging documents, hearing transcripts, sentencing memos, public alerts, official press conferences, inspection reports, internal reviews, and community testimony often matter more than viral commentary. We pay close attention to timelines, contradictions, language around motive, the limits of early official knowledge, and the way public narratives harden before the facts do.</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Attacks, alleged plots, arrests, prosecutions, sentencing records, and post-incident accountability questions</li>
+        <li>Failures in warning systems, interagency confusion, public-communication breakdowns, and lessons claimed after major incidents</li>
+        <li>Extremist violence affecting faith communities, public events, schools, transit systems, workplaces, or public infrastructure</li>
+        <li>How ideology, grievance narratives, hate, propaganda, and online amplification appear in the public record without reproducing them as spectacle</li>
+        <li>Community impact, trauma, memorialization, policing changes, emergency response, and civil-liberties tradeoffs after high-profile incidents</li>
+      </ul>
+
+      <h3>When official claims need context</h3>
+      <p>Authorities may describe an incident as terrorism, hesitate to do so, or shift their language as evidence develops. Motive may be inferred too quickly. Affiliation may be overstated. A manifesto excerpt may be taken out of context. A mental-health narrative may be used to minimize ideological violence, or an ideology narrative may be used to obscure institutional failure. We identify official claims as official claims unless they are independently confirmed through reliable records or corroborated reporting.</p>
+
+      <h3>How we avoid harm</h3>
+      <p>We do not publish recruitment material, ideological slogans for promotion, tactical instructions, attack methods, bomb-making detail, or any information that would predictably help someone cause harm or seek notoriety. We also avoid unnecessary repetition of perpetrators' self-mythology. Where reference to extremist language is necessary for context, we keep it brief, explained, and subordinate to public-interest reporting.</p>
+
+      <h3>Community impact and aftermath</h3>
+      <p>Extremism and public-safety stories do not end when the immediate danger passes. Communities may live with grief, suspicion, policy shifts, long court timelines, intensified surveillance, or public narratives that flatten everyone affected into a single symbol. We are interested in what happens after the headline: whether official lessons were real, whether emergency claims changed later, whether civil-liberties concerns were ignored, and whether public institutions used fear responsibly or opportunistically.</p>
+      <p>That aftermath matters because public memory is often shaped by repetition rather than evidence. We try to revisit the record when initial claims change, when prosecutions reveal a narrower or broader picture than early coverage suggested, or when policy responses impose lasting costs that deserve scrutiny in their own right.</p>
+
+      <h3>What readers can submit</h3>
+      <p>Readers may send public records, official notices, hearing material, community statements, timelines, public-safety communications, or first-hand accounts tied to the public-interest dimensions of a story. Do not send propaganda, threats, tactical material, illegal content, or anything that could interfere with emergency response or place people at risk.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not an emergency reporting channel, not a crisis hotline, and not a law-enforcement intake portal. If there is an immediate threat or emergency, contact local emergency services.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>Use <a href="{{ submit_tip_url }}">Submit a Tip</a> for editorial review. For the broader reporting framework behind this beat, review <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ corrections_url }}">Corrections Policy</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a>.</p>
+
+    {% when 'counterintelligence' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Counterintelligence stories involve secrecy, leverage, influence, and official claims made in the name of national security. They can concern espionage allegations, foreign influence campaigns, sanctions evasion, covert relationships, research theft, procurement vulnerabilities, cyber-enabled influence, or institutional failures hidden behind classification and public deference. These stories matter because secrecy itself can become a shield against accountability.</p>
+      <p>Our reporting treats this beat as a public-interest accountability area, not as an invitation to mimic intelligence language. We are interested in what the public record shows, how official claims are constructed, where prosecutions and sanctions reveal larger patterns, and how civil liberties are affected when governments, contractors, universities, or political institutions cite foreign influence or espionage risk.</p>
+
+      <h3>Questions we ask</h3>
+      <p>Who is making the allegation? What is supported by indictments, hearings, sanctions notices, export-control records, or public statements? What remains speculative? What institutional failures allowed influence or secrecy to expand? Are claims being used narrowly to address a real public concern, or broadly in a way that invites overreach, scapegoating, or panic?</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Espionage allegations, public prosecutions, sanctions-related cases, and the documentary record around them</li>
+        <li>Foreign influence tied to lobbying, business relationships, universities, online ecosystems, procurement, or political institutions</li>
+        <li>Economic espionage claims, research-security disputes, export-control issues, and the public-interest consequences of strategic secrecy</li>
+        <li>Cyber-enabled influence, disinformation laundering, covert networks, and institutional response to hidden pressure</li>
+        <li>Civil-liberties concerns, overreach, selective enforcement, and transparency failures in the name of national security</li>
+      </ul>
+
+      <h3>How we report responsibly</h3>
+      <p>Accusations in this area can ruin reputations long before a case is proven. We rely on court records, sanctions documents, official statements, public hearings, corporate disclosures, academic records, expert context, and corroborated reporting. Allegations stay allegations unless supported by credible evidence. We do not imply intelligence authority, surveillance access, or the ability to validate nonpublic government claims from inside those systems.</p>
+
+      <h3>Where this beat overlaps with public accountability</h3>
+      <p>Counterintelligence stories are not only about states and spies. They are also about contractors, data brokers, universities, procurement choices, lobbying ecosystems, disinformation markets, and institutional blind spots. A national-security frame can obscure ordinary accountability failures, so we pay attention to who benefited, who failed to disclose, and what the public was not told in time.</p>
+
+      <h3>When secrecy becomes the story</h3>
+      <p>Sometimes the most important public-interest question is not whether every allegation can be fully proven in open court, but how secrecy is used to structure public understanding. Was information withheld for a legitimate reason, or did secrecy shield embarrassment, delay accountability, or expand institutional power with minimal scrutiny? Did public officials ask readers to accept broad conclusions while providing too little evidence to evaluate those claims responsibly?</p>
+      <p>We take those questions seriously because national-security language can narrow public debate very quickly. A publication that covers this beat responsibly should resist the pressure to turn uncertainty into certainty simply because the subject sounds classified or strategically important.</p>
+
+      <h3>What readers can submit</h3>
+      <p>Readers may send public records, sanctions material, court references, procurement documents, public hearing evidence, expert context, or first-hand accounts tied to a legitimate public-interest story. Do not send classified material, illegal access credentials, or anything that would put you or others at unnecessary risk.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not an intelligence channel, not a secure disclosures portal, and not a substitute for emergency or legal advice. If there is an immediate danger, contact local emergency services or the appropriate lawful authority.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>For our reporting standards and corrections process, review <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ corrections_url }}">Corrections Policy</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a>.</p>
+
+    {% when 'cyber-crime' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Cyber crime is public-interest reporting because the harm is often concrete long before the technical story is fully understood. A ransomware incident can delay care, a breach can expose families, a scam can wipe out savings, and a platform-abuse failure can make ordinary people more vulnerable. The most important questions are not only what system was compromised, but who was affected, what was disclosed, what was hidden, who had responsibility, and whether institutions acted with enough urgency and honesty.</p>
+      <p>We cover this beat from the standpoint of victims, records, systems failure, and accountability. That means we focus less on technical mystique and more on public consequences: schools locked out of services, local governments that failed to patch known weaknesses, companies that disclosed too little, consumers left to clean up after fraud, and regulatory bodies that moved too slowly.</p>
+
+      <h3>Patterns we watch</h3>
+      <p>We pay attention to delayed disclosure, vague language designed to minimize harm, repeat vendor failures, breach notices that raise more questions than they answer, platform abuse that becomes normalized, and official narratives that exaggerate certainty about attribution before the record supports it. We also watch the financialization of cyber harm: extortion, fraud, customer deception, insurance disputes, and the transfer of costs onto victims.</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Data breaches, ransomware events, identity theft, digital extortion, platform abuse, and cyber-enabled fraud</li>
+        <li>Public-sector cybersecurity failures affecting schools, hospitals, local government, utilities, or civic systems</li>
+        <li>Disclosure practices, customer notifications, regulatory actions, litigation, audits, and post-incident accountability</li>
+        <li>Scams, impersonation schemes, financial exploitation, and patterns of consumer harm that appear in public records</li>
+        <li>How companies, vendors, and institutions communicate risk before, during, and after incidents</li>
+      </ul>
+
+      <h3>How we report responsibly</h3>
+      <p>We do not publish exploit instructions, credential-theft methods, malware details that predictably enable misuse, evasion guidance, or operational steps for attackers. When technical context matters, we use it to clarify consequences, timelines, governance failures, and what readers can verify in the public record. Allegations of intrusion, attribution, intent, or compromise stay labeled as allegations unless supported by credible records or corroborated reporting.</p>
+
+      <h3>How readers can help verify the record</h3>
+      <p>Helpful submissions may include public breach notices, official communications, consumer warnings, screenshots, vendor contracts, meeting records, timelines, court filings, audit references, or first-hand accounts that help establish impact and chronology. We do not want stolen credentials, malware, illegal access tools, or private personal information unrelated to a legitimate public-interest issue.</p>
+
+      <h3>What we will not publish</h3>
+      <p>We will not turn this beat into a guide for offensive tactics. The point of the coverage is to explain harm, accountability, and institutional response, not to provide a blueprint for abuse or notoriety.</p>
+
+      <h3>Why accountability often starts with plain language</h3>
+      <p>Cyber stories are frequently hidden behind jargon. That can benefit the institutions that failed. If a disclosure is vague, if an incident timeline is hard to follow, or if a vendor uses technical language to avoid describing plain public harm, we try to translate the record into terms ordinary readers can evaluate. Who lost access? Who paid? What data was exposed? What warnings were missed? Who is being asked to trust a company or agency that has not yet been fully candid?</p>
+      <p>Plain language is not a simplification of the public-interest issue. It is part of the accountability work. If readers cannot understand what happened, they cannot judge whether the response was credible.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not a hacking forum, not an emergency help desk, and not a private security service. If your device, workplace, or account is in immediate danger, contact the relevant service provider, security team, or emergency services where appropriate.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>Use <a href="{{ submit_tip_url }}">Submit a Tip</a> for editorial review. For the broader framework behind this beat, see <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ legal_url }}">Legal and Advertising</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a>.</p>
+
+    {% when 'public-corruption' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Public corruption reporting is about more than dramatic bribery cases. It is about the quieter ways power can be bent away from the public and toward insiders: contracts shaped behind closed doors, emergency spending with weak oversight, overtime systems that invite abuse, relationships that go undisclosed, watchdog findings ignored, retaliation against people who ask questions, and official language used to hide plain misuse of office.</p>
+      <p>We cover this beat because public money, public authority, and public trust are not abstract. They shape schools, policing, infrastructure, health systems, housing, permits, contracts, licensing, and who gets heard when something goes wrong. The damage is often cumulative. A pattern of unchallenged misconduct can become the operating culture of an institution long before it becomes a criminal case.</p>
+
+      <h3>Accountability angle</h3>
+      <p>Not every corruption story ends in charges. Some are revealed through audits, inspector findings, budget records, procurement data, campaign filings, whistleblower lawsuits, ethics disputes, or local reporting that exposes a pattern before formal enforcement arrives. That is why we do not treat the absence of a prosecution as proof that there is nothing to examine.</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Bribery allegations, kickback schemes, contract steering, procurement irregularities, and self-dealing</li>
+        <li>Conflicts of interest, undisclosed relationships, nepotism, patronage, and misuse of public office</li>
+        <li>Misuse of public funds, grants, emergency budgets, reimbursements, overtime, and discretionary spending</li>
+        <li>Accountability failures in local government, policing, public safety agencies, state offices, boards, and quasi-public institutions</li>
+        <li>Audit findings, ethics complaints, campaign-finance issues, oversight breakdowns, and retaliation against scrutiny</li>
+      </ul>
+
+      <h3>When allegations outpace proof</h3>
+      <p>Corruption stories are easily weaponized for partisan ends. We do not treat rumor, opposition messaging, or social media certainty as reporting. We look for contracts, disclosures, meeting records, sworn testimony, court records, inspection findings, budget material, and other documentary evidence that shows how power was used and who benefited.</p>
+
+      <h3>Community impact</h3>
+      <p>The public-interest case in corruption reporting often lies in consequences: services delayed, watchdogs undermined, neighborhoods neglected, public money diverted, safety systems weakened, or trust eroded. We want the reporting to explain those consequences clearly, not just narrate insider conflict.</p>
+
+      <h3>What transparency looks like in practice</h3>
+      <p>Transparency is not a slogan. It is budgets that can be read, contracts that can be examined, meetings that are documented, oversight that leaves a record, and officials who answer material questions with something more than messaging. We pay attention to the gap between formal compliance and real disclosure because institutions can satisfy narrow paperwork requirements while still obscuring how decisions were made.</p>
+      <p>That is why local details matter in this beat. A procurement clause, reimbursement line, overtime pattern, campaign filing, or public-record denial can explain far more than a sweeping public statement about integrity.</p>
+
+      <h3>What readers can submit</h3>
+      <p>Useful material may include public records, agendas, campaign filings, procurement documents, budget pages, conflict-of-interest disclosures, hearing videos, inspection findings, emails you have the right to share, or first-hand accounts supported by documents. Do not send hacked accounts, private credentials, threats, or personal data unrelated to a legitimate public-interest case.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not a court, not a law-enforcement intake portal, and not a substitute for ethics enforcement or legal advice. If there is an immediate public-safety emergency, contact local emergency services.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>For editorial review, use <a href="{{ submit_tip_url }}">Submit a Tip</a>. For the standards behind this beat, review <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ corrections_url }}">Corrections Policy</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a>.</p>
+
+    {% when 'civil-rights' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Civil-rights reporting asks who is protected, who is excluded, and what happens when institutions misuse power. These stories can involve discrimination allegations, abuse of authority, hate crimes, barriers to housing or services, policing disputes, school discipline patterns, workplace retaliation, disability access, or failures in the treatment of vulnerable communities. They are often argued through records, testimony, policy language, and lived impact rather than one dramatic moment that resolves everything at once.</p>
+      <p>We cover this beat because rights disputes are public-interest stories even when institutions try to reduce them to paperwork or procedure. Access to education, housing, work, due process, disability accommodation, public safety, and equal treatment can depend on decisions made far from public view. When those decisions reach the public record through complaints, hearings, court cases, or community testimony, they deserve careful, evidence-based reporting.</p>
+
+      <h3>Community impact</h3>
+      <p>This beat is not only about legal claims. It is also about lived reality. A rights case can change whether a student feels safe at school, whether a tenant can remain housed, whether a disabled resident can access public services, whether a person in custody is treated lawfully, or whether a community believes official power is applied fairly. We try to keep that human context visible without replacing documentation with rhetoric.</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Discrimination allegations involving race, religion, disability, sex, gender, housing, employment, education, or public access</li>
+        <li>Abuse of authority, color-of-law allegations, rights violations in custody, and policing accountability</li>
+        <li>Hate-crime cases, threats against protected groups, and institutional response failures</li>
+        <li>Voting access, language access, disability access, school discipline disparities, and unequal treatment in public systems</li>
+        <li>How advocates, agencies, courts, local institutions, and affected communities respond when rights claims enter the public record</li>
+      </ul>
+
+      <h3>How we report responsibly</h3>
+      <p>We use court filings, complaints, official statements, public records, interviews, and corroborated documentation to distinguish allegation from verified finding. We avoid amplifying unverified accusations or turning protected groups into threats. We also avoid flattening complicated disputes into slogans when the record is more nuanced than partisan framing allows.</p>
+
+      <h3>What privacy and dignity require</h3>
+      <p>Some civil-rights stories involve private individuals, minors, survivors, medical circumstances, immigration status, disability status, or other details that can cause harm if handled carelessly. We consider whether publishing names, images, or identifying details serves a clear public-interest purpose. When the case is strong but the identifying details are not necessary, restraint matters.</p>
+
+      <h3>Where official language can mislead</h3>
+      <p>Institutions often describe rights disputes in procedural terms that sound neutral while obscuring unequal impact. A school may call a repeated pattern an isolated incident. An agency may describe exclusion as a misunderstanding. A department may frame a force complaint as a training issue before the facts are fully reviewed. We try to compare those characterizations against the underlying record and the lived consequences described by affected people.</p>
+      <p>That does not mean assuming every claim is true. It means treating official language as one part of the record rather than the final word on what happened.</p>
+
+      <h3>How readers can help verify the record</h3>
+      <p>Readers may send public complaints, court filings, agency letters, school-board material, policy documents, public meeting evidence, first-hand accounts, timelines, or supporting records. We do not want threats, retaliatory submissions, illegal recordings, or private personal data unrelated to a legitimate public-interest issue.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not legal advice, not an emergency hotline, and not a government civil-rights enforcement office. If someone faces immediate danger, contact local emergency services.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>Use <a href="{{ submit_tip_url }}">Submit a Tip</a> to send material for review, and see <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ corrections_url }}">Corrections Policy</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a> for the broader reporting framework.</p>
+
+    {% when 'criminal-networks' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Criminal networks are often reported as mythology: shadowy groups, cinematic nicknames, single raids, and exaggerated claims of total control. Public-interest reporting requires more discipline than that. Coordinated criminal activity usually shows up through patterns: fraud rings, trafficking allegations, intimidation, laundering allegations, cargo theft, cross-border logistics, cyber-enabled schemes, and institutions that enable or ignore harm for long stretches of time.</p>
+      <p>We cover this beat because networks matter. When harm is coordinated, the public needs reporting that explains the systems around it: money flows, business relationships, community impact, coercion, corruption, and how official response either clarified the record or obscured it. The challenge is to make those systems visible without glamorizing the actors or supplying methods.</p>
+
+      <h3>Patterns we watch</h3>
+      <p>We pay attention to repeated names in court filings, overlapping corporate shells, procurement links, sanctions material, seizure records, coordinated fraud behavior, geographic patterns, retaliation against witnesses, and the difference between folklore and documented network conduct. We are less interested in mythology than in what can be traced.</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Trafficking allegations, extortion claims, smuggling patterns, intimidation, and public-safety impact tied to organized networks</li>
+        <li>Fraud rings, cargo theft, retail theft networks, financial channels, laundering allegations, and enabling business structures</li>
+        <li>Cross-border prosecutions, public records, sanctions, and the institutional failures that let organized harm persist</li>
+        <li>Corruption or procurement abuse that makes networked criminal activity harder to detect or easier to sustain</li>
+        <li>Victim and community impact, especially where fear or rumor can distort what is actually documented</li>
+      </ul>
+
+      <h3>How we avoid glamorization</h3>
+      <p>We do not want this coverage to read like fan fiction for criminal groups. We avoid romanticized language, stylized mythmaking, and methods detail that could help someone reproduce fraud, laundering, trafficking, or intimidation. We focus on records, consequences, accountability, and the gap between claims and proof.</p>
+
+      <h3>Where accountability often hides</h3>
+      <p>Sometimes the real public-interest story is not the headline arrest but the surrounding systems: officials who ignored warning signs, businesses that profited from suspicious relationships, communities left vulnerable, or institutions that failed to distinguish rumor from evidence. We try to keep that broader accountability frame visible.</p>
+
+      <h3>Rumor versus documented network behavior</h3>
+      <p>Organized-crime reporting easily drifts into folklore. People repeat reputational claims, coded language, and social mythology as if they were established facts. We try to separate image from evidence. A network may be portrayed as larger, more disciplined, or more omnipresent than the record supports. In other cases, public narratives minimize coordinated harm because it looks too ordinary to attract attention.</p>
+      <p>That is why we keep returning to documents, prosecutions, sanctions, corporate records, and repeated public patterns. The story should be what can be shown, not what sounds cinematic.</p>
+
+      <h3>What readers can submit</h3>
+      <p>Readers may send public records, case numbers, corporate filings, procurement material, local reporting, victim-impact accounts, or timelines that help explain the public-interest consequences of a documented pattern. Do not send illegal material, threats, retaliatory content, or anything that could place you or others in immediate danger.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not witness protection, not a police intake portal, and not a substitute for emergency response. If there is an immediate safety threat, contact local emergency services.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>For editorial review, use <a href="{{ submit_tip_url }}">Submit a Tip</a>. For the reporting standards behind this beat, see <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ corrections_url }}">Corrections Policy</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a>.</p>
+
+    {% when 'white-collar-crime' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>White-collar crime can disappear into paperwork even when the damage is enormous. Fraud, embezzlement, consumer deception, healthcare abuse, investment schemes, procurement fraud, accounting manipulation, tax cases, and corporate misconduct often leave harm distributed across many victims, many filings, and many years. That makes the stories easy to minimize even when the real-world consequences are severe.</p>
+      <p>We cover this beat because money trails are public-interest trails. They show how institutions failed, how incentives were structured, who benefited, who was misled, and how official oversight responded too late or too weakly. A court filing, audit report, bankruptcy record, licensing dispute, or whistleblower complaint can tell the story of public harm as clearly as any crime scene.</p>
+
+      <h3>Questions we ask</h3>
+      <p>Who lost money, services, trust, or access? What records back the claim? Did regulators, boards, auditors, or gatekeepers ignore warning signs? Was a scheme hidden in jargon ordinary readers could not decode? Was the harm concentrated on vulnerable consumers, patients, retirees, taxpayers, or workers who had little ability to protect themselves?</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Fraud, embezzlement allegations, securities or investment scams, procurement abuse, and deceptive business practices</li>
+        <li>Healthcare fraud, mortgage abuse, insurance disputes, tax cases, and professional misconduct tied to financial harm</li>
+        <li>Corporate disclosures, bankruptcy records, audit findings, regulatory actions, court filings, and whistleblower cases</li>
+        <li>Consumer harm, pension risk, public-contract abuse, and the human consequences of paper-based wrongdoing</li>
+        <li>How institutions, compliance systems, and oversight bodies failed to catch or stop predictable abuse</li>
+      </ul>
+
+      <h3>How we report responsibly</h3>
+      <p>White-collar allegations are often complex and easy to overstate. We rely on filings, contracts, audits, disclosures, court records, public enforcement documents, interviews, and corroborated documentation. Allegations remain allegations unless verified through reliable evidence. We do not publish methods for fraud, concealment, asset hiding, or victim exploitation.</p>
+
+      <h3>Victim impact is part of the story</h3>
+      <p>This beat is not only about executives, firms, or legal theories. It is also about the people left to absorb the loss: patients denied proper care, consumers trapped in predatory arrangements, investors misled, taxpayers exposed, workers discarded, or communities that paid more and received less. We try to keep that impact visible rather than letting the story dissolve into abstraction.</p>
+
+      <h3>What paperwork can conceal</h3>
+      <p>Financial misconduct often hides inside routine-seeming documents. Contracts, ledgers, disclosures, reimbursement forms, compliance reports, and investor materials can normalize harmful conduct simply by making it look administrative. We try to read those records for what they do, not only for how they sound.</p>
+      <p>That means following the incentives, identifying who had the power to question the arrangement, and asking why warning signs did not stop the conduct sooner. The paper trail is often where the public-interest story becomes legible.</p>
+
+      <h3>What readers can submit</h3>
+      <p>Useful submissions may include public filings, audit findings, consumer notices, contracts, billing records you have the right to share, court documents, regulatory letters, and other documentation that helps establish how a scheme or institutional failure affected the public. Use <a href="{{ submit_tip_url }}">Submit a Tip</a> for editorial review.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not financial advice, not an investor hotline, and not a law-enforcement reporting portal. It is a journalism page about how this publication covers financial harm and accountability.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>Review <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ legal_url }}">Legal and Advertising</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a> for the broader framework behind this beat.</p>
+
+    {% when 'crime-community-safety' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Crime and community-safety reporting can do real damage when it is rushed, graphic, speculative, or built around spectacle. Early police summaries, partial surveillance clips, rumors about motive, and public grief often spread faster than reliable information. That is why this beat demands restraint. We report on major incidents, court proceedings, public-safety questions, and institutional response with a focus on verified context rather than adrenaline.</p>
+      <p>We cover violent crime because communities need accurate information about what happened, what is confirmed, how the legal process is moving, what warning signs were missed, and how victims, families, neighborhoods, schools, or workplaces were affected. We do not want the coverage to turn alleged perpetrators into antiheroes or victims into background scenery.</p>
+
+      <h3>Public-safety context</h3>
+      <p>Sometimes the story is the incident itself. Sometimes it is the official response, the gaps in a warning system, a court process that changes public understanding, or a longer pattern of violence that a single case exposes. We try to explain those layers clearly without overstating what one event can prove.</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Major violent incidents, court proceedings, official updates, and the public record around them</li>
+        <li>Victim and community impact, especially where trauma, displacement, or institutional failure shaped the outcome</li>
+        <li>Charging decisions, plea agreements, dismissals, sentencing outcomes, and the way cases evolve over time</li>
+        <li>Prevention-policy questions, public warnings, school or workplace response, and gaps in official communication</li>
+        <li>Related issues such as trafficking allegations, child-safety cases, gang-related violence, or mass-casualty response when newsworthy and responsibly framed</li>
+      </ul>
+
+      <h3>How we report responsibly</h3>
+      <p>We avoid graphic detail, gratuitous imagery, and language that sensationalizes harm. Arrests are not convictions, allegations are not proof, and early official claims often need revision. We use court records, official statements, interviews, public records, and corroborated reporting. We also consider age, trauma, privacy, and the long afterlife of searchable reporting when deciding what to publish and how to frame it.</p>
+
+      <h3>What we will not publish</h3>
+      <p>We do not want this beat to become a vehicle for gore, voyeurism, notoriety, or tactical detail. Where visual material is necessary for public understanding, we aim to use it with context and restraint.</p>
+
+      <h3>How developing cases can change</h3>
+      <p>Violent-crime reporting often changes significantly over time. Charges can be reduced or expanded. Witness narratives can conflict. Video can clarify or complicate early claims. A self-defense argument, competency issue, forensic dispute, or procedural failure can alter the public understanding of a case months after the first headline. We try to leave room for that evolution instead of writing as though the first public version of events is final.</p>
+      <p>That matters for fairness and for public trust. Readers should be able to see where a case moved, not just how it was first framed under pressure.</p>
+
+      <h3>What readers can submit</h3>
+      <p>Readers may send public records, official notices, timelines, local context, eyewitness information, or material that helps verify a legitimate public-interest claim. Do not send graphic content, threats, exploitative material, or private personal data unrelated to the public-interest case.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not an emergency alert channel, not victim-services support, and not a substitute for law-enforcement or legal advice. If there is an immediate danger, contact local emergency services.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>For editorial review, use <a href="{{ submit_tip_url }}">Submit a Tip</a>. For our verification rules and corrections process, see <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ corrections_url }}">Corrections Policy</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a>.</p>
+
+    {% when 'high-risk-threats' %}
+      {{ investigation_short_disclaimer }}
+      <h2>Why this beat matters</h2>
+      <p>Stories involving chemical, biological, radiological, nuclear, or other mass-casualty risks require unusual caution. Public fear can escalate quickly, misinformation can spread faster than official clarity, and poorly framed reporting can do harm even without intending to. We cover this beat because the public needs reliable context around warnings, preparedness, prosecutions, policy disputes, institutional failures, and the difference between documented risk and exaggerated panic.</p>
+      <p>Not every high-risk-threat story is about an imminent event. Some concern old contamination records, public-warning failures, prosecution documents, training breakdowns, emergency planning disputes, or false claims that circulate during moments of anxiety. The public-interest value lies in helping readers understand how risk is described, who is accountable, and what the record actually shows.</p>
+
+      <h3>How we avoid harm</h3>
+      <p>We do not publish materials lists, recipes, acquisition paths, quantities, assembly detail, dispersal guidance, or other information that could help someone cause mass harm. When technical language is necessary, we keep it descriptive, high-level, and clearly subordinate to the public-interest story.</p>
+
+      <h3>What we examine</h3>
+      <ul>
+        <li>Chemical, biological, radiological, nuclear, or contamination-related stories with credible public-interest implications</li>
+        <li>Public warnings, prosecutions, hearings, policy disputes, and institutional accountability around mass-casualty risk</li>
+        <li>Preparedness failures, emergency-planning gaps, training breakdowns, and communication problems exposed by major events</li>
+        <li>Misinformation, panic narratives, hoaxes, and exaggerated claims that obscure the documented record</li>
+        <li>How schools, hospitals, local agencies, industry, and communities are affected when public-safety systems are tested</li>
+      </ul>
+
+      <h3>When official language matters</h3>
+      <p>Officials may use highly technical, highly vague, or highly reassuring language at moments when readers most need clarity. We try to translate the public record into plain English without overstating certainty. Where agencies or prosecutors make claims, we identify those claims as theirs unless independently confirmed.</p>
+
+      <h3>Public preparedness and accountability</h3>
+      <p>This beat is not about amplifying fear. It is about whether institutions planned honestly, communicated clearly, regulated responsibly, and responded credibly. A story may be newsworthy because a community was poorly warned, because a system failed a stress test, because misleading claims spread faster than corrections, or because a prosecution revealed a larger public-safety gap.</p>
+
+      <h3>How we frame uncertainty</h3>
+      <p>High-stakes public-safety stories often begin with fragments: a warning, a preliminary statement, a vague technical term, or a rapidly spreading rumor. We try to be explicit about what is known, what is not, what comes from official sources, and what still needs confirmation. That is especially important when readers are making judgments under fear.</p>
+      <p>Careful framing is not caution for its own sake. It is part of preventing avoidable confusion and keeping dangerous stories from becoming vehicles for misinformation or false reassurance.</p>
+
+      <h3>What readers can submit</h3>
+      <p>Readers may send public notices, hearing materials, public records, official communications, community impact documentation, or first-hand accounts that help explain the public-interest dimension of a documented story. Do not send dangerous materials, instructions, illegal content, or anything that could put people at risk.</p>
+
+      <h3>What this page is not</h3>
+      <p>This page is not emergency guidance, not an operational safety manual, and not a government hazard-reporting office. If there is an immediate safety risk, contact local emergency services and follow instructions from qualified emergency personnel.</p>
+
+      <h3>Related editorial paths</h3>
+      <p>Use <a href="{{ submit_tip_url }}">Submit a Tip</a> for editorial review, and see <a href="{{ editorial_url }}">Editorial Standards</a>, <a href="{{ legal_url }}">Legal and Advertising</a>, and <a href="{{ investigate_hub_url }}">What We Investigate</a> for the broader framework behind this beat.</p>
+  {% endcase %}
+{% endcapture %}
+
+<article class="newsroom-page newsroom-page--investigate newsroom-page--{{ investigate_page_kind }}">
+  <header class="newsroom-page__header">
+    <p class="newsroom-page__kicker">Coverage Guide</p>
+    <h1 class="newsroom-page__title">{{ investigate_page_title | strip }}</h1>
+    {% if investigate_page_lede != blank %}
+      <p class="newsroom-page__lede">{{ investigate_page_lede | strip }}</p>
+    {% endif %}
+  </header>
+
+  <div class="newsroom-page__body rte">
+    {{ investigate_page_body }}
+  </div>
+
+  <div class="newsroom-investigate__footer-links">
+    {% unless investigate_page_kind == 'hub' %}
+      <a href="{{ investigate_hub_url }}">Back to What We Investigate</a>
+    {% endunless %}
+    <a href="{{ submit_tip_url }}">Submit a Tip</a>
+    <a href="{{ editorial_url }}">Editorial Standards</a>
+    <a href="{{ corrections_url }}">Corrections Policy</a>
+    <a href="{{ privacy_url }}">Privacy Policy</a>
+  </div>
+</article>
+
+<style>
+  .newsroom-page--investigate {
+    width: min(100% - 32px, 1040px);
+    margin: 0 auto;
+    padding: 56px 0 88px;
+    color: #efefef;
+  }
+
+  .newsroom-page--investigate .newsroom-page__header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 22px;
+    margin-bottom: 34px;
+  }
+
+  .newsroom-page--investigate .newsroom-page__kicker {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(239, 239, 239, 0.56);
+  }
+
+  .newsroom-page--investigate .newsroom-page__title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 14px 0 14px;
+  }
+
+  .newsroom-page--investigate .newsroom-page__lede {
+    max-width: 760px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(22px, 2.4vw, 30px);
+    line-height: 1.42;
+    font-style: italic;
+    color: rgba(239, 239, 239, 0.76);
+  }
+
+  .newsroom-page--investigate .newsroom-page__body {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    line-height: 1.76;
+    color: #efefef;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body p,
+  .newsroom-page--investigate .newsroom-page__body ul,
+  .newsroom-page--investigate .newsroom-page__body ol,
+  .newsroom-page--investigate .newsroom-page__body h2,
+  .newsroom-page--investigate .newsroom-page__body h3 {
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body h2 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 34px;
+    margin-bottom: 12px;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body h3 {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: rgba(239, 239, 239, 0.88);
+  }
+
+  .newsroom-page--investigate .newsroom-page__body p {
+    margin-top: 0;
+    margin-bottom: 18px;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body ul,
+  .newsroom-page--investigate .newsroom-page__body ol {
+    padding-left: 24px;
+    margin-bottom: 18px;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body li {
+    margin-bottom: 11px;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body a {
+    color: #efefef;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body a:hover {
+    color: rgba(239, 239, 239, 0.78);
+  }
+
+  .newsroom-page--investigate .newsroom-page__body a.newsroom-investigate__card,
+  .newsroom-page--investigate .newsroom-page__body a.newsroom-investigate__card:hover,
+  .newsroom-page--investigate .newsroom-page__body a.newsroom-investigate__card:focus,
+  .newsroom-page--investigate .newsroom-page__body a.newsroom-investigate__card:focus-visible {
+    text-decoration: none;
+    color: #efefef;
+  }
+
+  .newsroom-page--investigate .newsroom-page__body > .newsroom-investigate__disclaimer:first-child {
+    margin-top: 0;
+  }
+
+  .newsroom-investigate__disclaimer {
+    max-width: 780px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    line-height: 1.74;
+    color: rgba(239, 239, 239, 0.8);
+    border-left: 2px solid rgba(239, 239, 239, 0.22);
+    padding-left: 18px;
+    margin: 0 auto 30px;
+  }
+
+  .newsroom-investigate__disclaimer--compact {
+    margin-bottom: 32px;
+  }
+
+  .newsroom-investigate__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    max-width: 900px;
+    margin: 10px auto 18px;
+  }
+
+  .newsroom-investigate__card {
+    display: grid;
+    gap: 10px;
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.025);
+    color: #efefef;
+    text-decoration: none;
+  }
+
+  .newsroom-investigate__card strong {
+    font-family: var(--sha-font-display, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .newsroom-investigate__card span {
+    font-family: var(--sha-font-body, Charter, "Bitstream Charter", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif);
+    font-size: 17px;
+    line-height: 1.65;
+    text-decoration: none;
+  }
+
+  .newsroom-investigate__card:hover {
+    border-color: rgba(255, 255, 255, 0.24);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .newsroom-investigate__card:hover strong,
+  .newsroom-investigate__card:hover span,
+  .newsroom-investigate__card:focus strong,
+  .newsroom-investigate__card:focus span,
+  .newsroom-investigate__card:focus-visible strong,
+  .newsroom-investigate__card:focus-visible span {
+    text-decoration: none;
+  }
+
+  .newsroom-investigate__card:focus-visible {
+    outline: 2px solid rgba(239, 239, 239, 0.76);
+    outline-offset: 3px;
+    border-color: rgba(239, 239, 239, 0.32);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .newsroom-investigate__footer-links {
+    width: min(100% - 24px, 780px);
+    margin: 34px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 18px;
+  }
+
+  .newsroom-investigate__footer-links a {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #efefef;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    padding-bottom: 10px;
+  }
+
+  .newsroom-investigate__footer-links a:hover {
+    border-color: rgba(255, 255, 255, 0.36);
+  }
+
+  @media (max-width: 720px) {
+    .newsroom-page--investigate {
+      width: min(100% - 22px, 1040px);
+      padding-top: 44px;
+      padding-bottom: 70px;
+    }
+
+    .newsroom-page--investigate .newsroom-page__body {
+      font-size: 17.5px;
+      line-height: 1.74;
+    }
+
+    .newsroom-page--investigate .newsroom-page__lede {
+      font-size: clamp(20px, 6vw, 26px);
+    }
+
+    .newsroom-page--investigate .newsroom-page__body h2 {
+      font-size: 12px;
+    }
+
+    .newsroom-page--investigate .newsroom-page__body h3,
+    .newsroom-investigate__card strong,
+    .newsroom-investigate__footer-links a {
+      font-size: 11px;
+    }
+
+    .newsroom-investigate__grid,
+    .newsroom-investigate__footer-links {
+      grid-template-columns: 1fr;
+    }
+
+    .newsroom-investigate__card span {
+      font-size: 16px;
+    }
+  }
+</style>

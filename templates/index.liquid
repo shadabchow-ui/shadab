@@ -1,31 +1,76 @@
+{% assign breaking_blog = blogs['breaking-news'] %}
+{% assign submit_tip_page = pages['submit-a-tip'] %}
+{% assign about_page = pages['about-shadab-chow'] %}
+{% assign contact_page = pages['contact'] %}
+{% assign editorial_page = pages['editorial-standards'] %}
+{% assign corrections_page = pages['corrections-policy'] %}
+{% assign privacy_page = pages['privacy-policy'] %}
+{% assign investigate_page = pages['what-we-investigate'] %}
+
 {% assign breaking_blog_url = '/blogs/breaking-news' %}
-{% assign archives_url = '/pages/archives' %}
+{% if breaking_blog != blank %}
+  {% assign breaking_blog_url = breaking_blog.url %}
+{% endif %}
+
 {% assign submit_tip_url = '/pages/submit-a-tip' %}
+{% if submit_tip_page != blank %}
+  {% assign submit_tip_url = submit_tip_page.url %}
+{% endif %}
+
 {% assign about_url = '/pages/about-shadab-chow' %}
+{% if about_page != blank %}
+  {% assign about_url = about_page.url %}
+{% endif %}
+
 {% assign contact_url = '/pages/contact' %}
+{% if contact_page != blank %}
+  {% assign contact_url = contact_page.url %}
+{% endif %}
+
 {% assign editorial_url = '/pages/editorial-standards' %}
+{% if editorial_page != blank %}
+  {% assign editorial_url = editorial_page.url %}
+{% endif %}
+
 {% assign corrections_url = '/pages/corrections-policy' %}
+{% if corrections_page != blank %}
+  {% assign corrections_url = corrections_page.url %}
+{% endif %}
+
 {% assign privacy_url = '/pages/privacy-policy' %}
+{% if privacy_page != blank %}
+  {% assign privacy_url = privacy_page.url %}
+{% endif %}
+
+{% assign investigate_url = '/pages/what-we-investigate' %}
+{% if investigate_page != blank %}
+  {% assign investigate_url = investigate_page.url %}
+{% endif %}
 
 <div class="newsroom-home">
   <section class="hero">
     <div class="hero-copy">
-      <div class="hero-kicker">Independent publisher · Breaking news · Public accountability</div>
-      <h1 class="hero-hed">Breaking news, crime coverage, corruption reporting, and public-interest accountability by Shadab Chow.</h1>
-      <p class="hero-sub">A direct publisher homepage built to surface the mission, clarify what the site covers, and route readers quickly to reporting, trust pages, and tip submission.</p>
+      <div class="hero-kicker">Independent public-interest reporting</div>
+      <h1 class="hero-hed">crime, corruption,<br>&amp; investigative journalism.</h1>
+      <p class="hero-sub">We cover developing stories where facts matter and public interest is high: crime, corruption, cyber crime, civil rights, public safety, institutional misconduct, and government accountability.</p>
+      <p class="hero-sub hero-sub--secondary">Our mission is to report what happened, explain why it matters, verify before amplifying, and correct the record when new facts emerge.</p>
       <div class="hero-ctas">
         <a href="{{ breaking_blog_url }}" class="btn btn-primary">Breaking News</a>
         <a href="{{ submit_tip_url }}" class="btn btn-secondary">Submit a Tip</a>
       </div>
     </div>
+  </section>
 
-    <div class="hero-panel">
-      <div class="hero-panel__label">Publisher Focus</div>
-      <ul class="hero-panel__list">
-        <li>Independent reporting and verified updates</li>
-        <li>Clear separation between facts, claims, and developing details</li>
-        <li>Reader pathways to archives, standards, corrections, and contact</li>
-      </ul>
+  <section class="publisher-focus">
+    <div class="inner section-grid">
+      <div>
+        <div class="label">Publisher Focus</div>
+        <h2 class="section-title">Public-interest reporting with an investigative lens</h2>
+      </div>
+      <div class="body-copy">
+        <p>Our reporting follows stories involving real-world impact, public safety, misuse of power, criminal allegations, institutional failure, and reader-submitted evidence.</p>
+        <p>Coverage is built around verified information, clear sourcing, careful language, and updates when facts change.</p>
+      </div>
     </div>
   </section>
 
@@ -33,11 +78,11 @@
     <div class="inner section-grid">
       <div>
         <div class="label">Mission</div>
-        <h2 class="section-title">The site exists to document what happened, explain why it matters, and state plainly when key facts are still being verified.</h2>
+        <h2 class="section-title">Report facts. Follow evidence. Hold power accountable.</h2>
       </div>
       <div class="body-copy">
-        <p>Coverage is centered on breaking developments, crime, corruption, public accountability, submitted evidence, and developing public-interest stories that need context instead of noise.</p>
-        <p>It is a publisher platform, not a storefront. Readers should be able to move from the homepage into reporting, archives, editorial policies, and tip submission without digging through low-value filler.</p>
+        <p>This publication exists to document important events, examine systems that affect everyday people, and give readers clear context around fast-moving public-interest stories.</p>
+        <p>This site does not publish rumors as fact. Allegations are labeled as allegations. Official statements are identified as official statements. Corrections, updates, contact information, and editorial standards remain visible so readers can evaluate the work directly.</p>
       </div>
     </div>
   </section>
@@ -48,19 +93,39 @@
       <div class="coverage-grid">
         <article class="coverage-card">
           <h3>Breaking News</h3>
-          <p>Fast-moving stories, major developments, and timely updates with clear status labeling.</p>
+          <p>Fast-moving public-interest developments, emergency incidents, public-safety alerts, official updates, and verified reporting as events unfold.</p>
         </article>
         <article class="coverage-card">
-          <h3>Crime and Public Safety</h3>
-          <p>Coverage that keeps allegations, arrests, and confirmed facts clearly separated.</p>
+          <h3>Crime &amp; Community Safety</h3>
+          <p>Coverage of arrests, charges, investigations, violent incidents, community safety, court developments, and official statements with careful distinction between claims and confirmed facts.</p>
         </article>
         <article class="coverage-card">
-          <h3>Corruption and Accountability</h3>
-          <p>Reporting focused on misuse of power, public records, institutional failures, and scrutiny.</p>
+          <h3>Cyber Crime &amp; Digital Threats</h3>
+          <p>Reporting on scams, hacking incidents, online exploitation, data breaches, digital fraud, cyber-enabled crime, and the systems that leave people exposed.</p>
         </article>
         <article class="coverage-card">
-          <h3>Exclusive Footage and Tips</h3>
-          <p>Reader-submitted documents, media, and leads reviewed for public-interest relevance.</p>
+          <h3>Civil Rights and Community Impact</h3>
+          <p>Stories involving discrimination, abuse of authority, free speech, due process, housing, policing, public services, and the rights of people affected by powerful institutions.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>Public Corruption and Misconduct</h3>
+          <p>Coverage focused on misuse of public office, conflicts of interest, institutional failures, misconduct allegations, public records, and accountability at every level.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>White-Collar Crime and Fraud</h3>
+          <p>Reporting on financial deception, corporate misconduct, fraud allegations, consumer harm, government waste, and cases where money, influence, and power intersect.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>Criminal Networks and Public Accountability</h3>
+          <p>Coverage of criminal networks, coordinated fraud, trafficking allegations, community impact, and cross-border accountability when there is clear public-interest value.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>Extremism and Public Safety</h3>
+          <p>Careful reporting on extremist threats, public-safety failures, official response, court records, and community impact without glorifying perpetrators.</p>
+        </article>
+        <article class="coverage-card">
+          <h3>Tips &amp; Source Documents</h3>
+          <p>Reader-submitted documents, public records, photos, timelines, corrections, and leads reviewed for authenticity, public-interest value, privacy concerns, and editorial relevance before publication.</p>
         </article>
       </div>
     </div>
@@ -70,10 +135,11 @@
     <div class="inner section-grid">
       <div>
         <div class="label">Editorial Approach</div>
-        <h2 class="section-title">Independent reporting with trust signals that are easy to find.</h2>
+        <h2 class="section-title">Independent. Careful. Accountable.</h2>
       </div>
       <div class="body-copy">
-        <p>Readers should be able to reach editorial standards, corrections, privacy, and contact pages directly from the public homepage. That improves clarity for both audiences and policy review.</p>
+        <p>We report with a clear standard: separate confirmed facts from allegations, cite sources where possible, avoid unnecessary sensationalism, and update stories when the record changes.</p>
+        <p>The site prioritizes transparency through visible editorial standards, correction policies, contact options, privacy information, and tip-submission paths.</p>
         <div class="trust-links">
           <a href="{{ editorial_url }}">Editorial Standards</a>
           <a href="{{ corrections_url }}">Corrections Policy</a>
@@ -91,22 +157,22 @@
         <a class="cta-card" href="{{ breaking_blog_url }}">
           <span class="cta-card__label">Read</span>
           <strong>Breaking News</strong>
-          <span>Go straight to the primary reporting stream.</span>
+          <span>Follow the latest reporting, developing stories, and public-interest updates.</span>
         </a>
-        <a class="cta-card" href="{{ archives_url }}">
+        <a class="cta-card" href="{{ investigate_url }}">
           <span class="cta-card__label">Browse</span>
-          <strong>Archives</strong>
-          <span>Find older coverage and topic history.</span>
+          <strong>What We Investigate</strong>
+          <span>Explore our reporting beats across corruption, civil rights, cyber crime, community safety, criminal networks, and public accountability.</span>
         </a>
         <a class="cta-card" href="{{ submit_tip_url }}">
           <span class="cta-card__label">Send</span>
           <strong>Submit a Tip</strong>
-          <span>Share documents, footage, and public-interest leads.</span>
+          <span>Share documents, public records, timelines, corrections, and leads for editorial review.</span>
         </a>
         <a class="cta-card" href="{{ about_url }}">
           <span class="cta-card__label">About</span>
-          <strong>About Shadab Chow</strong>
-          <span>Understand the site, mission, and editorial purpose.</span>
+          <strong>About the Publisher</strong>
+          <span>Learn about the publisher, the mission behind the newsroom, and the editorial approach guiding this site.</span>
         </a>
       </div>
     </div>

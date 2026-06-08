@@ -27,7 +27,9 @@ body.index {
   font-family: var(--body-serif);
   font-size: 18px;
   line-height: 1.7;
-  background: var(--black);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 32rem),
+    linear-gradient(180deg, #050505 0%, #0b0b0b 42%, #000000 100%);
   color: var(--white);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -73,10 +75,7 @@ body.index::before {
 }
 
 .newsroom-home .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.14fr) minmax(280px, 0.7fr);
-  align-items: center;
-  gap: 28px;
+  display: block;
   padding: 88px 52px 72px;
   max-width: 1160px;
   margin: 0 auto;
@@ -111,7 +110,12 @@ body.index::before {
 
 .newsroom-home .hero-sub {
   max-width: 44ch;
-  margin: 0 0 30px;
+  margin: 0 0 18px;
+}
+
+.newsroom-home .hero-sub--secondary {
+  max-width: 52ch;
+  margin-bottom: 30px;
 }
 
 .newsroom-home .hero-ctas {
@@ -156,26 +160,13 @@ body.index::before {
   color: var(--white);
 }
 
-.hero-panel,
 .coverage-card,
 .cta-card {
   border: 1px solid var(--border0);
   background: var(--surface0);
 }
 
-.hero-panel {
-  padding: 28px 30px;
-}
-
-.hero-panel__list {
-  margin: 18px 0 0;
-  padding-left: 18px;
-}
-
-.hero-panel__list li + li {
-  margin-top: 10px;
-}
-
+.publisher-focus,
 .mission,
 .coverage,
 .standards,
@@ -183,6 +174,7 @@ body.index::before {
   padding: 88px 0;
 }
 
+.publisher-focus,
 .mission,
 .standards {
   background: var(--surface0);
@@ -220,7 +212,7 @@ body.index::before {
 
 .coverage-grid,
 .cta-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .coverage-card,
@@ -271,6 +263,10 @@ body.index::before {
   flex-direction: column;
   gap: 10px;
   transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.cta-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .cta-card:hover {

@@ -4,49 +4,135 @@
 {% endcomment %}
 
 <footer class="footer">
+  {% assign editorial_page = pages['editorial-standards'] %}
+  {% assign corrections_page = pages['corrections-policy'] %}
+  {% assign legal_page = pages['legal-and-advertising'] %}
+  {% assign privacy_page = pages['privacy-policy'] %}
+  {% assign terms_page = pages['terms-of-use'] %}
+  {% assign copyright_page = pages['copyright-policy'] %}
+  {% assign advertise_page = pages['advertise-sponsor'] %}
+  {% assign contact_page = pages['contact'] %}
+  {% assign submit_tip_page = pages['submit-a-tip'] %}
+  {% assign about_page = pages['about-shadab-chow'] %}
+  {% assign trust_policies_page = pages['trust-and-policies'] %}
+  {% assign source_attribution_page = pages['source-attribution-policy'] %}
+  {% assign public_records_page = pages['public-records-policy'] %}
+  {% assign non_affiliation_page = pages['non-affiliation-disclaimer'] %}
+  {% assign investigate_page = pages['what-we-investigate'] %}
+  {% assign extremism_public_safety_page = pages['extremism-public-safety'] %}
+  {% assign counterintelligence_page = pages['counterintelligence'] %}
+  {% assign cyber_crime_page = pages['cyber-crime'] %}
+  {% assign public_corruption_page = pages['public-corruption'] %}
+  {% assign civil_rights_page = pages['civil-rights'] %}
+  {% assign criminal_networks_page = pages['criminal-networks'] %}
+  {% assign white_collar_page = pages['white-collar-crime'] %}
+  {% assign crime_community_safety_page = pages['crime-community-safety'] %}
+  {% assign high_risk_threats_page = pages['high-risk-threats'] %}
+
+  {% assign editorial_url = '/pages/editorial-standards' %}
+  {% if editorial_page != blank %}{% assign editorial_url = editorial_page.url %}{% endif %}
+  {% assign corrections_url = '/pages/corrections-policy' %}
+  {% if corrections_page != blank %}{% assign corrections_url = corrections_page.url %}{% endif %}
+  {% assign legal_url = '/pages/legal-and-advertising' %}
+  {% if legal_page != blank %}{% assign legal_url = legal_page.url %}{% endif %}
+  {% assign privacy_url = '/pages/privacy-policy' %}
+  {% if privacy_page != blank %}{% assign privacy_url = privacy_page.url %}{% endif %}
+  {% assign terms_url = '/pages/terms-of-use' %}
+  {% if terms_page != blank %}{% assign terms_url = terms_page.url %}{% endif %}
+  {% assign copyright_url = '/pages/copyright-policy' %}
+  {% if copyright_page != blank %}{% assign copyright_url = copyright_page.url %}{% endif %}
+  {% assign advertise_url = '/pages/advertise-sponsor' %}
+  {% if advertise_page != blank %}{% assign advertise_url = advertise_page.url %}{% endif %}
+  {% assign contact_url = '/pages/contact' %}
+  {% if contact_page != blank %}{% assign contact_url = contact_page.url %}{% endif %}
+  {% assign submit_tip_url = '/pages/submit-a-tip' %}
+  {% if submit_tip_page != blank %}{% assign submit_tip_url = submit_tip_page.url %}{% endif %}
+  {% assign about_url = '/pages/about-shadab-chow' %}
+  {% if about_page != blank %}{% assign about_url = about_page.url %}{% endif %}
+  {% assign trust_policies_url = '/pages/trust-and-policies' %}
+  {% if trust_policies_page != blank %}{% assign trust_policies_url = trust_policies_page.url %}{% endif %}
+  {% assign source_attribution_url = '/pages/source-attribution-policy' %}
+  {% if source_attribution_page != blank %}{% assign source_attribution_url = source_attribution_page.url %}{% endif %}
+  {% assign public_records_url = '/pages/public-records-policy' %}
+  {% if public_records_page != blank %}{% assign public_records_url = public_records_page.url %}{% endif %}
+  {% assign non_affiliation_url = '/pages/non-affiliation-disclaimer' %}
+  {% if non_affiliation_page != blank %}{% assign non_affiliation_url = non_affiliation_page.url %}{% endif %}
+  {% assign investigate_url = '/pages/what-we-investigate' %}
+  {% if investigate_page != blank %}{% assign investigate_url = investigate_page.url %}{% endif %}
+  {% assign extremism_public_safety_url = '/pages/extremism-public-safety' %}
+  {% if extremism_public_safety_page != blank %}{% assign extremism_public_safety_url = extremism_public_safety_page.url %}{% endif %}
+  {% assign counterintelligence_url = '/pages/counterintelligence' %}
+  {% if counterintelligence_page != blank %}{% assign counterintelligence_url = counterintelligence_page.url %}{% endif %}
+  {% assign cyber_crime_url = '/pages/cyber-crime' %}
+  {% if cyber_crime_page != blank %}{% assign cyber_crime_url = cyber_crime_page.url %}{% endif %}
+  {% assign public_corruption_url = '/pages/public-corruption' %}
+  {% if public_corruption_page != blank %}{% assign public_corruption_url = public_corruption_page.url %}{% endif %}
+  {% assign civil_rights_url = '/pages/civil-rights' %}
+  {% if civil_rights_page != blank %}{% assign civil_rights_url = civil_rights_page.url %}{% endif %}
+  {% assign criminal_networks_url = '/pages/criminal-networks' %}
+  {% if criminal_networks_page != blank %}{% assign criminal_networks_url = criminal_networks_page.url %}{% endif %}
+  {% assign white_collar_url = '/pages/white-collar-crime' %}
+  {% if white_collar_page != blank %}{% assign white_collar_url = white_collar_page.url %}{% endif %}
+  {% assign crime_community_safety_url = '/pages/crime-community-safety' %}
+  {% if crime_community_safety_page != blank %}{% assign crime_community_safety_url = crime_community_safety_page.url %}{% endif %}
+  {% assign high_risk_threats_url = '/pages/high-risk-threats' %}
+  {% if high_risk_threats_page != blank %}{% assign high_risk_threats_url = high_risk_threats_page.url %}{% endif %}
+
   <div class="container footer-menu-wrap footer-publisher-shell">
     <div class="footer-publisher-grid">
       <div class="footer-publisher-brand">
-        <p class="footer-brand-line">{{ shop.name }}</p>
-        <p class="footer-mission">Independent publishing focused on breaking news, crime, corruption, public accountability, submitted evidence, and developing public-interest stories.</p>
+        <p class="footer-brand-line">Conquer New Heights</p>
+        <p class="footer-mission">Independent reporting on crime, corruption, civil rights, public accountability, and investigative journalism.</p>
       </div>
 
-      <nav class="footer-link-group" aria-label="News links">
-        <h6>News</h6>
+      <nav class="footer-link-group" aria-label="Investigation links">
+        <h6>Investigations</h6>
         <ul>
-          <li><a href="/blogs/breaking-news">Breaking News</a></li>
-          <li><a href="/pages/archives">Archives</a></li>
-          <li><a href="/pages/submit-a-tip">Submit a Tip</a></li>
+          <li><a href="/blogs/crime">Investigations</a></li>
+          <li><a href="{{ investigate_url }}">What We Investigate</a></li>
+          <li><a href="{{ extremism_public_safety_url }}">Extremism &amp; Public Safety</a></li>
+          <li><a href="{{ counterintelligence_url }}">Counterintelligence</a></li>
+          <li><a href="{{ cyber_crime_url }}">Cyber Crime</a></li>
+          <li><a href="{{ public_corruption_url }}">Public Corruption</a></li>
+          <li><a href="{{ civil_rights_url }}">Civil Rights</a></li>
+          <li><a href="{{ criminal_networks_url }}">Criminal Networks &amp; Public Accountability</a></li>
+          <li><a href="{{ white_collar_url }}">White-Collar Crime</a></li>
+          <li><a href="{{ crime_community_safety_url }}">Crime &amp; Community Safety</a></li>
+          <li><a href="{{ high_risk_threats_url }}">High-Risk Threats &amp; Emergency Preparedness</a></li>
         </ul>
       </nav>
 
-      <nav class="footer-link-group" aria-label="About and trust links">
-        <h6>About and Trust</h6>
+      <nav class="footer-link-group" aria-label="Start here links">
+        <h6>Start Here</h6>
         <ul>
-          <li><a href="/pages/about-shadab-chow">About Shadab Chow</a></li>
-          <li><a href="/pages/contact">Contact</a></li>
-          <li><a href="/pages/editorial-standards">Editorial Standards</a></li>
-          <li><a href="/pages/corrections-policy">Corrections Policy</a></li>
-          {% if shop.customer_accounts_enabled %}
-            <li><a href="/account">Account</a></li>
-          {% endif %}
+          <li><a href="/">Home</a></li>
+          <li><a href="{{ about_url }}">About</a></li>
+          <li><a href="{{ contact_url }}">Contact</a></li>
+          <li><a href="{{ submit_tip_url }}">Submit a Tip</a></li>
         </ul>
       </nav>
 
-      <nav class="footer-link-group" aria-label="Legal and advertising links">
-        <h6>Legal and Advertising</h6>
+      <nav class="footer-link-group" aria-label="Trust and policy links">
+        <h6>Trust and Policies</h6>
         <ul>
-          <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
-          <li><a href="/pages/terms-of-use">Terms of Use</a></li>
-          <li><a href="/pages/copyright-policy">Copyright / DMCA Policy</a></li>
-          <li><a href="/pages/advertise-sponsor">Advertise/Sponsor</a></li>
+          <li><a href="{{ trust_policies_url }}">Trust and Policies</a></li>
+          <li><a href="{{ editorial_url }}">Editorial Standards</a></li>
+          <li><a href="{{ corrections_url }}">Corrections Policy</a></li>
+          <li><a href="{{ source_attribution_url }}">Source Attribution Policy</a></li>
+          <li><a href="{{ public_records_url }}">Public Records Policy</a></li>
+          <li><a href="{{ non_affiliation_url }}">Non-Affiliation Disclaimer</a></li>
+          <li><a href="{{ legal_url }}">Legal and Advertising</a></li>
+          <li><a href="{{ privacy_url }}">Privacy Policy</a></li>
+          <li><a href="{{ terms_url }}">Terms of Use</a></li>
+          <li><a href="{{ copyright_url }}">Copyright / DMCA Policy</a></li>
+          <li><a href="{{ advertise_url }}">Advertise / Sponsor</a></li>
         </ul>
       </nav>
     </div>
 
     <div class="sixteen columns row footer_credits footer-publisher-credits">
       <p class="credits">
-        &copy; {{ "now" | date: "%Y" }} {{ shop.name | link_to: '/' }}.
+        &copy; {{ "now" | date: "%Y" }} <a href="/">ShadabChow.com</a>. Conquer New Heights.
         {{ section.settings.copyright_text }}
       </p>
     </div>
@@ -71,13 +157,13 @@
   .footer-link-group h6,
   .footer-link-group a,
   .footer-publisher-credits .credits {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: var(--sha-font-display, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, "Times New Roman", serif);
   }
 
   .footer-brand-line {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #efefef;
     margin-bottom: 14px;
@@ -92,9 +178,9 @@
   }
 
   .footer-link-group h6 {
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: #efefef;
     margin-bottom: 14px;
@@ -113,7 +199,7 @@
   .footer-link-group a {
     color: rgba(239, 239, 239, 0.72);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
   }
 

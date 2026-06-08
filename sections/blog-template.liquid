@@ -307,9 +307,13 @@
 
 {% assign archive_heading = blog.title | append: ' Archive' %}
 {% assign archive_subtitle = 'This archive leads with the top report first, then supporting developments, then the wider newsroom file. Story labels, urgency states, beat tags, deck copy, and updated dates are shown where the live article data provides them.' %}
+{% assign archive_source_label = 'Archive source: ' | append: blog.title %}
 {% if blog.handle == 'breaking-news' %}
   {% assign archive_heading = 'Breaking News and Investigations' %}
   {% assign archive_subtitle = 'The newsroom archive leads with the most urgent report first, then supporting developments, then the wider reporting file. Story labels, urgency states, beat tags, deck copy, and updated dates are shown where the live article data provides them.' %}
+{% elsif blog.handle == 'crime' %}
+  {% assign archive_subtitle = 'Independent coverage of crime, court cases, federal investigations, public corruption, trafficking cases, violent crime, cybercrime, civil rights matters, and law-enforcement developments. This archive brings source-based reporting, case updates, and public accountability stories into one place.' %}
+  {% assign archive_source_label = 'Source-based crime coverage' %}
 {% endif %}
 
 <div class="blog-grid-wrap">
@@ -319,7 +323,7 @@
     <p class="blog-grid-subtitle">{{ archive_subtitle }}</p>
     <div class="blog-grid-notes">
       <span class="blog-grid-note">Lead story hierarchy enabled</span>
-      <span class="blog-grid-note">Archive source: {{ blog.title }}</span>
+      <span class="blog-grid-note">{{ archive_source_label }}</span>
       <span class="blog-grid-note">Updated dates shown when provided</span>
     </div>
   </div>

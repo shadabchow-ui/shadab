@@ -901,15 +901,6 @@ li.dropdown_link--vertical:last-of-type .vertical-menu_sub-submenu {
   cursor: pointer;
 }
 
-button.mobile_nav {
-  background: transparent;
-  border: 0;
-  color: inherit;
-  padding: 0;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
 .mobile_nav div span {
   display: block !important;
   position: absolute !important;
@@ -1132,9 +1123,9 @@ select.currencies {
   padding-bottom: 0;
   cursor: pointer;
   @if (lightness(#000000) > 50) {
-    background-image: url(//shadabchow.com/cdn/shop/t/2/assets/select.png?v=163443801653745187891765920912); // Lighter background
+    background-image: url(//shadabchow.com/cdn/shop/t/11/assets/select.png?v=163443801653745187891780582691); // Lighter background
   } @else {
-    background-image: url(//shadabchow.com/cdn/shop/t/2/assets/select_light.png?v=153136132513795776861765920912); // Darker background
+    background-image: url(//shadabchow.com/cdn/shop/t/11/assets/select_light.png?v=153136132513795776861780582691); // Darker background
   }
   @include respond-to('medium'){
     font-size: 16px;
@@ -2745,7 +2736,7 @@ select::-ms-expand {
 }
 
 select {
-  background: #fff url(//shadabchow.com/cdn/shop/t/2/assets/select.png?v=163443801653745187891765920912) no-repeat 96% 50%;
+  background: #fff url(//shadabchow.com/cdn/shop/t/11/assets/select.png?v=163443801653745187891780582691) no-repeat 96% 50%;
   background-size: 18px 12px;
   
     padding: 8px 14px 8px;
@@ -4142,7 +4133,7 @@ div.section { margin: 10px 0; }
   height: 0;
   width: 0;
   transition: all 0.3s linear;
-  background: url('//shadabchow.com/cdn/shop/t/2/assets/loader.gif') center center no-repeat;
+  background: url('//shadabchow.com/cdn/shop/t/11/assets/loader.gif') center center no-repeat;
   background-size: 32px 32px;
   margin: 0 auto;
 }
@@ -6730,14 +6721,13 @@ or wrap each row of columns in a <div class="row"> */
 
 @font-face {
   font-family: 'turbo';
-  src: url('//shadabchow.com/cdn/shop/t/2/assets/turbo.eot?v=22446298993688963281765920912');
-  src: url('//shadabchow.com/cdn/shop/t/2/assets/turbo.eot?v=22446298993688963281765920912') format('embedded-opentype'),
-       url('//shadabchow.com/cdn/shop/t/2/assets/turbo.woff?v=1876293967402835401765920912') format('woff'),
-       url('//shadabchow.com/cdn/shop/t/2/assets/turbo.ttf?v=35221075142360648371765920912') format('truetype'),
-       url('//shadabchow.com/cdn/shop/t/2/assets/turbo.svg?v=35158008340974890511765920912') format('svg');
+  src: url('//shadabchow.com/cdn/shop/t/11/assets/turbo.eot?v=22446298993688963281780582691');
+  src: url('//shadabchow.com/cdn/shop/t/11/assets/turbo.eot?v=22446298993688963281780582691') format('embedded-opentype'),
+       url('//shadabchow.com/cdn/shop/t/11/assets/turbo.woff?v=1876293967402835401780582691') format('woff'),
+       url('//shadabchow.com/cdn/shop/t/11/assets/turbo.ttf?v=35221075142360648371780582691') format('truetype'),
+       url('//shadabchow.com/cdn/shop/t/11/assets/turbo.svg?v=35158008340974890511780582691') format('svg');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 
 [class^="icon-"]:before, [class*=" icon-"]:before {
@@ -7094,7 +7084,7 @@ footer .social_icons a:active, footer .social_icons a:hover {
   color: #ffffff;
 
   
-    background: url(//shadabchow.com/cdn/shop/t/2/assets/password-page-background.jpg?v=134257309994338270501765920912) center center;
+    background: url(//shadabchow.com/cdn/shop/t/11/assets/password-page-background.jpg?v=134257309994338270501780582691) center center;
   
 
   
@@ -8851,27 +8841,3 @@ $delay: 0;
 
 /* #Custom Styles
 ================================================== */
-
-.no-ad-zone {
-  position: relative;
-}
-
-.no-ad-zone--sensitive,
-.no-ad-zone--trust,
-.no-ad-zone--form,
-.no-ad-zone--tipline {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.no-ad-zone--sensitive + .no-ad-zone--sensitive,
-.no-ad-zone--trust .no-ad-zone--tipline,
-.no-ad-zone--form form,
-.no-ad-zone--tipline form {
-  margin-top: 18px;
-}
-
-.no-ad-zone--form input[type="submit"],
-.no-ad-zone--tipline input[type="submit"] {
-  margin-top: 12px;
-}

@@ -1,13 +1,13 @@
 <a name="pagecontent" id="pagecontent"></a>
 
 <div class="sixteen columns clearfix collection_nav">
-  <h1 class="collection_title">{{ 'general.404.title' | t }}</h1>
+  <h1>Page Not Found</h1>
 </div>
 
 <div class="sixteen columns">
   <div class="section clearfix">
     <p class="quote">
-      {{ 'general.404.subtext' | t }}
+      The page you requested could not be found. It may have moved, been updated, or the link may be incorrect.
     </p>
   </div>
 </div>
@@ -15,12 +15,14 @@
 <div class="section clearfix search_page">
   <div class="sixteen columns center">
     <p class="extra_padding">
-      {{ 'general.404.continue_shopping_html' | t }}
+      Try searching, or go to <a href="/">Home</a>, <a href="/blogs/breaking-news">Breaking News</a>, <a href="/pages/contact">Contact</a>, <a href="/pages/submit-a-tip">Submit a Tip</a>, or <a href="/pages/editorial-standards">Editorial Standards</a>.
     </p>
   </div>
   <div class="six columns offset-by-five">
-    <form class="search" action="/search">
-      <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}"  value="{{ search.terms }}" />
+    <form class="search" action="/search" role="search">
+      <input type="hidden" name="type" value="article,page" />
+      <label for="search-404" class="hidden-label">Search stories and pages</label>
+      <input id="search-404" type="search" name="q" class="search_box" placeholder="Search stories and pages" value="{{ search.terms }}" autocapitalize="off" autocomplete="off" autocorrect="off" />
     </form>
   </div>
 </div>

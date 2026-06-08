@@ -7,7 +7,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="cleartype" content="on">
-    <meta name="robots" content="index,follow">
+    {% comment %}Conditional robots: noindex all non-publisher Shopify utility routes (cart, customers, product, collection, search, 404, password, gift_card). Publisher routes (index, blog, article, page) remain indexed.{% endcomment %}
+    {% if template contains 'index' or template contains 'blog' or template contains 'article' or template contains 'page' %}
+      <meta name="robots" content="index,follow">
+    {% else %}
+      <meta name="robots" content="noindex,nofollow">
+    {% endif %}
 
     <!-- Custom Fonts -->
     {% if settings.logo_font contains 'Google' or settings.headline_font contains 'Google' or settings.nav_font contains 'Google' or settings.slideshow_subtitle_font contains 'Google' or settings.slideshow_headline_font contains 'Google' or settings.regular_font contains 'Google' %}
@@ -29,10 +34,58 @@
     </script>
 
     {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %}{% endif %}
-    <title>{% if template contains "index" %}{{ page_title }}{% else %}{{ page_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}{% unless page_title contains shop.name %} - {{ shop.name }}{% endunless %}{% endif %}</title>
+    {% assign meta_title = page_title %}
+    {% assign meta_description = page_description %}
+    {% if template contains 'page' and page != blank %}
+      {% case page.handle %}
+        {% when 'what-we-investigate' %}
+          {% assign meta_title = 'What We Investigate' %}
+          {% assign meta_description = 'What We Investigate explains this publication\'s core reporting beats, editorial standards, tip-review process, sensitive-content boundaries, and public-interest approach to accountability journalism.' %}
+        {% when 'extremism-public-safety' %}
+          {% assign meta_title = 'Extremism & Public Safety' %}
+          {% assign meta_description = 'Extremism and public-safety coverage examines threats, attacks, prosecutions, community impact, official response, and civil-liberties concerns without amplifying propaganda or tactical detail.' %}
+        {% when 'terrorism' %}
+          {% assign meta_title = 'Extremism & Public Safety' %}
+          {% assign meta_description = 'Extremism and public-safety coverage examines threats, attacks, prosecutions, community impact, official response, and civil-liberties concerns without amplifying propaganda or tactical detail.' %}
+        {% when 'counterintelligence' %}
+          {% assign meta_title = 'Counterintelligence Reporting' %}
+          {% assign meta_description = 'Counterintelligence coverage examines foreign influence, espionage allegations, sanctions, public accountability, institutional response, and civil-liberties concerns through a journalism lens.' %}
+        {% when 'cyber-crime' %}
+          {% assign meta_title = 'Cyber Crime Reporting' %}
+          {% assign meta_description = 'Cyber Crime coverage explains scams, breaches, ransomware impact, platform abuse, digital fraud, and public-sector security failures without publishing technical instructions that could enable harm.' %}
+        {% when 'public-corruption' %}
+          {% assign meta_title = 'Public Corruption Reporting' %}
+          {% assign meta_description = 'Public corruption coverage focuses on misuse of office, public funds, conflicts of interest, procurement failures, and institutional accountability — using records and careful sourcing to separate what is known from what remains disputed.' %}
+        {% when 'civil-rights' %}
+          {% assign meta_title = 'Civil Rights Reporting' %}
+          {% assign meta_description = 'Civil-rights coverage examines access, discrimination allegations, abuse of authority, hate-crime cases, and the lived impact of public systems, while separating documented findings from unresolved claims.' %}
+        {% when 'criminal-networks' %}
+          {% assign meta_title = 'Criminal Networks & Public Accountability' %}
+          {% assign meta_description = 'Coverage of criminal networks focuses on documented cases, public harm, money flows, intimidation allegations, trafficking claims, and institutional response without glamorizing groups or explaining criminal methods.' %}
+        {% when 'organized-crime' %}
+          {% assign meta_title = 'Criminal Networks & Public Accountability' %}
+          {% assign meta_description = 'Coverage of criminal networks focuses on documented cases, public harm, money flows, intimidation allegations, trafficking claims, and institutional response without glamorizing groups or explaining criminal methods.' %}
+        {% when 'white-collar-crime' %}
+          {% assign meta_title = 'White-Collar Crime Reporting' %}
+          {% assign meta_description = 'White-collar coverage follows fraud, financial misconduct, healthcare schemes, investment claims, corporate accountability, and consumer harm through court records, public documents, and source-based reporting.' %}
+        {% when 'crime-community-safety' %}
+          {% assign meta_title = 'Crime & Community Safety' %}
+          {% assign meta_description = 'Crime and community-safety coverage follows major incidents, court proceedings, official responses, and community impact while avoiding sensationalism and clearly separating allegations from confirmed facts.' %}
+        {% when 'violent-crime' %}
+          {% assign meta_title = 'Crime & Community Safety' %}
+          {% assign meta_description = 'Crime and community-safety coverage follows major incidents, court proceedings, official responses, and community impact while avoiding sensationalism and clearly separating allegations from confirmed facts.' %}
+        {% when 'high-risk-threats' %}
+          {% assign meta_title = 'High-Risk Threats & Emergency Preparedness' %}
+          {% assign meta_description = 'High-risk threat coverage focuses on public warnings, preparedness, institutional accountability, misinformation, prosecutions, and emergency-response questions without publishing operational details that could cause harm.' %}
+        {% when 'wmd' %}
+          {% assign meta_title = 'High-Risk Threats & Emergency Preparedness' %}
+          {% assign meta_description = 'High-risk threat coverage focuses on public warnings, preparedness, institutional accountability, misinformation, prosecutions, and emergency-response questions without publishing operational details that could cause harm.' %}
+      {% endcase %}
+    {% endif %}
+    <title>{% if template contains "index" %}{{ meta_title }}{% else %}{{ meta_title }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}{% endif %}{% unless meta_title contains shop.name %} - {{ shop.name }}{% endunless %}{% endif %}</title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags | escape }}.{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}.{% endif %}" />
+    {% if meta_description %}
+      <meta name="description" content="{{ meta_description | escape }}{% if current_tags %} {{ 'general.meta.tagged_html' | t: tags: meta_tags | escape }}.{% endif %}{% if current_page != 1 %} {{ 'general.meta.page' | t: page_number: current_page }}.{% endif %}" />
     {% endif %}
 
     {% include 'social-meta-info' %}
@@ -122,6 +175,67 @@
 
     <script src="{{ 'app.js' | asset_url }}"></script>
 
+    <script>
+      (function () {
+        function closeNewsletterPopup(event) {
+          var trigger = event.target && event.target.closest && event.target.closest('[data-remodal-action="close"]');
+          if (!trigger || !trigger.closest('[data-remodal-id="newsletter"]')) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+
+          var modal = document.querySelector('[data-remodal-id="newsletter"]');
+          if (window.jQuery && modal && typeof window.jQuery(modal).remodal === 'function') {
+            var instance = window.jQuery(modal).remodal();
+            if (instance && typeof instance.close === 'function') {
+              instance.close();
+              return;
+            }
+          }
+
+          document.documentElement.classList.remove('remodal-is-locked');
+          document.body.classList.remove('remodal-is-locked');
+          document.querySelectorAll('.remodal-wrapper, .remodal-overlay').forEach(function (el) {
+            el.style.display = 'none';
+          });
+        }
+
+        document.addEventListener('click', closeNewsletterPopup, true);
+
+        document.addEventListener('submit', function (event) {
+          var form = event.target;
+          if (!form || !form.closest || !form.closest('[data-remodal-id="newsletter"]')) return;
+
+          var email = form.querySelector('input[type="email"]');
+          if (!email || !email.value || !email.checkValidity()) {
+            return;
+          }
+
+          if (form.classList.contains('contact-form') && window.jQuery) {
+            event.preventDefault();
+
+            var $form = window.jQuery(form);
+            window.jQuery.ajax({
+              type: $form.attr('method') || 'post',
+              url: $form.attr('action') || '/contact',
+              data: $form.serialize(),
+              success: function () {
+                $form.fadeOut('slow', function () {
+                  $form.closest('.newsletter').find('.message').first().html({{ 'general.newsletter_form.success_text' | t | json }});
+                });
+              },
+              error: function () {
+                var challenge = form.querySelector('input[name="challenge"]');
+                if (challenge) challenge.value = 'true';
+                form.submit();
+              }
+            });
+          }
+        }, true);
+      })();
+    </script>
+
+
     {% comment %}reveal script removed — sections always visible{% endcomment %}
 
     {% if settings.show_multiple_currencies %}{% include 'currencies' %}{% endif %}
@@ -149,6 +263,89 @@
     {% endunless %}
 
     <script>{{ settings.custom_scripts }}</script>
+
+
+
+    <script>
+      (function () {
+        // PushOwl/Brevo popup hardening: the app injects its own iframe/DOM outside theme control.
+        // If another floating widget or theme layer sits above it, the close button and email input cannot receive clicks.
+        var PUSHOWL_TERMS = ['pushowl', 'brevo', 'pushengage', 'webpush', 'push-owl'];
+        var BMC_TERMS = ['buymeacoffee', 'bmc-', 'bmc_', 'coffee.com'];
+        var maxZ = '2147483647';
+
+        function textFor(el) {
+          if (!el || !el.getAttribute) return '';
+          return [
+            el.id || '',
+            typeof el.className === 'string' ? el.className : '',
+            el.getAttribute('src') || '',
+            el.getAttribute('name') || '',
+            el.getAttribute('title') || '',
+            el.getAttribute('data-name') || '',
+            el.getAttribute('data-testid') || '',
+            el.getAttribute('aria-label') || ''
+          ].join(' ').toLowerCase();
+        }
+
+        function matchesAny(haystack, terms) {
+          return terms.some(function (term) { return haystack.indexOf(term) !== -1; });
+        }
+
+        function isVisible(el) {
+          if (!el || !el.getBoundingClientRect) return false;
+          var rect = el.getBoundingClientRect();
+          var style = window.getComputedStyle ? window.getComputedStyle(el) : null;
+          return rect.width > 1 && rect.height > 1 && (!style || (style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0'));
+        }
+
+        function isPushOwl(el) {
+          return matchesAny(textFor(el), PUSHOWL_TERMS);
+        }
+
+        function isBmc(el) {
+          return matchesAny(textFor(el), BMC_TERMS);
+        }
+
+        function hardenPushOwlPopup() {
+          var pushowlIsVisible = false;
+          var nodes = document.querySelectorAll('iframe, div, section, aside, form, button, input');
+
+          nodes.forEach(function (el) {
+            if (!isPushOwl(el)) return;
+            if (isVisible(el)) pushowlIsVisible = true;
+            el.style.pointerEvents = 'auto';
+            el.style.zIndex = maxZ;
+            if (el.tagName === 'IFRAME') {
+              el.style.position = el.style.position || 'fixed';
+              el.setAttribute('allow', (el.getAttribute('allow') || '') + '; clipboard-write');
+            }
+          });
+
+          if (!pushowlIsVisible) return;
+
+          // Buy Me a Coffee can inject a floating iframe/widget above app popups. Disable it while PushOwl is open.
+          document.querySelectorAll('iframe, div, section, aside, script').forEach(function (el) {
+            if (!isBmc(el) || isPushOwl(el)) return;
+            if (el.tagName === 'SCRIPT') return;
+            el.setAttribute('data-sha-popup-disabled', 'true');
+            el.style.pointerEvents = 'none';
+            el.style.zIndex = '1';
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', hardenPushOwlPopup);
+        } else {
+          hardenPushOwlPopup();
+        }
+
+        var observer = new MutationObserver(hardenPushOwlPopup);
+        observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['style', 'class', 'src'] });
+        window.addEventListener('load', hardenPushOwlPopup);
+        setInterval(hardenPushOwlPopup, 500);
+      })();
+    </script>
 
     <!-- Buy Me a Coffee -->
     <script

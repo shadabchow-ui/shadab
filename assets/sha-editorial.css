@@ -238,6 +238,47 @@ div.logo img,
   text-transform: uppercase;
 }
 
+
+.newsletter-popup.remodal {
+  overflow: visible !important;
+}
+
+.newsletter-popup .remodal-close {
+  align-items: center;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  display: flex !important;
+  font-family: var(--sha-font-ui);
+  font-size: 22px;
+  height: 44px;
+  justify-content: center;
+  line-height: 1;
+  opacity: 1;
+  pointer-events: auto;
+  position: absolute;
+  right: -14px;
+  text-decoration: none;
+  top: -14px;
+  width: 44px;
+  z-index: 10000;
+}
+
+.newsletter-popup .remodal-close:before,
+.newsletter-popup .remodal-close:after {
+  content: none !important;
+}
+
+.newsletter-popup .remodal-close:focus,
+.newsletter-popup .remodal-close:hover {
+  background: #fff;
+  color: #111;
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 2px;
+}
+
 @media only screen and (max-width: 798px) {
   .main_nav div.logo a {
     padding-top: 8px;
@@ -257,4 +298,154 @@ div.logo img,
   .header_search_form input:active {
     font-size: 20px;
   }
+}
+
+
+/* Compact editorial dropdown overrides */
+.main_nav .dropdown_container.sha-dropdown-container,
+.dropdown_container.sha-dropdown-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: auto;
+  min-width: 210px;
+  max-width: 280px;
+  margin: 0;
+  padding: 0;
+  z-index: 9999;
+}
+
+.main_nav .dropdown.sha-dropdown,
+.dropdown.sha-dropdown {
+  position: relative;
+  width: auto;
+  min-width: 210px;
+  max-width: 280px;
+  margin: 0;
+  padding: 0;
+  background: #111;
+  border: 1px solid #2c2c2c;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.38);
+}
+
+.main_nav .dropdown_content.sha-dropdown-content,
+.dropdown_content.sha-dropdown-content {
+  display: block;
+  width: auto;
+  min-width: 210px;
+  max-width: 280px;
+  padding: 8px 0;
+  background: transparent;
+}
+
+.sha-dropdown-list,
+.sha-dropdown-nested {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sha-dropdown-item,
+.sha-dropdown-subitem {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sha-dropdown-link,
+.sha-dropdown-link:visited {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--sha-font-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.sha-dropdown-link:hover,
+.sha-dropdown-link:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.07);
+  outline: none;
+}
+
+.sha-dropdown-nested {
+  padding: 0 0 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sha-dropdown-link--child {
+  padding-left: 28px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+
+/* Newsletter popup interaction hardening */
+.remodal-overlay {
+  z-index: 2147483000 !important;
+}
+
+.remodal-wrapper {
+  z-index: 2147483001 !important;
+  pointer-events: auto !important;
+}
+
+.newsletter-popup.remodal {
+  z-index: 2147483002 !important;
+  pointer-events: auto !important;
+}
+
+.newsletter-popup.remodal,
+.newsletter-popup.remodal * {
+  pointer-events: auto;
+}
+
+.newsletter-popup input,
+.newsletter-popup button,
+.newsletter-popup a,
+.newsletter-popup textarea,
+.newsletter-popup select {
+  position: relative;
+  z-index: 2;
+}
+
+.newsletter-popup .remodal-close {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  z-index: 2147483003 !important;
+}
+
+
+/* PushOwl/Brevo popup click hardening */
+iframe[src*="pushowl"],
+iframe[src*="PushOwl"],
+iframe[src*="brevo"],
+iframe[src*="Brevo"],
+[id*="pushowl"],
+[class*="pushowl"],
+[id*="PushOwl"],
+[class*="PushOwl"],
+[id*="brevo"],
+[class*="brevo"],
+[id*="Brevo"],
+[class*="Brevo"] {
+  pointer-events: auto !important;
+  z-index: 2147483647 !important;
+}
+
+[data-sha-popup-disabled="true"] {
+  pointer-events: none !important;
+  z-index: 1 !important;
 }

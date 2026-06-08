@@ -1,96 +1,31 @@
-{% for link in linklists[mobile-menu].links %}
-  {% assign normalized_title = link.title | strip | downcase %}
-  {% assign normalized_url = link.url | downcase %}
-  {% assign link_label = link.title %}
-  {% assign hide_link = false %}
-  {% if normalized_url contains '/cart' or normalized_url contains '/checkout' or normalized_url contains '/collections' or normalized_url contains '/products' %}
-    {% assign hide_link = true %}
-  {% endif %}
-  {% if normalized_title == 'cart' or normalized_title == 'checkout' or normalized_title == 'shop' or normalized_title == 'products' or normalized_title == 'collections' %}
-    {% assign hide_link = true %}
-  {% endif %}
-  {% if normalized_url contains '/account' %}
-    {% assign link_label = 'Profile' %}
-  {% endif %}
-  {% unless hide_link %}
-    {% if linklists[link.handle] == empty %}
-      <li data-mobile-dropdown-rel="{{ link.handle }}">
-        {% if link.url == 'http://' or link.url == '' or link.url == '/' or link.url == 'https://' or link.url == '#' %}
-          <a data-no-instant href="{{ link.url }}" class="parent-link--false"{% if linklists[link.handle] != empty %} aria-haspopup="true" aria-expanded="false"{% endif %}>
-            {{ link_label }}
-          </a>
-        {% else %}
-          <a data-no-instant href="{{ link.url }}" class="parent-link--true"{% if linklists[link.handle] != empty %} aria-haspopup="true" aria-expanded="false"{% endif %}>
-            {{ link_label }}
-          </a>
-        {% endif %}
-      </li>
-    {% else %}
-      <li data-mobile-dropdown-rel="{{ link.handle }}" class="sublink">
-        {% if link.url == 'http://' or link.url == '' or link.url == '/' or link.url == 'https://' or link.url == '#' %}
-          <a data-no-instant href="{{ link.url }}" class="parent-link--false" aria-haspopup="true" aria-expanded="false">
-            {{ link_label }} <span class="right icon-down-arrow" aria-hidden="true"></span>
-          </a>
-        {% else %}
-          <a data-no-instant href="{{ link.url }}" class="parent-link--true" aria-haspopup="true" aria-expanded="false">
-            {{ link_label }} <span class="right icon-down-arrow" aria-hidden="true"></span>
-          </a>
-        {% endif %}
-        <ul>
-          {% for child_link in linklists[link.handle].links %}
-            {% assign child_normalized_title = child_link.title | strip | downcase %}
-            {% assign child_normalized_url = child_link.url | downcase %}
-            {% assign child_link_label = child_link.title %}
-            {% assign hide_child_link = false %}
-            {% if child_normalized_url contains '/cart' or child_normalized_url contains '/checkout' or child_normalized_url contains '/collections' or child_normalized_url contains '/products' %}
-              {% assign hide_child_link = true %}
-            {% endif %}
-            {% if child_normalized_title == 'cart' or child_normalized_title == 'checkout' or child_normalized_title == 'shop' or child_normalized_title == 'products' or child_normalized_title == 'collections' %}
-              {% assign hide_child_link = true %}
-            {% endif %}
-            {% if child_normalized_url contains '/account' %}
-              {% assign child_link_label = 'Profile' %}
-            {% endif %}
-            {% unless hide_child_link %}
-              {% if linklists[child_link.handle] == empty %}
-                <li><a href="{{ child_link.url }}">{{ child_link_label }}</a></li>
-              {% else %}
-                <li class="sublink">
-                  {% if child_link.url == 'http://' or child_link.url == '' or child_link.url == '/' or child_link.url == 'https://' or child_link.url == '#' %}
-                    <a data-no-instant href="{{ child_link.url }}" class="parent-link--false">
-                      {{ child_link_label }} <span class="right icon-down-arrow" aria-hidden="true"></span>
-                    </a>
-                  {% else %}
-                    <a data-no-instant href="{{ child_link.url }}" class="parent-link--true">
-                      {{ child_link_label }} <span class="right icon-down-arrow" aria-hidden="true"></span>
-                    </a>
-                  {% endif %}
-                  <ul>
-                    {% for grandchild_link in linklists[child_link.handle].links %}
-                      {% assign grandchild_normalized_title = grandchild_link.title | strip | downcase %}
-                      {% assign grandchild_normalized_url = grandchild_link.url | downcase %}
-                      {% assign grandchild_link_label = grandchild_link.title %}
-                      {% assign hide_grandchild_link = false %}
-                      {% if grandchild_normalized_url contains '/cart' or grandchild_normalized_url contains '/checkout' or grandchild_normalized_url contains '/collections' or grandchild_normalized_url contains '/products' %}
-                        {% assign hide_grandchild_link = true %}
-                      {% endif %}
-                      {% if grandchild_normalized_title == 'cart' or grandchild_normalized_title == 'checkout' or grandchild_normalized_title == 'shop' or grandchild_normalized_title == 'products' or grandchild_normalized_title == 'collections' %}
-                        {% assign hide_grandchild_link = true %}
-                      {% endif %}
-                      {% if grandchild_normalized_url contains '/account' %}
-                        {% assign grandchild_link_label = 'Profile' %}
-                      {% endif %}
-                      {% unless hide_grandchild_link %}
-                        <li><a href="{{ grandchild_link.url }}">{{ grandchild_link_label }}</a></li>
-                      {% endunless %}
-                    {% endfor %}
-                  </ul>
-                </li>
-              {% endif %}
-            {% endunless %}
-          {% endfor %}
-        </ul>
-      </li>
-    {% endif %}
-  {% endunless %}
-{% endfor %}
+{% assign investigations_blog = blogs['crime'] %}
+{% assign about_page = pages['about-shadab-chow'] %}
+{% assign contact_page = pages['contact'] %}
+
+{% assign investigations_blog_url = '/blogs/crime' %}
+{% if investigations_blog != blank %}
+  {% assign investigations_blog_url = investigations_blog.url %}
+{% endif %}
+
+{% assign about_url = '/pages/about-shadab-chow' %}
+{% if about_page != blank %}
+  {% assign about_url = about_page.url %}
+{% endif %}
+
+{% assign contact_url = '/pages/contact' %}
+{% if contact_page != blank %}
+  {% assign contact_url = contact_page.url %}
+{% endif %}
+
+<li data-mobile-dropdown-rel="home">
+  <a data-no-instant href="/" class="parent-link--true">Home</a>
+</li>
+<li data-mobile-dropdown-rel="investigations">
+  <a data-no-instant href="{{ investigations_blog_url }}" class="parent-link--true">Investigations</a>
+</li>
+<li data-mobile-dropdown-rel="about">
+  <a data-no-instant href="{{ about_url }}" class="parent-link--true">About</a>
+</li>
+<li data-mobile-dropdown-rel="contact">
+  <a data-no-instant href="{{ contact_url }}" class="parent-link--true">Contact</a>
+</li>

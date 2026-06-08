@@ -1,18 +1,23 @@
-{% for link in linklists[menu].links %}
-  {% assign normalized_title = link.title | strip | downcase %}
-  {% assign normalized_url = link.url | downcase %}
-  {% assign link_label = link.title %}
-  {% assign hide_link = false %}
-  {% if normalized_url contains '/cart' or normalized_url contains '/checkout' or normalized_url contains '/collections' or normalized_url contains '/products' %}
-    {% assign hide_link = true %}
-  {% endif %}
-  {% if normalized_title == 'cart' or normalized_title == 'checkout' or normalized_title == 'shop' or normalized_title == 'products' or normalized_title == 'collections' %}
-    {% assign hide_link = true %}
-  {% endif %}
-  {% if normalized_url contains '/account' %}
-    {% assign link_label = 'Profile' %}
-  {% endif %}
-  {% unless hide_link %}
-    <li><a href="{{ link.url }}" class="{% if link.active %}active{% endif %} {% if linklists[link.handle] != empty %}dropdown_link{% else %} top_link {% endif %}" data-dropdown-rel="{{ link.handle }}"{% if linklists[link.handle] != empty %} aria-haspopup="true" aria-expanded="false"{% endif %}>{{ link_label }} {% if linklists[link.handle] != empty %}<span class="icon-down-arrow" aria-hidden="true"></span>{% endif %}</a></li>
-  {% endunless %}
-{% endfor %}
+{% assign investigations_blog = blogs['crime'] %}
+{% assign about_page = pages['about-shadab-chow'] %}
+{% assign contact_page = pages['contact'] %}
+
+{% assign investigations_blog_url = '/blogs/crime' %}
+{% if investigations_blog != blank %}
+  {% assign investigations_blog_url = investigations_blog.url %}
+{% endif %}
+
+{% assign about_url = '/pages/about-shadab-chow' %}
+{% if about_page != blank %}
+  {% assign about_url = about_page.url %}
+{% endif %}
+
+{% assign contact_url = '/pages/contact' %}
+{% if contact_page != blank %}
+  {% assign contact_url = contact_page.url %}
+{% endif %}
+
+<li><a href="/" class="{% if request.path == '/' %}active{% endif %} top_link">Home</a></li>
+<li><a href="{{ investigations_blog_url }}" class="{% if request.path contains '/blogs/crime' %}active{% endif %} top_link">Investigations</a></li>
+<li><a href="{{ about_url }}" class="{% if request.path contains '/pages/about-shadab-chow' %}active{% endif %} top_link">About</a></li>
+<li><a href="{{ contact_url }}" class="{% if request.path contains '/pages/contact' %}active{% endif %} top_link">Contact</a></li>
