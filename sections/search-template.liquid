@@ -8,6 +8,8 @@
 {% paginate search.results by search_pagination %}
 
 <a name="pagecontent" id="pagecontent"></a>
+{% comment %}Future ad placement guardrail: search is a utility page and should remain a no-ad zone unless manually reviewed later.{% endcomment %}
+<div class="no-ad-zone no-ad-zone--utility">
 
   <div class="clearfix breadcrumb-collection">
     {% if section.settings.search_breadcrumb %}
@@ -182,6 +184,7 @@
   {% endif %}
 
   {% include 'pagination' with sidebar %}
+</div>
 </div>
 
 {% endpaginate %}

@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="cleartype" content="on">
-    {% comment %}Conditional robots: noindex all non-publisher Shopify utility routes (cart, customers, product, collection, search, 404, password, gift_card). Publisher routes (index, blog, article, page) remain indexed.{% endcomment %}
+    {% comment %}Publisher routes should stay indexable, while Shopify utility, ecommerce, and private routes should remain noindexed for newsroom and AdSense-readiness.{% endcomment %}
     {% if template contains 'index' or template contains 'blog' or template contains 'article' or template contains 'page' %}
       <meta name="robots" content="index,follow">
     {% else %}

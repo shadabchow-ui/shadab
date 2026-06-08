@@ -3,7 +3,8 @@
 - Draggable section
 {% endcomment %}
 
-<div class="newsletter_section
+{% comment %}Future ad placement guardrail: newsletter signup areas should remain no-ad zones unless manually reviewed later.{% endcomment %}
+<div class="newsletter_section no-ad-zone no-ad-zone--form
             {% if section.settings.display_first_name and section.settings.display_last_name %}newsletter-both-names--true {% else %}newsletter-both-names--false {% endif %}
             {% if section.settings.image != nil %}newsletter-bgr-true{% endif %}
             text-align--{{section.settings.newsletter_section_text_align}}

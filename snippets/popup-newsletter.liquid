@@ -1,4 +1,5 @@
-<div class="remodal newsletter-popup {% if settings.newsletter_bg != nil %}newsletter-image--true {% else %} newsletter-image--false{% endif %} align-{{settings.newsletter_popup_image_align}} {% if settings.display_first_name and settings.display_last_name %}newsletter-both-names--true {% else %}newsletter-both-names--false {% endif %}" data-remodal-id="newsletter" data-remodal-options="hashTracking: false">
+{% comment %}Future ad placement guardrail: newsletter popups and signup prompts should remain no-ad zones.{% endcomment %}
+<div class="remodal newsletter-popup no-ad-zone no-ad-zone--popup {% if settings.newsletter_bg != nil %}newsletter-image--true {% else %} newsletter-image--false{% endif %} align-{{settings.newsletter_popup_image_align}} {% if settings.display_first_name and settings.display_last_name %}newsletter-both-names--true {% else %}newsletter-both-names--false {% endif %}" data-remodal-id="newsletter" data-remodal-options="hashTracking: false">
 	<button type="button" data-remodal-action="close" class="remodal-close" aria-label="Close newsletter popup">&#215;</button>
 	{% if settings.newsletter_bg != nil %}
 		<div class="newsletter-img">
